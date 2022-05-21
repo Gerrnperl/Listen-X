@@ -6,10 +6,10 @@
 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "live-pug": "pug components/pug -o components/html",
-    "live-scss": "sass components/style/scss:components/style/css",
-    "eslint": "eslint ./browserAction/ --fix",
-    "stylelint": "stylelint \"./browserAction/**/*.scss\" --fix"
+    "live-pug": "pug index.pug -o . -w",
+    "live-scss": "sass components/style/scss:components/style/css -w",
+    "eslint": "eslint components/script --fix",
+    "stylelint": "stylelint \"./components/**/*.scss\" --fix"
   },
   "author": "Gerrnperl Lunn",
   "license": "GPL-3.0-or-later"
