@@ -8,11 +8,15 @@
     "96": "icons/listen-x96.png",
     "192": "icons/listen-x192.png"
   },
+  "background":{
+    "service_worker": "background.js"
+  }
+  ,
   "action": {
     "default_title": "Listen X"
   },
   "permissions": [
-    "*://music.163.com/dis*",
+    "*://music.163.com/*",
     "*://*.music.163.com/*"
   ]
 }
