@@ -6,8 +6,8 @@
 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "live-pug": "cd browserAction && pug pugs index.html -o . -w",
-    "live-scss": "cd browserAction && sass scss:css -w -s compressed",
+    "live-pug": "pug components/pug -o components/html",
+    "live-scss": "sass components/style/scss:components/style/css",
     "eslint": "eslint ./browserAction/ --fix",
     "stylelint": "stylelint \"./browserAction/**/*.scss\" --fix"
   },

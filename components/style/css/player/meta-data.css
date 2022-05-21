@@ -1,0 +1,36 @@
+.ctrl-pnl-item#songs-meta {
+  display: flex;
+  flex-direction: row;
+  height: var(--control-panel-height);
+  overflow: hidden;
+}
+
+.cover.cover-shortcut {
+  width: var(--control-panel-height);
+  height: var(--control-panel-height);
+  margin-right: 6px;
+  background-image: url("../image/microphone.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.text-data {
+  max-width: 250px-var(--control-panel-height);
+  padding-top: 7px;
+}
+.text-data .song-name,
+.text-data .artist-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.text-data .song-name {
+  font-size: 16px;
+}
+.text-data .artist-name {
+  font-size: 12px;
+  color: var(--neutralPrimaryAlt);
+}
+
+/*# sourceMappingURL=meta-data.css.map */
