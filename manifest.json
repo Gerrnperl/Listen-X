@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Listen X",
+  "version": "0.1.0",
+  "description": "To be a better music player",
+  "icons": {
+    "48": "icons/listen-x48.png",
+    "96": "icons/listen-x96.png",
+    "192": "icons/listen-x192.png"
+  },
+  "action": {
+    "default_title": "Listen X"
+  },
+  "permissions": [
+    "*://music.163.com/*",
+    "*://*.music.163.com/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}
