@@ -14,6 +14,5 @@
   "permissions": [
     "*://music.163.com/dis*",
     "*://*.music.163.com/*"
-  ],
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  ]
 }
