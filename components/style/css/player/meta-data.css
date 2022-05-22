@@ -20,6 +20,7 @@
 }
 .text-data .song-name {
   font-size: 16px;
+  margin: 3px 8px;
 }
 .text-data .artist-name {
   font-size: 12px;
