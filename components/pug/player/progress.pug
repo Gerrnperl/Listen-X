@@ -2,3 +2,15 @@
 	Progress related components: progress bar, play toggler
 //--------------------------------------------------------------
 
+template(id='template-progress')
+	.progress-bar-wrapper 
+		.progress-bar#current-time-bar
+		.progress-bar#duration-bar
+		#progress-slider
+	.progress-text-wrapper
+		p.progress-text#current-time-text --/--
+		p.progress-text#duration-text --/--
+	#progress-ctrl-buttons
+		button#prev-song
+		button#play-pause(playing="false")
+		button#next-song

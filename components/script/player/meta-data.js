@@ -10,7 +10,6 @@ class MetaData extends HTMLElement{
 	cover;
 
 	constructor(){
-		// Always call super first in constructor
 		super();
 		this.attachShadow({mode: 'open'});
 		this.shadowRoot.appendChild(document.querySelector('#template-meta-data').content);
@@ -19,19 +18,15 @@ class MetaData extends HTMLElement{
 		this.cover = this.shadowRoot.querySelector('.cover');
 
 		document.addEventListener('lx-meta-data-update', (event)=>{
-			this.update(
-				event.detail.songName,
-				event.detail.artistList,
-				event.detail.coverURL
-			);
+			this.update(event.detail);
 		});
 	}
 
-	update(songName, artistList, coverURL){
-		this.songName.innerText = songName;
-		this.artistName.innerText = artistList.join(', ');
-		this.artistName.setAttribute('title', artistList.join(', '));
-		this.cover.style.backgroundImage = `url(${coverURL})`;
+	update(detail){
+		this.songName.innerText = detail.songName;
+		this.artistName.innerText = detail.artistList.join(', ');
+		this.artistName.setAttribute('title', detail.artistList.join(', '));
+		this.cover.style.backgroundImage = `url(${detail.coverURL})`;
 	}
 
 }

@@ -1,0 +1,44 @@
+@font-face {
+  font-family: fabric;
+  src: url("../fonts/fabric-icons.woff") format("woff");
+}
+:root {
+  --control-panel-height: 60px;
+  --themeDarker: #004377;
+  --themeDark: #005ba1;
+  --themeDarkAlt: #006cbe;
+  --themePrimary: #0078d4;
+  --themeSecondary: #1a86d9;
+  --themeTertiary: #5ca9e5;
+  --themeLight: #a9d3f2;
+  --themeLighter: #d0e7f8;
+  --themeLighterAlt: #f3f9fd;
+  --black: #3a3836;
+  --neutralDark: #52504e;
+  --neutralPrimary: #201f1e;
+  --neutralPrimaryAlt: #83817e;
+  --neutralSecondary: #9b9997;
+  --neutralTertiary: #b4b2b0;
+  --white: #ffffff;
+  --neutralTertiaryAlt: #c8c8c8;
+  --neutralQuaternaryAlt: #dadada;
+  --neutralQuaternary: #dadada;
+  --neutralLight: #eaeaea;
+  --neutralLighter: #f4f4f4;
+  --neutralLighterAlt: #f8f8f8;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  width: 100vw;
+  min-width: 300px;
+  height: 100vh;
+  min-height: 183px;
+  overflow: hidden;
+}
+
+/*# sourceMappingURL=root.css.map */
