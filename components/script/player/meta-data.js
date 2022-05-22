@@ -19,7 +19,11 @@ class MetaData extends HTMLElement{
 		this.cover = this.shadowRoot.querySelector('.cover');
 
 		document.addEventListener('lx-meta-data-update', (event)=>{
-			this.update(...event.detail);
+			this.update(
+				event.detail.songName,
+				event.detail.artistList,
+				event.detail.coverURL
+			);
 		});
 	}
 
