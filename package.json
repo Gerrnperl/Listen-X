@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "description": "My Chrome Extension",
   "private": true,
-
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "live-pug": "pug index.pug -o . -w",
     "live-scss": "sass components/style/scss:components/style/css -w",
-    "eslint": "eslint components/script --fix",
+    "eslint": "eslint . --fix",
     "stylelint": "stylelint \"./components/**/*.scss\" --fix"
   },
   "author": "Gerrnperl Lunn",

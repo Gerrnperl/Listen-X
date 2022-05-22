@@ -63,6 +63,7 @@
         "require-unicode-regexp": "warn",
         "no-shadow": ["error", { "builtinGlobals": false ,"allow": ["done","reject", "temp","tmp","error","err"] }],
         "no-undefined": "error",
+        "no-undef": "off",
         "no-useless-call": "error",
         "no-div-regex": "warn",
         "no-else-return": "warn",
