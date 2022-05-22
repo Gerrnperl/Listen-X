@@ -1,6 +1,6 @@
 @font-face {
   font-family: fabric;
-  src: url("/fonts/fabric-icons.woff") format("woff");
+  src: url("fonts/fabric-icons.woff") format("woff");
 }
 :root {
   --control-panel-height: 60px;
@@ -41,4 +41,22 @@ body {
   overflow: hidden;
 }
 
-/*# sourceMappingURL=root.css.map */
+lx-meta-data {
+  display: flex;
+  flex-direction: row;
+  height: var(--control-panel-height);
+  overflow: hidden;
+}
+
+lx-player {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  column-gap: 10px;
+  width: 100%;
+  height: var(--control-panel-height);
+  background-color: var(--white);
+  box-shadow: 0 -3.2px 7.2px 0 rgba(0, 0, 0, 0.13);
+}
+
+/*# sourceMappingURL=main.css.map */
