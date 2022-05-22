@@ -3,7 +3,7 @@ class Player extends HTMLElement {
 		// Always call super first in constructor
 		super();
 		this.attachShadow({mode: 'open'}).appendChild(
-			document.createElement('div')
+			document.createElement('cs-meta-data')
 		  );
 	  }
 }
