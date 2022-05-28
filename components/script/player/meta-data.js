@@ -1,32 +1,32 @@
 class MetaData extends HTMLElement{
 
 	/** @type {HTMLElement} */
-	songName;
+	songNameEle;
 
 	/** @type {HTMLElement} */
-	artistName;
+	artistNameEle;
 
 	/** @type {HTMLElement} */
-	cover;
+	coverEle;
 
 	constructor(){
 		super();
 		this.attachShadow({mode: 'open'});
 		this.shadowRoot.appendChild(document.querySelector('#template-meta-data').content);
-		this.songName = this.shadowRoot.querySelector('.song-name');
-		this.artistName = this.shadowRoot.querySelector('.artist-name');
-		this.cover = this.shadowRoot.querySelector('.cover');
+		this.songNameEle = this.shadowRoot.querySelector('.song-name');
+		this.artistNameEle = this.shadowRoot.querySelector('.artist-name');
+		this.coverEle = this.shadowRoot.querySelector('.cover');
 
-		document.addEventListener('lx-meta-data-update', (event)=>{
+		lx.addEventListener('lx-meta-data-update', (event)=>{
 			this.update(event.detail);
 		});
 	}
 
 	update(detail){
-		this.songName.innerText = detail.songName;
-		this.artistName.innerText = detail.artistList.join(', ');
-		this.artistName.setAttribute('title', detail.artistList.join(', '));
-		this.cover.style.backgroundImage = `url(${detail.coverURL})`;
+		this.songNameEle.innerText = detail.songName;
+		this.artistNameEle.innerText = detail.artistList.join(', ');
+		this.artistNameEle.setAttribute('title', detail.artistList.join(', '));
+		this.coverEle.style.backgroundImage = `url(${detail.coverURL})`;
 	}
 
 }
