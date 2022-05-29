@@ -1,8 +1,10 @@
 include ./meta-data.pug
+include ./progress.pug
 
 template(id='template-player')
 	audio(id='main-palyer')
 	lx-meta-data
+	lx-progress-ctrl
 	link(rel="stylesheet", href="components/style/css/player/player.css")
 
 script(src='components/script/player/player.js')

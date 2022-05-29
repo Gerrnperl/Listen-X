@@ -4,3 +4,10 @@ lx-meta-data {
 	height: var(--control-panel-height);
 	overflow: hidden;
 }
+
+lx-progress-ctrl {
+	display: flex;
+	flex-basis: 150px;
+	flex-flow: column nowrap;
+	flex-grow: 1;
+}
