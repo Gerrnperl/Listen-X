@@ -1,7 +1,7 @@
 /*
  * @Author      : Gerrnperl
  * @Date        : 2022-02-15 11: 08: 45
- * @LastEditTime: 2022-05-28 23:43:37
+ * @LastEditTime: 2022-05-29 11:10:10
  * @LastEditors: Gerrnperl
  * @Description : music.163.com
  * ═══════════😅═══════════
@@ -87,16 +87,16 @@ class Netease{
 						this.#aesEncrypt(
 							text,
 							CryptoJS.mode.CBC,
-							CryptoJS.enc.Utf8.parse(PRESET_KEY),
-							CryptoJS.enc.Utf8.parse(IV)
+							CryptoJS.enc.Utf8.parse(this.PRESET_KEY),
+							CryptoJS.enc.Utf8.parse(this.IV)
 						).ciphertext
 					),
 					CryptoJS.mode.CBC,
 					CryptoJS.enc.Utf8.parse(secretKey),
-					CryptoJS.enc.Utf8.parse(IV),
+					CryptoJS.enc.Utf8.parse(this.IV),
 				).ciphertext
 			),
-			encSecKey: this.#rsaEncrypt(secretKey, PUB_KEY, MODULUS),
+			encSecKey: this.#rsaEncrypt(secretKey, this.PUB_KEY, this.MODULUS),
 		};
 	}
 
@@ -107,7 +107,7 @@ class Netease{
 		let data = `${url}-36cd479b6b5-${text}-36cd479b6b5-${digest}`;
 
 		return {
-			params: CryptoJS.enc.Hex.stringify(this.#aesEncrypt(data, CryptoJS.mode.ECB, CryptoJS.enc.Utf8.parse(EAPI_KEY), '').ciphertext)
+			params: CryptoJS.enc.Hex.stringify(this.#aesEncrypt(data, CryptoJS.mode.ECB, CryptoJS.enc.Utf8.parse(this.EAPI_KEY), '').ciphertext)
 				.toUpperCase(),
 		};
 	}
@@ -243,4 +243,4 @@ class Netease{
 
 }
 
-registerProvider(Netease, 'netease');
+lx.registerProvider(Netease, 'netease');
