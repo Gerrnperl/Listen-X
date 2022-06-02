@@ -109,4 +109,26 @@
   background-color: var(--themeLighterAlt);
 }
 
+#progress-ctrl-buttons > *::before {
+  font-family: fabric;
+  font-size: 22px;
+  font-weight: bolder;
+}
+#progress-ctrl-buttons #prev-song::before {
+  content: "\e892";
+}
+#progress-ctrl-buttons #next-song::before {
+  content: "\e893";
+}
+#progress-ctrl-buttons #play-pause::before {
+  position: relative;
+  left: -1px;
+  font-size: 28px;
+  content: "\e769";
+}
+#progress-ctrl-buttons #play-pause[playing=false]::before {
+  left: 0;
+  content: "\e768";
+}
+
 /*# sourceMappingURL=progress.css.map */

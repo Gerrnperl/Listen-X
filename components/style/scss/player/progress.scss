@@ -105,3 +105,27 @@
 		}
 	}
 }
+
+#progress-ctrl-buttons {
+	& > *::before {
+		font-family: fabric;
+		font-size: 22px;
+		font-weight: bolder;
+	}
+	#prev-song::before {
+		content: '';
+	}
+	#next-song::before {
+		content: '';
+	}
+	#play-pause::before {
+		position: relative;
+		left: -1px;
+		font-size: 28px;
+		content: '';
+	}
+	#play-pause[playing='false']::before {
+		left: 0;
+		content: '';
+	}
+}
