@@ -6,5 +6,6 @@ class ProgressCtrl extends HTMLElement{
 		this.shadowRoot.appendChild(document.querySelector('#template-progress').content);
 	}
 
+
 }
 customElements.define('lx-progress-ctrl', ProgressCtrl);

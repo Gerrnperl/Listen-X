@@ -4,7 +4,12 @@ include ./progress.pug
 template(id='template-player')
 	audio(id='main-palyer')
 	lx-meta-data
-	lx-progress-ctrl
+	.central-ctrl
+		lx-progress-ctrl
+		#progress-ctrl-buttons
+			button#prev-song
+			button#play-pause(playing="false")
+			button#next-song
 	link(rel="stylesheet", href="components/style/css/player/player.css")
 
 script(src='components/script/player/player.js')

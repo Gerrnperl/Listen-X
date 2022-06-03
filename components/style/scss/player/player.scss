@@ -5,9 +5,77 @@ lx-meta-data {
 	overflow: hidden;
 }
 
-lx-progress-ctrl {
+.central-ctrl {
 	display: flex;
 	flex-basis: 150px;
 	flex-flow: column nowrap;
 	flex-grow: 1;
+}
+
+#progress-ctrl-buttons {
+	position: relative;
+	top: -10px;
+	display: flex;
+	flex-flow: row nowrap;
+	column-gap: 10px;
+	align-items: center;
+	justify-content: center;
+	height: 36px;
+	button {
+		color: var(--themePrimary);
+		background: transparent;
+		border: none;
+		outline: none;
+		&:hover {
+			color: var(--themeDark);
+		}
+		&:active {
+			color: var(--themeDarker);
+		}
+		&::before {
+			font-family: fabric;
+			font-size: 22px;
+			font-weight: bolder;
+		}
+	}
+	#prev-song,
+	#next-song {
+		width: 30px;
+		height: 30px;
+	}
+	#play-pause {
+		width: 36px;
+		height: 36px;
+		line-height: 34px;
+		text-align: center;
+		border: 1px solid var(--themeLighter);
+		border-radius: 50px;
+		&:hover {
+			background-color: var(--themeLighterAlt);
+		}
+	}
+}
+
+#progress-ctrl-buttons {
+	& > *::before {
+		font-family: fabric;
+		font-size: 22px;
+		font-weight: bolder;
+	}
+	#prev-song::before {
+		content: '';
+	}
+	#next-song::before {
+		content: '';
+	}
+	#play-pause::before {
+		position: relative;
+		left: -4px;
+		font-size: 28px;
+		content: '';
+	}
+	#play-pause[playing='false']::before {
+		left: -3px;
+		content: '';
+	}
 }
