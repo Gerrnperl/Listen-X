@@ -1,7 +1,8 @@
+/* eslint-disable no-undefined */
 /*
  * @Author      : Gerrnperl
  * @Date        : 2022-02-15 11: 08: 45
- * @LastEditTime: 2022-05-29 11:10:10
+ * @LastEditTime: 2022-06-02 22:39:52
  * @LastEditors: Gerrnperl
  * @Description : music.163.com
  * ═══════════😅═══════════
@@ -145,10 +146,10 @@ class Netease{
 		});
 		return {
 			id,
-			name,
-			coverImage,
+			songName: name,
+			coverURL: coverImage,
 			albumName,
-			artists,
+			artistList: artists,
 			duration,
 		};
 	}
@@ -214,10 +215,10 @@ class Netease{
 
 		return Object.assign(music, {
 			bitRate: responseData.br || NaN,
-			type   : responseData.type || '<Unknown>',
-			url    : responseData.url || '<Unknown>',
+			type   : responseData.type || undefined,
+			url    : responseData.url || undefined,
 			size   : responseData.size || NaN,
-			id     : responseData.id || '<Unknown>',
+			id     : responseData.id || undefined,
 		});
 	}
 

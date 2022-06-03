@@ -1,6 +1,6 @@
 @font-face {
   font-family: fabric;
-  src: url("fonts/fabric-icons.woff") format("woff");
+  src: url("/fonts/fabric-icons.woff") format("woff");
 }
 :root {
   --control-panel-height: 60px;

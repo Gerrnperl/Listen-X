@@ -13,6 +13,15 @@ let lx = new (class LX extends EventTarget{
 
 	providers = {};
 
+	playing = false;
+
+	/** @type {HTMLAudioElement} */
+	audioEle;
+
+	audioCtx = new AudioContext();
+
+	track;
+
 	constructor(){
 		super();
 	}
@@ -39,7 +48,9 @@ let lx = new (class LX extends EventTarget{
 	async getStoregedPlayingList(){
 		return [
 			await lx.providers.netease.getDetails(
-				(await lx.providers.netease.search({keywords: '最初的梦想', type: 1, limit: 30, offset: 0})).songs[0]),
+				(await lx.providers.netease.search({keywords: '浮夸', type: 1, limit: 30, offset: 0})).songs[0]),
+			await lx.providers.netease.getDetails(
+				(await lx.providers.netease.search({keywords: '红日', type: 1, limit: 30, offset: 0})).songs[0]),
 			await lx.providers.netease.getDetails(
 				(await lx.providers.netease.search({keywords: '错位时空', type: 1, limit: 30, offset: 0})).songs[0]),
 			await lx.providers.netease.getDetails(
