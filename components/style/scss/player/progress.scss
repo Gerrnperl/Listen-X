@@ -22,6 +22,15 @@
 		.progress-bar {
 			width: 100%;
 			height: 4px;
+			&::after {
+				// Extended click area
+				content: "";
+				width: 100%;
+				height: 450%;
+				position: absolute;
+				z-index: 2;
+				top: -50%;
+			}
 		}
 		#duration-bar {
 			width: 100%;
