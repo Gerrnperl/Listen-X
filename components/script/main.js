@@ -1,10 +1,50 @@
+/**
+ * @typedef {{
+ * 	albumName: string;
+ * 	artistList: string[];
+ * 	bitRate: number,
+ * 	blob   : Blob,
+ * 	coverURL: string;
+ * 	duration: number,
+ * 	id     : number,
+ * 	songName   : string,
+ * 	size   : number,
+ * 	type   : string,
+ * 	url    : string,
+ * }}music
+ */
 
 /**
  * ##### As A Custom Event Target
  * These events will be dispatched to **`lx`**
  * - `lx-loaded`
+ * ```js
+CustomEvent<{
+    playList: any[];
+}>
+```
  * - `lx-meta-data-update`
+ * ```js
+CustomEvent<{
+    songName: string;
+    artistList: string[];
+    coverURL: string;
+}>
+```
  * - `lx-music-ready`
+ * ```js
+ CustomEvent<{
+     music: music;
+ }>
+ ```
+ * - `lx-time-update`
+ * ```js
+ CustomEvent<{
+ 	time: number;
+ 	fmtTime: string;
+	durtion: number;
+ }>
+ ```
  * ---
  * ##### As A Base
  * some code logic related methods and infos will be put here

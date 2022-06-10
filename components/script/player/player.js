@@ -1,5 +1,6 @@
 class Player extends HTMLElement{
 
+	/** @type {HTMLButtonElement} */
 	play_pause;
 
 	constructor(){
@@ -9,6 +10,8 @@ class Player extends HTMLElement{
 		lx.audioEle = this.shadowRoot.querySelector('audio');
 		lx.track = lx.audioCtx.createMediaElementSource(lx.audioEle);
 		lx.track.connect(lx.audioCtx.destination);
+		this.goto = Helper.throttle(this.goto, 100);
+
 		lx.addEventListener('lx-loaded', event=>{
 			this.loadMusic(event.detail.playList[0]);
 			// todo: init playing list
@@ -17,8 +20,21 @@ class Player extends HTMLElement{
 		this.play_pause.addEventListener('click', ()=>{
 			this.switchPlayPause();
 		});
+		lx.audioEle.addEventListener('timeupdate', ()=>{
+			lx.dispatchEvent(new CustomEvent('lx-time-update', {
+				detail: {
+					time: lx.audioEle.currentTime,
+					fmtTime: Helper.formatTime(lx.audioEle.currentTime),
+					duration: lx.audioEle.duration,
+				},
+			}));
+		});
 	}
 
+	/**
+	 * 
+	 * @param {music} music 
+	 */
 	async loadMusic(music){
 		if(!music.blob){
 			await this.getBlob(music);

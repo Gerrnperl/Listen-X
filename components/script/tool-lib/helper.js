@@ -2,7 +2,7 @@
 /*
  * @Author      : Gerrnperl
  * @Date        : 2022-02-15 15: 19: 39
- * @LastEditTime: 2022-06-02 23:59:44
+ * @LastEditTime: 2022-06-10 08:42:29
  * @LastEditors: Gerrnperl
  * @Description : 
  * ═══════════😅═══════════
@@ -151,7 +151,7 @@ class Helper{
 		return `${minute}:${second}.${millisecond}`;
 	}
 
-	static throttle(func, cooldownTime = config.cooldownTime){
+	static throttle(func, cooldownTime = 100){
 		let isThrottled = false;
 		let args = null;
 		let self = null;
