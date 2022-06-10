@@ -1,5 +1,6 @@
 include ./meta-data.pug
 include ./progress.pug
+include ./play-ctrl.pug
 
 template(id='template-player')
 	audio(id='main-palyer')
@@ -10,6 +11,7 @@ template(id='template-player')
 			button#prev-song
 			button#play-pause(playing="false")
 			button#next-song
+	lx-play-ctrl
 	link(rel="stylesheet", href="components/style/css/player/player.css")
 
 script(src='components/script/player/player.js')

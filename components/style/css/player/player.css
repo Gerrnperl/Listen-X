@@ -78,4 +78,20 @@ lx-meta-data {
   content: "\e768";
 }
 
+lx-play-ctrl {
+  display: flex;
+  flex: 0.5 0.2 20px;
+  flex-direction: row;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: space-evenly;
+  height: var(--control-panel-height);
+  overflow: visible;
+  font-size: 16px;
+}
+lx-play-ctrl > * {
+  width: 16px;
+  height: 16px;
+}
+
 /*# sourceMappingURL=player.css.map */
