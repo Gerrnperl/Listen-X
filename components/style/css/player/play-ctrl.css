@@ -1,7 +1,6 @@
 @charset "UTF-8";
 #playing-list-trigger {
   flex: 0 0 16px;
-  transform: translateY(-1px);
 }
 #playing-list-trigger #playing-list-panel {
   position: absolute;
@@ -13,7 +12,7 @@
   pointer-events: none;
   box-shadow: 0 6.4px 14.4px 0 rgba(0, 0, 0, 0.13), 0 1.2px 3.6px 0 rgba(0, 0, 0, 0.11);
   opacity: 0;
-  transform: translateX(-50%) translateY(100%);
+  transform: translateX(-50%) translateY(0%);
 }
 #playing-list-trigger div#playing-list-panel-head {
   height: 20px;
@@ -84,13 +83,13 @@
   opacity: 1;
 }
 #playing-list-trigger #playing-list-panel[visible=true] {
-  top: -240px;
-  height: 275px;
+  bottom: calc(var(--control-panel-height) - 50px);
+  height: 295px;
   padding: 5px 0;
   overflow: visible;
   pointer-events: all;
   opacity: 1;
-  transition: height ease 0.2s, opacity ease 0.4s;
+  transition: all ease 0.3s;
   transform: translateX(-50%) translateY(-20%);
 }
 #playing-list-trigger #playing-list-panel[visible=true] ul#playing-list {

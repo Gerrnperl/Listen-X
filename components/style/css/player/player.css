@@ -80,7 +80,7 @@ lx-meta-data {
 
 lx-play-ctrl {
   display: flex;
-  flex: 0.35 0.2 20px;
+  flex: 0.2 0.2 40px;
   flex-direction: row;
   column-gap: 10px;
   align-items: center;
@@ -88,7 +88,7 @@ lx-play-ctrl {
   height: var(--control-panel-height);
   overflow: visible;
   font-size: 16px;
-}
+/* position: relative; *//* position: relative; */}
 lx-play-ctrl > * {
   width: 16px;
   height: 16px;

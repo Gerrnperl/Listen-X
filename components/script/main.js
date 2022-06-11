@@ -51,9 +51,17 @@ CustomEvent<{
  */
 let lx = new (class LX extends EventTarget{
 
+	config = {
+		playMode: 'repeatAll',
+	};
+
+	jump2next = true;
+
 	providers = {};
 
 	playing = false;
+
+	playingList;
 
 	/** @type {HTMLAudioElement} */
 	audioEle;

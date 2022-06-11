@@ -11,10 +11,11 @@ class Player extends LxHTMLElement{
 		lx.track.connect(lx.audioCtx.destination);
 		this.goto = Helper.throttle(this.goto, 100);
 
-		lx.addEventListener('lx-loaded', event=>{
-			this.loadMusic(event.detail.playList[0]);
+		lx.addEventListener('lx-loaded', (event=>{
+			this.shadowRoot.querySelector('lx-play-ctrl').genratePlayingList(event.detail.playList);
+			this.loadMusic(event.detail.playList[0], false);
 			// todo: init playing list
-		});
+		}).bind(this));
 		this.play_pause = this.shadowRoot.querySelector('#play-pause');
 		this.play_pause.addEventListener('click', ()=>{
 			this.switchPlayPause();
@@ -28,13 +29,14 @@ class Player extends LxHTMLElement{
 				},
 			}));
 		});
+		lx.audioEle.addEventListener('ended', this.gotoNext);
 	}
 
 	/**
 	 * 
 	 * @param {music} music 
 	 */
-	async loadMusic(music){
+	async loadMusic(music, play = true){
 		if(!music.blob){
 			await this.getBlob(music);
 		}
@@ -54,6 +56,10 @@ class Player extends LxHTMLElement{
 				coverURL: music.coverURL,
 			}}
 		));
+
+		if(play){
+			this.playAudio();
+		}
 	}
 
 	async getBlob(music){
@@ -100,6 +106,16 @@ class Player extends LxHTMLElement{
 	goto(second){
 		lx.audioEle.currentTime = second;
 	}
+
+	async gotoNext(){
+		this.switchPlayPause();
+		// let next = audioVariables.playingList.next();
+
+		// if (audioState.jump2next && next){
+		// 	this.prepareAudio(await this.fetchAudioBlob(next));
+		// }
+	}
+
 
 }
 customElements.define('lx-player', Player);
