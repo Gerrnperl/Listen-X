@@ -1,0 +1,14 @@
+Dev Plan
+---
+- [ ] Next & previous song
+- [ ] Volumn Controller
+- [ ] `Preliminary` Lyric
+---
+- [ ] Side Panel
+- [ ] `Complete` Playing list
+- [ ] `Complete` Lyric
+---
+- [x] Meta data
+- [x] Progress ctrl
+- [x] Play mode
+- [x] `Preliminary` Playing list

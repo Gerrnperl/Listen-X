@@ -74,12 +74,10 @@ let lx = new (class LX extends EventTarget{
 		super();
 	}
 
-
 	/**
-	 * @param {Class} provider 
-	 * A **class** that contains related methods. 
-	 * This class would not be instantiated.
-	 * Means all methods should be **static**
+	 * @param {Class|Object} provider 
+	 * A class or a set of function that contains related methods. 
+	 * This class would not be instantiated and all methods should be **static**
 	 * @param {string} name 
 	 * The identification name of the provider.
 	 */
@@ -108,6 +106,10 @@ let lx = new (class LX extends EventTarget{
 
 })();
 
+/** 
+ * All lx-element constructors will inherit from this class
+ * To provide style inheritance etc.
+ */
 // eslint-disable-next-line no-unused-vars
 class LxHTMLElement extends HTMLElement{
 
@@ -116,8 +118,10 @@ class LxHTMLElement extends HTMLElement{
 		this.attachShadow({mode: 'open'});
 		let style = document.createElement('style');
 
+		// Attach the common style to the element
 		style.innerText = '@import url(components/style/css/main.css)';
 		this.shadowRoot.appendChild(style);
+		// todo: In planning, custom styles should be set here
 	}
 
 }

@@ -9,12 +9,14 @@ class playCtrl extends LxHTMLElement{
 	constructor(){
 		super();
 		this.shadowRoot.appendChild(document.querySelector('#template-play-ctrl').content);
+		// Get Children
 		this.playModeSwitcher = this.shadowRoot.querySelector('#play-mode-switcher');
 		this.playModeContainer = this.shadowRoot.querySelector('#play-mode-selector-container');
 		this.playingList = this.shadowRoot.querySelector('#playing-list');
 		this.playingListPanel = this.shadowRoot.querySelector('#playing-list-panel');
 		this.playingListTrigger = this.shadowRoot.querySelector('#playing-list-trigger');
 
+		// Switch play mode
 		this.shadowRoot.querySelectorAll('#play-mode-selector-container li.play-mode').forEach(li=>{
 			li.addEventListener('click', event=>{
 				let playMode = event.target.getAttribute('play-mode');
@@ -23,17 +25,22 @@ class playCtrl extends LxHTMLElement{
 				this.playModeSwitcher.setAttribute('play-mode', playMode);
 			});
 		});
+
+		// Pop up playModeSwitcher & Hide playingList
 		this.playModeSwitcher.addEventListener('click', event => {
 			event.stopPropagation();
 			this.playModeContainer.setAttribute('visible', 'true');
 			this.playingListPanel.setAttribute('visible', 'false');
 		});
 
+		// Pop up playingList & Hide playModeSwitcher
 		this.playingListTrigger.addEventListener('click', event => {
 			event.stopPropagation();
 			this.playModeContainer.setAttribute('visible', 'false');
 			this.playingListPanel.setAttribute('visible', 'true');
 		});
+
+		// Hide playingList & playModeSwitcher
 		document.body.addEventListener('click', () => {
 			this.playModeContainer.setAttribute('visible', 'false');
 			this.playingListPanel.setAttribute('visible', 'false');
@@ -41,6 +48,7 @@ class playCtrl extends LxHTMLElement{
 	}
 
 	renderPlayingList(){
+		// short-cut
 		let pl = lx.playingList;
 		let player = document.querySelector('lx-player');
 
@@ -56,12 +64,13 @@ class playCtrl extends LxHTMLElement{
 				<span class="playing-list-item-duration">${Helper.formatTime(music.duration).split('.')[0]}</span>
 			`;
 
+			// Switch playing music
 			li.addEventListener('click', (()=>{
 				if(pl.playingIndex === pl.list.length){
 					pl.playingIndex = 0;
 				}
 				pl.playingIndex = index + 1;
-				this.switchPlaying(pl.playedStack.at(-1), index);
+				this.switchPlayingMusic(pl.playedStack.at(-1), index);
 				pl.playedStack.push(index);
 				player.loadMusic(music);
 			}).bind(this));
@@ -70,7 +79,7 @@ class playCtrl extends LxHTMLElement{
 		this.shadowRoot.querySelector(' #playing-list-panel-head span.plph-summary').innerText = `播放列表 [${pl.list.length}]`;
 	}
 
-	switchPlaying(from, to){
+	switchPlayingMusic(from, to){
 		let playingListUI = this.shadowRoot.querySelectorAll('#playing-list .playing-list-item');
 
 		playingListUI[from]?.removeAttribute('playing');
@@ -129,7 +138,7 @@ class playCtrl extends LxHTMLElement{
 				default:
 					break;
 				}
-				switchPlaying(this.playedStack.at(-1), toPlayIndex);
+				this.switchPlayingMusic(this.playedStack.at(-1), toPlayIndex);
 				this.playedStack.push(toPlayIndex);
 				return this.list[toPlayIndex];
 			},

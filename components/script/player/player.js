@@ -6,20 +6,22 @@ class Player extends LxHTMLElement{
 	constructor(){
 		super();
 		this.shadowRoot.appendChild(document.querySelector('#template-player').content);
+		// Get Children
 		lx.audioEle = this.shadowRoot.querySelector('audio');
 		lx.track = lx.audioCtx.createMediaElementSource(lx.audioEle);
 		lx.track.connect(lx.audioCtx.destination);
+		this.play_pause = this.shadowRoot.querySelector('#play-pause');
 		this.goto = Helper.throttle(this.goto, 100);
 
 		lx.addEventListener('lx-loaded', (event=>{
 			this.shadowRoot.querySelector('lx-play-ctrl').genratePlayingList(event.detail.playList);
 			this.loadMusic(event.detail.playList[0], false);
-			// todo: init playing list
 		}).bind(this));
-		this.play_pause = this.shadowRoot.querySelector('#play-pause');
+
 		this.play_pause.addEventListener('click', ()=>{
 			this.switchPlayPause();
 		});
+
 		lx.audioEle.addEventListener('timeupdate', ()=>{
 			lx.dispatchEvent(new CustomEvent('lx-time-update', {
 				detail: {
@@ -29,7 +31,7 @@ class Player extends LxHTMLElement{
 				},
 			}));
 		});
-		lx.audioEle.addEventListener('ended', this.gotoNext);
+		lx.audioEle.addEventListener('ended', this.gotoNext.bind(this));
 	}
 
 	/**

@@ -12,6 +12,7 @@ class MetaData extends LxHTMLElement{
 	constructor(){
 		super();
 		this.shadowRoot.appendChild(document.querySelector('#template-meta-data').content);
+		// Get Children
 		this.songNameEle = this.shadowRoot.querySelector('.song-name');
 		this.artistNameEle = this.shadowRoot.querySelector('.artist-name');
 		this.coverEle = this.shadowRoot.querySelector('.cover');
