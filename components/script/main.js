@@ -100,6 +100,19 @@ let lx = new (class LX extends EventTarget{
 
 })();
 
+// eslint-disable-next-line no-unused-vars
+class LxHTMLElement extends HTMLElement{
+
+	constructor(){
+		super();
+		this.attachShadow({mode: 'open'});
+		let style = document.createElement('style');
+
+		style.innerText = '@import url(components/style/css/main.css)';
+		this.shadowRoot.appendChild(style);
+	}
+
+}
 
 document.addEventListener('DOMContentLoaded', async()=>{
 	lx.dispatchEvent(new CustomEvent('lx-loaded',

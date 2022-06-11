@@ -1,4 +1,4 @@
-class ProgressCtrl extends HTMLElement{
+class ProgressCtrl extends LxHTMLElement{
 
 	/** @type {HTMLParagraphElement} */
 	progressText;
@@ -14,7 +14,6 @@ class ProgressCtrl extends HTMLElement{
 
 	constructor(){
 		super();
-		this.attachShadow({mode: 'open'});
 		this.shadowRoot.appendChild(document.querySelector('#template-progress').content);
 		this.progressText = this.shadowRoot.querySelector('#current-time-text');
 		this.progressBar = this.shadowRoot.querySelector('#current-time-bar');

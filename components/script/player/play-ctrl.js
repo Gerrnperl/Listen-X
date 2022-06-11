@@ -1,8 +1,7 @@
-class playCtrl extends HTMLElement{
+class playCtrl extends LxHTMLElement{
 
 	constructor(){
 		super();
-		this.attachShadow({mode: 'open'});
 		this.shadowRoot.appendChild(document.querySelector('#template-play-ctrl').content);
 	}
 

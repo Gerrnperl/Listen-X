@@ -1,11 +1,10 @@
-class Player extends HTMLElement{
+class Player extends LxHTMLElement{
 
 	/** @type {HTMLButtonElement} */
 	play_pause;
 
 	constructor(){
 		super();
-		this.attachShadow({mode: 'open'});
 		this.shadowRoot.appendChild(document.querySelector('#template-player').content);
 		lx.audioEle = this.shadowRoot.querySelector('audio');
 		lx.track = lx.audioCtx.createMediaElementSource(lx.audioEle);
