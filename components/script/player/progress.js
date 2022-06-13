@@ -14,6 +14,7 @@ class ProgressCtrl extends LxHTMLElement{
 
 	constructor(){
 		super();
+		lx.progressCtrl = this;
 		this.shadowRoot.appendChild(document.querySelector('#template-progress').content);
 		this.progressText = this.shadowRoot.querySelector('#current-time-text');
 		this.progressBar = this.shadowRoot.querySelector('#current-time-bar');
@@ -67,7 +68,7 @@ class ProgressCtrl extends LxHTMLElement{
 
 	stopMoveSlider(){
 		if (this.isMovingSlider){
-			document.querySelector('lx-player').goto(this.sliderGoingto);
+			lx.player.goto(this.sliderGoingto);
 			this.isMovingSlider = false;
 		}
 	}
@@ -106,7 +107,7 @@ class ProgressCtrl extends LxHTMLElement{
 		this.rangeOfSlider = durationBarRect.width;
 		let percentage = (event.clientX - this.leftExtremumOfSlider) / this.rangeOfSlider;
 
-		document.querySelector('lx-player').goto(percentage * this.duration);
+		lx.player.goto(percentage * this.duration);
 	}
 
 }

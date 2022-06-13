@@ -1,4 +1,4 @@
-class playCtrl extends LxHTMLElement{
+class PlayCtrl extends LxHTMLElement{
 
 	playModeSwitcher;
 	playModeContainer;
@@ -8,6 +8,7 @@ class playCtrl extends LxHTMLElement{
 
 	constructor(){
 		super();
+		lx.PlayCtrl = this;
 		this.shadowRoot.appendChild(document.querySelector('#template-play-ctrl').content);
 		// Get Children
 		this.playModeSwitcher = this.shadowRoot.querySelector('#play-mode-switcher');
@@ -50,7 +51,6 @@ class playCtrl extends LxHTMLElement{
 	renderPlayingList(){
 		// short-cut
 		let pl = lx.playingList;
-		let player = document.querySelector('lx-player');
 
 		pl.list.forEach((music, index)=>{
 			let li = document.createElement('li');
@@ -72,7 +72,7 @@ class playCtrl extends LxHTMLElement{
 				pl.playingIndex = index + 1;
 				this.switchPlayingMusic(pl.playedStack.at(-1), index);
 				pl.playedStack.push(index);
-				player.loadMusic(music);
+				lx.layer.loadMusic(music);
 			}).bind(this));
 			this.playingList.appendChild(li);
 		});
@@ -167,4 +167,4 @@ class playCtrl extends LxHTMLElement{
 	}
 
 }
-customElements.define('lx-play-ctrl', playCtrl);
+customElements.define('lx-play-ctrl', PlayCtrl);

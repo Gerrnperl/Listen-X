@@ -5,6 +5,7 @@ class Player extends LxHTMLElement{
 
 	constructor(){
 		super();
+		lx.player = this;
 		this.shadowRoot.appendChild(document.querySelector('#template-player').content);
 		// Get Children
 		lx.audioEle = this.shadowRoot.querySelector('audio');
