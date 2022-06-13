@@ -117,7 +117,7 @@ class Helper{
 
 	static shuffleArray(arr){
 		for (let i = 0; i < arr.length; i++){
-			let rnd = getRandomInt(i, arr.length - 1);
+			let rnd = this.getRandomInt(i, arr.length - 1);
 			let tmp = arr[rnd];
 
 			arr[rnd] = arr[i];
