@@ -8,7 +8,7 @@ class PlayCtrl extends LxHTMLElement{
 
 	constructor(){
 		super();
-		lx.PlayCtrl = this;
+		lx.playCtrl = this;
 		this.shadowRoot.appendChild(document.querySelector('#template-play-ctrl').content);
 		// Get Children
 		this.playModeSwitcher = this.shadowRoot.querySelector('#play-mode-switcher');
