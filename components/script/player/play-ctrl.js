@@ -90,24 +90,24 @@ class PlayCtrl extends LxHTMLElement{
 	genratePlayingList(musics){
 		let playList = {
 			list: musics,
-			playingIndex: 0,
+			playingIndex: -1,
 			shuffledOrder: [],
 			playedStack: [],
 			next(){
-				let toPlayIndex = 0;
+				let toPlayIndex = -1;
 
 				switch (lx.config.playMode){ // repeatAll repeatOne playAll playOne shuffle random
 				case 'playAll':
-					if(this.playingIndex >= this.list.length){
+					if(this.playingIndex >= this.list.length - 1){
 						lx.jump2next = false;
 					}
 					// fall through
 
 				case 'repeatAll':
-					if(this.playingIndex === this.list.length){
-						this.playingIndex = 0;
+					if(this.playingIndex === this.list.length - 1){
+						this.playingIndex = -1;
 					}
-					toPlayIndex = this.playingIndex++;
+					toPlayIndex = ++this.playingIndex;
 					break;
 
 				case 'playOne':
@@ -126,10 +126,10 @@ class PlayCtrl extends LxHTMLElement{
 						Helper.shuffleArray(this.shuffledOrder);
 					}
 					if(this.playingIndex >= this.list.length){
-						this.playingIndex = 0;
+						this.playingIndex = -1;
 						Helper.shuffleArray(this.shuffledOrder);
 					}
-					toPlayIndex = this.shuffledOrder[this.playingIndex++];
+					toPlayIndex = this.shuffledOrder[++this.playingIndex];
 					break;
 
 				case 'random':
@@ -138,12 +138,17 @@ class PlayCtrl extends LxHTMLElement{
 				default:
 					break;
 				}
-				this.switchPlayingMusic(this.playedStack.at(-1), toPlayIndex);
+				lx.playCtrl.switchPlayingMusic(this.playedStack.at(-1), toPlayIndex);
 				this.playedStack.push(toPlayIndex);
 				return this.list[toPlayIndex];
 			},
 			prev(){
-				return this.list[this.playedStack.pop() || 0];
+				let lastPlayingIndex = this.playedStack.pop();
+				this.playingIndex = this.playedStack.at(-1);
+				lastPlayingIndex = !lastPlayingIndex || lastPlayingIndex < 0 ? 0 : lastPlayingIndex;
+				this.playingIndex = !this.playingIndex || this.playingIndex < 0 ? 0 : this.playingIndex;
+				lx.playCtrl.switchPlayingMusic(lastPlayingIndex, this.playingIndex);
+				return this.list[this.playingIndex];
 			},
 			add(song){
 				this.list.push(song);
@@ -160,7 +165,6 @@ class PlayCtrl extends LxHTMLElement{
 				this.list.splice(to, 0, ...this.list.splice(from, 1));
 			},
 		};
-
 		lx.playingList = playList;
 		this.renderPlayingList();
 		return lx.playingList;

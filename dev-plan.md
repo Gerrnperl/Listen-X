@@ -1,6 +1,5 @@
 Dev Plan
 ---
-- [ ] Next & previous song
 - [ ] Volumn Controller
 - [ ] `Preliminary` Lyric
 ---
@@ -12,3 +11,4 @@ Dev Plan
 - [x] Progress ctrl
 - [x] Play mode
 - [x] `Preliminary` Playing list
+- [x] Next & previous song

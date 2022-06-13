@@ -12,16 +12,28 @@ class Player extends LxHTMLElement{
 		lx.track = lx.audioCtx.createMediaElementSource(lx.audioEle);
 		lx.track.connect(lx.audioCtx.destination);
 		this.play_pause = this.shadowRoot.querySelector('#play-pause');
+		this.prevSong = this.shadowRoot.querySelector('#prev-song');
+		this.nextSong = this.shadowRoot.querySelector('#next-song');
 		this.goto = Helper.throttle(this.goto, 100);
 
 		lx.addEventListener('lx-loaded', (event=>{
 			this.shadowRoot.querySelector('lx-play-ctrl').genratePlayingList(event.detail.playList);
-			this.loadMusic(event.detail.playList[0], false);
+			let next = lx.playingList.next();
+			this.loadMusic(next, false);
 		}).bind(this));
 
 		this.play_pause.addEventListener('click', ()=>{
 			this.switchPlayPause();
 		});
+
+		this.prevSong.addEventListener('click', ()=>{
+			this.gotoPrev();
+		});
+
+		this.nextSong.addEventListener('click', ()=>{
+			this.gotoNext();
+		});
+
 
 		lx.audioEle.addEventListener('timeupdate', ()=>{
 			lx.dispatchEvent(new CustomEvent('lx-time-update', {
@@ -81,9 +93,6 @@ class Player extends LxHTMLElement{
 		lx.playing ? this.pauseAudio() : this.playAudio();
 	}
 
-	/**
-	 * 播放
-	 */
 	playAudio(){
 		if(lx.audioCtx.state === 'suspended'){
 			lx.audioCtx.resume();
@@ -94,29 +103,31 @@ class Player extends LxHTMLElement{
 		// // requestAnimationFrame(updateCurrentTime);
 	}
 
-	/**
-	 * 暂停
-	 */
 	pauseAudio(){
 		lx.playing = false;
 		lx.audioEle.pause();
 		this.play_pause.setAttribute('playing', false);
 	}
 
-	/**
-	 * 跳转进度
-	 */
 	goto(second){
 		lx.audioEle.currentTime = second;
 	}
 
 	async gotoNext(){
 		this.switchPlayPause();
-		// let next = audioVariables.playingList.next();
+		let next = lx.playingList.next();
 
-		// if (audioState.jump2next && next){
-		// 	this.prepareAudio(await this.fetchAudioBlob(next));
-		// }
+		if (lx.jump2next && next){
+			this.loadMusic(next);
+		}
+	}
+
+	async gotoPrev(){
+		let prev = lx.playingList.prev();
+
+		if (prev){
+			this.loadMusic(prev);
+		}
 	}
 
 
