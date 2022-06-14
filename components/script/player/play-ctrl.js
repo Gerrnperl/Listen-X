@@ -16,6 +16,11 @@ class PlayCtrl extends LxHTMLElement{
 		this.playingList = this.shadowRoot.querySelector('#playing-list');
 		this.playingListPanel = this.shadowRoot.querySelector('#playing-list-panel');
 		this.playingListTrigger = this.shadowRoot.querySelector('#playing-list-trigger');
+		this.volumeTrigger = this.shadowRoot.querySelector('#volume');
+		this.volumeSlider = this.shadowRoot.querySelector('#volume-slider');
+
+		// TODO:This `0.5` should be replaced by user-configued value
+		this.changeVolume(0.5);
 
 		// Switch play mode
 		this.shadowRoot.querySelectorAll('#play-mode-selector-container li.play-mode').forEach(li=>{
@@ -27,24 +32,53 @@ class PlayCtrl extends LxHTMLElement{
 			});
 		});
 
-		// Pop up playModeSwitcher & Hide playingList
+		// Pop up playModeSwitcher & Hide others
 		this.playModeSwitcher.addEventListener('click', event => {
 			event.stopPropagation();
 			this.playModeContainer.setAttribute('visible', 'true');
 			this.playingListPanel.setAttribute('visible', 'false');
+			this.volumeSlider.parentElement.setAttribute('visible', 'false');
 		});
 
-		// Pop up playingList & Hide playModeSwitcher
+		// Pop up playingList & Hide others
 		this.playingListTrigger.addEventListener('click', event => {
 			event.stopPropagation();
 			this.playModeContainer.setAttribute('visible', 'false');
 			this.playingListPanel.setAttribute('visible', 'true');
+			this.volumeSlider.parentElement.setAttribute('visible', 'false');
 		});
 
-		// Hide playingList & playModeSwitcher
+		// Hide all
 		document.body.addEventListener('click', () => {
 			this.playModeContainer.setAttribute('visible', 'false');
 			this.playingListPanel.setAttribute('visible', 'false');
+			this.volumeSlider.parentElement.setAttribute('visible', 'false');
+		});
+
+		// React to `volume-slider`'s change
+		this.volumeSlider.addEventListener('input', event => {
+			this.changeVolume(event.target.value / 100);
+		});
+
+		// Prevent the volumeSlider's click event from bubbling up to the parent;
+		this.volumeSlider.addEventListener('click', event => {
+			event.stopPropagation();
+		});
+
+		// React to `volume-trigger`'s click
+		// Pop up volumeSlider & Hide others when the width of window is less than 768px
+		// Otherwise, just change the volume
+		this.volumeTrigger.addEventListener('click', event => {
+			event.stopPropagation();
+			this.volumeSlider.parentElement.setAttribute('visible', 'true');
+			if(window.innerWidth > 768){
+				lx.audioEle.muted = !lx.audioEle.muted;
+				this.volumeTrigger.setAttribute('volume', lx.audioEle.muted ? 'muted' : this.getVolumeLevel(lx.audioEle.volume));
+			}
+			else{
+				this.playModeContainer.setAttribute('visible', 'false');
+				this.playingListPanel.setAttribute('visible', 'false');
+			}
 		});
 	}
 
@@ -171,6 +205,34 @@ class PlayCtrl extends LxHTMLElement{
 		lx.playingList = playList;
 		this.renderPlayingList();
 		return lx.playingList;
+	}
+
+	changeVolume(value){
+		lx.audioEle.volume = value;
+		let volumeLevel = this.getVolumeLevel(value);
+
+		this.volumeSlider.setAttribute('style', `--present: ${value * 100}%`);
+		this.volumeTrigger.setAttribute('volume', volumeLevel);
+	}
+
+	getVolumeLevel(value){
+		let volumeLevel;
+
+		// The level is assigned to volumeLevel according to the level of the volume
+		if(value === 0){
+			volumeLevel = 'no';
+		}
+		else if(value < 0.25){
+			volumeLevel = 'low';
+		}
+		else if(value < 0.75){
+			volumeLevel = 'medium';
+		}
+		else if(value <= 1){
+			volumeLevel = 'high';
+		}
+
+		return volumeLevel;
 	}
 
 }

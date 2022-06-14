@@ -74,21 +74,23 @@ lx-meta-data {
   content: "\e769";
 }
 #progress-ctrl-buttons #play-pause[playing=false]::before {
-  left: 0px;
+  left: 0;
   content: "\e768";
 }
 
 lx-play-ctrl {
   display: flex;
-  flex: 0.2 0.2 40px;
   flex-direction: row;
   column-gap: 10px;
   align-items: center;
   justify-content: space-evenly;
+  width: max-content;
   height: var(--control-panel-height);
+  padding-top: 4px;
+  padding-right: 10px;
   overflow: visible;
   font-size: 16px;
-/* position: relative; *//* position: relative; */}
+}
 lx-play-ctrl > * {
   width: 16px;
   height: 16px;

@@ -19,6 +19,7 @@ class Player extends LxHTMLElement{
 		lx.addEventListener('lx-loaded', (event=>{
 			this.shadowRoot.querySelector('lx-play-ctrl').genratePlayingList(event.detail.playList);
 			let next = lx.playingList.next();
+
 			this.loadMusic(next, false);
 		}).bind(this));
 

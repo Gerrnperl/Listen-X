@@ -4,14 +4,12 @@ lx-meta-data {
 	height: var(--control-panel-height);
 	overflow: hidden;
 }
-
 .central-ctrl {
 	display: flex;
 	flex-basis: 150px;
 	flex-flow: column nowrap;
 	flex-grow: 1;
 }
-
 #progress-ctrl-buttons {
 	position: relative;
 	top: -10px;
@@ -55,7 +53,6 @@ lx-meta-data {
 		}
 	}
 }
-
 #progress-ctrl-buttons {
 	& > *::before {
 		font-family: fabric;
@@ -75,19 +72,20 @@ lx-meta-data {
 		content: '';
 	}
 	#play-pause[playing='false']::before {
-		left: 0px;
+		left: 0;
 		content: '';
 	}
 }
-
 lx-play-ctrl {
 	display: flex;
-	flex: 0.35 0.2 20px;
 	flex-direction: row;
 	column-gap: 10px;
 	align-items: center;
 	justify-content: space-evenly;
+	width: max-content;
 	height: var(--control-panel-height);
+	padding-top: 4px;
+	padding-right: 10px;
 	overflow: visible;
 	font-size: 16px;
 	& > * {

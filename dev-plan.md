@@ -1,6 +1,5 @@
 Dev Plan
 ---
-- [ ] Volumn Controller
 - [ ] `Preliminary` Lyric
 ---
 - [ ] Side Panel
@@ -12,3 +11,4 @@ Dev Plan
 - [x] Play mode
 - [x] `Preliminary` Playing list
 - [x] Next & previous song
+- [x] Volume Controller

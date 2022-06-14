@@ -14,10 +14,10 @@
 }
 .text-data .song-name,
 .text-data .artist-name {
+  margin: 3px 8px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin: 3px 8px;
 }
 .text-data .song-name {
   font-size: 16px;

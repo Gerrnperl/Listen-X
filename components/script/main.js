@@ -46,8 +46,7 @@ CustomEvent<{
  }>
  ```
  * ---
- * ##### As A Base
- * some code logic related methods and infos will be put here
+ * ##### As A Namespace
  */
 let lx = new (class LX extends EventTarget{
 
