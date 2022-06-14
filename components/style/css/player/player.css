@@ -60,6 +60,7 @@ lx-meta-data {
   font-family: fabric;
   font-size: 22px;
   font-weight: bolder;
+  cursor: pointer;
 }
 #progress-ctrl-buttons #prev-song::before {
   content: "\e892";

@@ -38,6 +38,7 @@
   font-size: 12px;
   color: var(--black);
   transition: all ease 0.2s;
+  cursor: pointer;
 }
 #playing-list-trigger li.playing-list-item[odd-even=odd] {
   background-color: var(--themeLighterAlt);
@@ -127,6 +128,7 @@
   padding: 0 15px;
   line-height: 36px;
   transition: all ease 0.2s;
+  cursor: pointer;
 }
 #play-mode ul#play-mode-selector-container li.play-mode:hover {
   background-color: var(--neutralQuaternary);
@@ -268,6 +270,8 @@
 *::before {
   font-family: fabric;
   font-size: 16px;
+  color: var(--black);
+  cursor: pointer;
 }
 
 #playing-list-trigger::before {
