@@ -66,13 +66,10 @@ class PlayCtrl extends LxHTMLElement{
 
 			// Switch playing music
 			li.addEventListener('click', (()=>{
-				if(pl.playingIndex === pl.list.length){
-					pl.playingIndex = 0;
-				}
-				pl.playingIndex = index + 1;
+				pl.playingIndex = index;
 				this.switchPlayingMusic(pl.playedStack.at(-1), index);
 				pl.playedStack.push(index);
-				lx.layer.loadMusic(music);
+				lx.player.loadMusic(music);
 			}).bind(this));
 			this.playingList.appendChild(li);
 		});
@@ -125,7 +122,7 @@ class PlayCtrl extends LxHTMLElement{
 						}
 						Helper.shuffleArray(this.shuffledOrder);
 					}
-					if(this.playingIndex >= this.list.length){
+					if(this.playingIndex >= this.list.length - 1){
 						this.playingIndex = -1;
 						Helper.shuffleArray(this.shuffledOrder);
 					}
@@ -138,12 +135,17 @@ class PlayCtrl extends LxHTMLElement{
 				default:
 					break;
 				}
+
+				toPlayIndex = toPlayIndex <= -1 ? 0 : toPlayIndex;
+				toPlayIndex = toPlayIndex >= this.list.length ? this.list.length - 1 : toPlayIndex;
+
 				lx.playCtrl.switchPlayingMusic(this.playedStack.at(-1), toPlayIndex);
 				this.playedStack.push(toPlayIndex);
 				return this.list[toPlayIndex];
 			},
 			prev(){
 				let lastPlayingIndex = this.playedStack.pop();
+
 				this.playingIndex = this.playedStack.at(-1);
 				lastPlayingIndex = !lastPlayingIndex || lastPlayingIndex < 0 ? 0 : lastPlayingIndex;
 				this.playingIndex = !this.playingIndex || this.playingIndex < 0 ? 0 : this.playingIndex;
@@ -165,6 +167,7 @@ class PlayCtrl extends LxHTMLElement{
 				this.list.splice(to, 0, ...this.list.splice(from, 1));
 			},
 		};
+
 		lx.playingList = playList;
 		this.renderPlayingList();
 		return lx.playingList;
