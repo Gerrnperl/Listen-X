@@ -66,5 +66,6 @@ lerna-debug.log
 # System Files
 .DS_Store
 Thumbs.db
+.vscode/*
 .vscode/settings.json
 .count/*
