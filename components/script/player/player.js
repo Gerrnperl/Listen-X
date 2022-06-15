@@ -56,9 +56,11 @@ class Player extends LxHTMLElement{
 		if(!music.blob){
 			await this.getBlob(music);
 		}
-		let audioURL = URL.createObjectURL(music.blob);
+		if(!music.objURL){
+			music.objURL = URL.createObjectURL(music.blob);
+		}
 
-		lx.audioEle.src = audioURL;
+		lx.audioEle.src = music.objURL;
 		lx.dispatchEvent(new CustomEvent('lx-music-ready', {
 			'detail':{
 				music,
