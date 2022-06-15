@@ -56,6 +56,11 @@ class Player extends LxHTMLElement{
 	 * @param {music} music 
 	 */
 	async loadMusic(music, play = true){
+		lx.dispatchEvent(new CustomEvent('lx-music-loading', {
+			detail: {
+				music: music,
+			},
+		}));
 		if(!music.blob){
 			await this.getBlob(music);
 		}

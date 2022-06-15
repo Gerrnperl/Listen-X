@@ -29,6 +29,7 @@ class ProgressCtrl extends LxHTMLElement{
 			}
 		});
 		lx.addEventListener('lx-music-ready', event=>{
+			console.log(event.detail.music);
 			this.renderDurationText(Helper.formatTime(event.detail.music.duration));
 			this.duration = event.detail.music.duration;
 		});

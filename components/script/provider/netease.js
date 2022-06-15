@@ -151,6 +151,7 @@ class Netease{
 			albumName,
 			artistList: artists,
 			duration,
+			provider: 'netease',
 		};
 	}
 

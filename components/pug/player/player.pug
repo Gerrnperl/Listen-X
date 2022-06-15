@@ -1,10 +1,12 @@
 include ./meta-data.pug
 include ./progress.pug
 include ./play-ctrl.pug
+include ./lyric.pug
 
 template(id='template-player')
 	audio(id='main-palyer')
 	lx-meta-data
+	lx-lyric
 	.central-ctrl
 		lx-progress-ctrl
 		#progress-ctrl-buttons

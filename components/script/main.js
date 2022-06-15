@@ -11,6 +11,8 @@
  * 	size   : number,
  * 	type   : string,
  * 	url    : string,
+ * 	objURL : string,
+ * 	provider: string,
  * }}music
  */
 
@@ -18,33 +20,51 @@
  * ##### As A Custom Event Target
  * These events will be dispatched to **`lx`**
  * - `lx-loaded`
- * ```js
-CustomEvent<{
-    playList: any[];
-}>
-```
+		```js
+		CustomEvent<{
+			playList: any[];
+		}>
+		```
  * - `lx-meta-data-update`
- * ```js
-CustomEvent<{
-    songName: string;
-    artistList: string[];
-    coverURL: string;
-}>
-```
+		```js
+		CustomEvent<{
+			songName: string;
+			artistList: string[];
+			coverURL: string;
+		}>
+		```
+ * - `lx-music-loading`
+		the blob and objURL fields of `music` and may not be available
+		```js
+		CustomEvent<{
+			music: music;
+		}>
+		```
  * - `lx-music-ready`
- * ```js
- CustomEvent<{
-     music: music;
- }>
- ```
+		```js
+		CustomEvent<{
+			music: music;
+		}>
+		```
  * - `lx-time-update`
- * ```js
- CustomEvent<{
- 	time: number;
- 	fmtTime: string;
-	durtion: number;
- }>
- ```
+		```js
+		CustomEvent<{
+			time: number;
+			fmtTime: string;
+			durtion: number;
+		}>
+		```
+ * - `lx-music-ended`
+ * - `lx-lyric-update`
+		```js
+		CustomEvent<{
+			stamp: number;
+			lyric: string;
+			prevLyric: string;
+			nextLyric: string;
+		}>
+		```
+
  * ---
  * ##### As A Namespace
  */
