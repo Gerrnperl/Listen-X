@@ -32,6 +32,11 @@ class ProgressCtrl extends LxHTMLElement{
 			this.renderDurationText(Helper.formatTime(event.detail.music.duration));
 			this.duration = event.detail.music.duration;
 		});
+		lx.addEventListener('lx-music-ended', ()=>{
+			this.updateProgessText('00:00');
+			this.updateProgressBar(0);
+			this.duration = 0;
+		});
 
 		this.slider.addEventListener('mousedown', this.activeSlider.bind(this));
 		document.body.addEventListener('mouseup', this.stopMoveSlider.bind(this));
@@ -83,7 +88,7 @@ class ProgressCtrl extends LxHTMLElement{
 	}
 
 	moveSlider(event){
-		if (this.isMovingSlider){
+		if (this.isMovingSlider && this.duration){
 			if (event.clientX <= this.leftExtremumOfSlider){
 				this.sliderGoingto = 0;
 			}
@@ -101,6 +106,10 @@ class ProgressCtrl extends LxHTMLElement{
 	}
 
 	flashSlider(event){
+		// Do nothing when the music is not ready
+		if (!this.duration){
+			return;
+		}
 		let durationBarRect = this.durationBar.getBoundingClientRect();
 
 		this.leftExtremumOfSlider = durationBarRect.left;

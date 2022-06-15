@@ -3,11 +3,17 @@ class Player extends LxHTMLElement{
 	/** @type {HTMLButtonElement} */
 	play_pause;
 
+	/** @type {HTMLButtonElement} */
+	prevSong;
+
+	/** @type {HTMLButtonElement} */
+	nextSong;
+
 	constructor(){
 		super();
 		lx.player = this;
 		this.shadowRoot.appendChild(document.querySelector('#template-player').content);
-		// Get Children
+		// Get elements
 		lx.audioEle = this.shadowRoot.querySelector('audio');
 		lx.track = lx.audioCtx.createMediaElementSource(lx.audioEle);
 		lx.track.connect(lx.audioCtx.destination);
@@ -16,25 +22,18 @@ class Player extends LxHTMLElement{
 		this.nextSong = this.shadowRoot.querySelector('#next-song');
 		this.goto = Helper.throttle(this.goto, 100);
 
+		// Add Event Listeners
 		lx.addEventListener('lx-loaded', (event=>{
-			this.shadowRoot.querySelector('lx-play-ctrl').genratePlayingList(event.detail.playList);
+			lx.playCtrl.genratePlayingList(event.detail.playList);
 			let next = lx.playingList.next();
 
+			// Do not play when first load
 			this.loadMusic(next, false);
 		}).bind(this));
 
-		this.play_pause.addEventListener('click', ()=>{
-			this.switchPlayPause();
-		});
-
-		this.prevSong.addEventListener('click', ()=>{
-			this.gotoPrev();
-		});
-
-		this.nextSong.addEventListener('click', ()=>{
-			this.gotoNext();
-		});
-
+		this.play_pause.addEventListener('click', this.switchPlayPause.bind(this));
+		this.prevSong.addEventListener('click', this.gotoPrev.bind(this));
+		this.nextSong.addEventListener('click', this.gotoNext.bind(this));
 
 		lx.audioEle.addEventListener('timeupdate', ()=>{
 			lx.dispatchEvent(new CustomEvent('lx-time-update', {
@@ -45,7 +44,11 @@ class Player extends LxHTMLElement{
 				},
 			}));
 		});
-		lx.audioEle.addEventListener('ended', this.gotoNext.bind(this));
+
+		lx.audioEle.addEventListener('ended', ()=>{
+			this.gotoNext();
+			lx.dispatchEvent(new CustomEvent('lx-music-ended'));
+		});
 	}
 
 	/**
@@ -66,7 +69,6 @@ class Player extends LxHTMLElement{
 				music,
 			}}
 		));
-		console.log(music);
 		lx.dispatchEvent(new CustomEvent('lx-meta-data-update', {
 			'detail':{
 				songName: music.songName,
