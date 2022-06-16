@@ -1,4 +1,4 @@
-class ProgressCtrl extends LxHTMLElement{
+class ProgressCtrl extends HTMLElement{
 
 	/** @type {HTMLParagraphElement} */
 	progressText;
@@ -15,12 +15,12 @@ class ProgressCtrl extends LxHTMLElement{
 	constructor(){
 		super();
 		lx.progressCtrl = this;
-		this.shadowRoot.appendChild(document.querySelector('#template-progress').content);
-		this.progressText = this.shadowRoot.querySelector('#current-time-text');
-		this.progressBar = this.shadowRoot.querySelector('#current-time-bar');
-		this.durationBar = this.shadowRoot.querySelector('#duration-bar');
-		this.durationText = this.shadowRoot.querySelector('#duration-text');
-		this.slider = this.shadowRoot.querySelector('#progress-slider');
+		this.appendChild(document.querySelector('#template-progress').content);
+		this.progressText = this.querySelector('#current-time-text');
+		this.progressBar = this.querySelector('#current-time-bar');
+		this.durationBar = this.querySelector('#duration-bar');
+		this.durationText = this.querySelector('#duration-text');
+		this.slider = this.querySelector('#progress-slider');
 
 		lx.addEventListener('lx-time-update', event=>{
 			if(!this.isMovingSlider){

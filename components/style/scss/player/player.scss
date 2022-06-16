@@ -53,30 +53,7 @@ lx-meta-data {
 		}
 	}
 }
-#progress-ctrl-buttons {
-	& > *::before {
-		font-family: fabric;
-		font-size: 22px;
-		font-weight: bolder;
-		cursor: pointer;
-	}
-	#prev-song::before {
-		content: '';
-	}
-	#next-song::before {
-		content: '';
-	}
-	#play-pause::before {
-		position: relative;
-		left: -1px;
-		font-size: 28px;
-		content: '';
-	}
-	#play-pause[playing='false']::before {
-		left: 0;
-		content: '';
-	}
-}
+
 lx-play-ctrl {
 	display: flex;
 	flex-direction: row;
@@ -93,4 +70,10 @@ lx-play-ctrl {
 		width: 16px;
 		height: 16px;
 	}
+}
+
+lx-lyric {
+}
+lx-lyric[lyric-mode='false'] {
+	display: none;
 }

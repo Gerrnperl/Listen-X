@@ -82,6 +82,8 @@ let lx = new (class LX extends EventTarget{
 
 	playingList;
 
+	lyricMode = false;
+
 	/** @type {HTMLAudioElement} */
 	audioEle;
 
@@ -125,25 +127,25 @@ let lx = new (class LX extends EventTarget{
 
 })();
 
-/** 
- * All lx-element constructors will inherit from this class
- * To provide style inheritance etc.
- */
-// eslint-disable-next-line no-unused-vars
-class LxHTMLElement extends HTMLElement{
+// /** 
+//  * All lx-element constructors will inherit from this class
+//  * To provide style inheritance etc.
+//  */
+// // eslint-disable-next-line no-unused-vars
+// class LxHTMLElement extends HTMLElement{
 
-	constructor(){
-		super();
-		this.attachShadow({mode: 'open'});
-		let style = document.createElement('style');
+// 	constructor(){
+// 		super();
+// 		this.attachShadow({mode: 'open'});
+// 		let style = document.createElement('style');
 
-		// Attach the common style to the element
-		style.innerText = '@import url(components/style/css/main.css)';
-		this.shadowRoot.appendChild(style);
-		// todo: In planning, custom styles should be set here
-	}
+// 		// Attach the common style to the element
+// 		style.innerText = '@import url(components/style/css/main.css)';
+// 		this.appendChild(style);
+// 		// todo: In planning, custom styles should be set here
+// 	}
 
-}
+// }
 
 document.addEventListener('DOMContentLoaded', async()=>{
 	lx.dispatchEvent(new CustomEvent('lx-loaded',
