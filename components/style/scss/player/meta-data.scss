@@ -6,6 +6,25 @@
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
+	&::after{
+		content: '';
+		opacity: 0;
+		transition: all ease 0.2s;
+	}
+	&:hover::after {
+		opacity: 1;
+		content: "\edbd"; //EE04
+		font-size: large;
+		font-family: 'fabric';
+		color: var(--themeLighter);
+		display: flex;
+		backdrop-filter: blur(2px);
+		width: 100%;
+		height: 100%;
+		background-color: rgba(89, 89, 89, 0.3490196078);
+		justify-content: center;
+		align-items: center;
+	}
 }
 .text-data {
 	max-width: calc(200px - var(--control-panel-height));
@@ -41,6 +60,9 @@ lx-player[lyric-mode='true'] {
 	.cover.cover-shortcut {
 		width: 80px;
 		height: 80px;
+		&:hover::after {
+			content: "\ee04";
+		}
 		@media screen and (max-width: 768px) {
 			width: 60px;
 			height: 60px;

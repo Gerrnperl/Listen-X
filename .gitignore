@@ -69,3 +69,4 @@ Thumbs.db
 .vscode/*
 .vscode/settings.json
 .count/*
+components/script/test.js

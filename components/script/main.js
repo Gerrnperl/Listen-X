@@ -112,17 +112,8 @@ let lx = new (class LX extends EventTarget{
 	 * todo: 重写为 getter/setter
 	 * todo: 将临时生成的musics换为从cache/storage获取
 	 */
-	async getStoregedPlayingList(){
-		return [
-			await lx.providers.netease.getDetails(
-				(await lx.providers.netease.search({keywords: '浮夸', type: 1, limit: 30, offset: 0})).songs[0]),
-			await lx.providers.netease.getDetails(
-				(await lx.providers.netease.search({keywords: '红日', type: 1, limit: 30, offset: 0})).songs[0]),
-			await lx.providers.netease.getDetails(
-				(await lx.providers.netease.search({keywords: '错位时空', type: 1, limit: 30, offset: 0})).songs[0]),
-			await lx.providers.netease.getDetails(
-				(await lx.providers.netease.search({keywords: '七里香', type: 1, limit: 30, offset: 0})).songs[1]),
-		];
+	async getStoredPlayingList(){
+		return getTESTStoredPlaylist();
 	}
 
 })();
@@ -151,7 +142,7 @@ document.addEventListener('DOMContentLoaded', async()=>{
 	lx.dispatchEvent(new CustomEvent('lx-loaded',
 		{
 			'detail':{
-				playList: await lx.getStoregedPlayingList(),
+				playList: await lx.getStoredPlayingList(),
 			},
 		}
 	));

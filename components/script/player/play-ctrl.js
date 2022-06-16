@@ -40,6 +40,7 @@ class PlayCtrl extends HTMLElement{
 			this.playModeContainer.setAttribute('visible', 'true');
 			this.playingListPanel.setAttribute('visible', 'false');
 			this.volumeSlider.parentElement.setAttribute('visible', 'false');
+			lx.player.setAttribute('viewing-playing-list', 'false');
 		});
 
 		// Pop up playingList & Hide others
@@ -48,6 +49,7 @@ class PlayCtrl extends HTMLElement{
 			this.playModeContainer.setAttribute('visible', 'false');
 			this.playingListPanel.setAttribute('visible', 'true');
 			this.volumeSlider.parentElement.setAttribute('visible', 'false');
+			lx.player.setAttribute('viewing-playing-list', 'true');
 		});
 
 		// Hide all
@@ -55,6 +57,7 @@ class PlayCtrl extends HTMLElement{
 			this.playModeContainer.setAttribute('visible', 'false');
 			this.playingListPanel.setAttribute('visible', 'false');
 			this.volumeSlider.parentElement.setAttribute('visible', 'false');
+			lx.player.setAttribute('viewing-playing-list', 'false');
 		});
 
 		// React to `volume-slider`'s change
@@ -81,6 +84,7 @@ class PlayCtrl extends HTMLElement{
 				this.playModeContainer.setAttribute('visible', 'false');
 				this.playingListPanel.setAttribute('visible', 'false');
 			}
+			lx.player.setAttribute('viewing-playing-list', 'false');
 		});
 	}
 

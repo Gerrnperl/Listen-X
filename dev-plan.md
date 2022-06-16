@@ -5,6 +5,7 @@ Dev Plan
 ---
 - [ ] `Complete` Playing list
 - [ ] Play List
+- [ ] Translation of lyric
 ---
 - [x] Meta data
 - [x] Progress ctrl
