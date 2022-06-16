@@ -56,29 +56,6 @@ lx-meta-data {
   background-color: var(--themeLighterAlt);
 }
 
-#progress-ctrl-buttons > *::before {
-  font-family: fabric;
-  font-size: 22px;
-  font-weight: bolder;
-  cursor: pointer;
-}
-#progress-ctrl-buttons #prev-song::before {
-  content: "\e892";
-}
-#progress-ctrl-buttons #next-song::before {
-  content: "\e893";
-}
-#progress-ctrl-buttons #play-pause::before {
-  position: relative;
-  left: -1px;
-  font-size: 28px;
-  content: "\e769";
-}
-#progress-ctrl-buttons #play-pause[playing=false]::before {
-  left: 0;
-  content: "\e768";
-}
-
 lx-play-ctrl {
   display: flex;
   flex-direction: row;
@@ -95,6 +72,10 @@ lx-play-ctrl {
 lx-play-ctrl > * {
   width: 16px;
   height: 16px;
+}
+
+lx-lyric[lyric-mode=false] {
+  display: none;
 }
 
 /*# sourceMappingURL=player.css.map */

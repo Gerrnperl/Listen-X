@@ -1,0 +1,101 @@
+@charset "UTF-8";
+.central-ctrl::before {
+  font-family: fabric;
+  font-size: 22px;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+#prev-song::before {
+  content: "\e892";
+}
+
+#next-song::before {
+  content: "\e893";
+}
+
+#play-pause::before {
+  position: relative;
+  left: -1px;
+  font-size: 28px;
+  content: "\e769";
+}
+
+#play-pause[playing=false]::before {
+  left: 0;
+  content: "\e768";
+}
+
+.play-ctrl-button::before, li.play-mode::before {
+  font-family: fabric;
+  position: relative;
+  font-size: 16px;
+  cursor: pointer;
+  top: -2px;
+}
+
+#playing-list-trigger::before {
+  position: relative;
+  top: -3px;
+  content: "\e93f";
+}
+
+#play-mode-switcher[play-mode=repeatAll]::before,
+li.play-mode#play-mode-repeat-all::before {
+  content: "\e8ee";
+}
+
+#play-mode-switcher[play-mode=repeatOne]::before,
+li.play-mode#play-mode-repeat-one::before {
+  content: "\e8ed";
+}
+
+#play-mode-switcher[play-mode=playAll]::before,
+li.play-mode#play-mode-play-all::before {
+  content: "\e72a";
+}
+
+#play-mode-switcher[play-mode=playOne]::before,
+li.play-mode#play-mode-play-one::before {
+  content: "㏢";
+}
+
+#play-mode-switcher[play-mode=shuffle]::before,
+li.play-mode#play-mode-shuffle::before {
+  content: "㏠";
+}
+
+#play-mode-switcher[play-mode=random]::before,
+li.play-mode#play-mode-random::before {
+  content: "㏡";
+}
+
+#volume::before {
+  left: px;
+  font-size: 17px;
+  content: "";
+}
+#volume[volume=muted]::before {
+  content: "\ea85";
+  transform: scale(1.05) translateX(-3.7px);
+}
+#volume[volume=no]::before {
+  content: "\e992";
+}
+#volume[volume=low]::before {
+  content: "\e993";
+}
+#volume[volume=medium]::before {
+  content: "\e994";
+}
+#volume[volume=high]::before {
+  content: "\e995";
+}
+
+li.playing-list-item[playing]::before {
+  color: var(--themePrimary);
+  content: "\f5b0";
+  opacity: 1;
+}
+
+/*# sourceMappingURL=icon.css.map */
