@@ -1,0 +1,91 @@
+lx-side-panel div#side-panel-title {
+  height: 50px;
+  white-space: nowrap;
+  font-family: sans-serif;
+  font-size: 2rem;
+  font-variant: petite-caps;
+  line-height: 50px;
+  color: var(--white);
+  text-align: center;
+  text-shadow: 0 1px 1px var(--themePrimary);
+  transition: all ease 0.3s;
+  opacity: 1;
+}
+lx-side-panel ul#side-panel-list {
+  display: flex;
+  flex-flow: column nowrap;
+  height: calc(100% - 50px);
+  list-style: none;
+  transition: all ease 0.3s;
+  overflow: hidden;
+}
+lx-side-panel ul#side-panel-list .side-panel-item {
+  position: relative;
+  height: 40px;
+  padding-left: 8px;
+  color: var(--black);
+  border-left: 5px solid transparent;
+  transition: all ease 0.3s;
+}
+lx-side-panel ul#side-panel-list .side-panel-item:hover {
+  background-color: var(--neutralQuaternaryAlt);
+}
+lx-side-panel ul#side-panel-list .side-panel-item.at-bottom {
+  justify-self: end;
+  margin-top: auto;
+}
+lx-side-panel ul#side-panel-list .side-panel-item[focus] {
+  color: var(--themePrimary);
+  border-left: 5px solid var(--themePrimary);
+}
+lx-side-panel ul#side-panel-list .spi-content {
+  transition: all ease 0.3s;
+  font-size: 14px;
+  line-height: 40px;
+  display: inline-block;
+  position: absolute;
+  opacity: 1;
+}
+@media screen and (max-width: 768px) {
+  lx-side-panel {
+    width: 40px;
+  }
+  lx-side-panel:hover {
+    width: 200px;
+  }
+  lx-side-panel:hover ul#side-panel-list .spi-content {
+    opacity: 1;
+  }
+  lx-side-panel ul#side-panel-list {
+    height: 100%;
+  }
+  lx-side-panel div#side-panel-title {
+    opacity: 0;
+    height: 0px;
+  }
+  lx-side-panel ul#side-panel-list .spi-content {
+    opacity: 0;
+  }
+}
+
+lx-side-panel .spi-page {
+  display: none;
+  position: fixed;
+  width: calc(100vw - var(--side-panel-width-wide));
+  right: 0;
+  height: calc(100vh - var(--control-panel-height));
+  top: 0;
+}
+@media screen and (max-width: 768px) {
+  lx-side-panel .spi-page {
+    width: calc(100vw - var(--side-panel-width-narrow));
+  }
+}
+
+lx-side-panel li.side-panel-item[focus] .spi-page {
+  pointer-events: all;
+  user-select: all;
+  display: block;
+}
+
+/*# sourceMappingURL=side-panel.css.map */

@@ -118,7 +118,7 @@ li.playing-list-item[playing]::before {
 #side-panel-list #spi-recommend::before {
   content: "\e728";
 }
-#side-panel-list #spi-extension::before {
+#side-panel-list #spi-plugins::before {
   content: "\ea86";
 }
 #side-panel-list #spi-settings::before {

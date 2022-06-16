@@ -115,6 +115,14 @@ li.playing-list-item[playing]::before {
 }
 
 
+// Listen X
+// ┃♫ My Music
+//  🧭 Explore
+//  ॱ𝄘 Playlists
+//  ☆𝍢 Recommend
+//  🧩 Plugins
+//  
+//  ⚙ Settings
 #side-panel-list {
 	& > *::before {
 		font-family: fabric;
@@ -124,21 +132,27 @@ li.playing-list-item[playing]::before {
 		position: relative;
 		margin-right: 6px;
 	}
+	// ♫ 
 	#spi-my-music::before {
 		content: '\e940';
 	}
+	//  🧭
 	#spi-explore::before {
 		content: '\e942';
 	}
+	//  ॱ𝄘
 	#spi-playlists::before {
 		content: '\e93f';
 	}
+	//  ☆𝍢
 	#spi-recommend::before {
 		content: '\e728';
 	}
-	#spi-extension::before {
+	//  🧩
+	#spi-plugins::before {
 		content: '\ea86';
 	}
+	//  ⚙
 	#spi-settings::before {
 		content: '\e713';
 	}

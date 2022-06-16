@@ -19,7 +19,7 @@ customElements.define('lx-play-ctrl', class extends HTMLElement{
 		this.volumeTrigger = this.querySelector('#volume');
 		this.volumeSlider = this.querySelector('#volume-slider');
 
-		// TODO:This `0.5` should be replaced by user-configued value
+		// TODO:This `0.5` should be replaced by user-configured value
 		lx.addEventListener('lx-loaded', ()=>{
 			this.changeVolume(0.5);
 		});

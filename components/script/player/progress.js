@@ -24,7 +24,7 @@ customElements.define('lx-progress-ctrl', class extends HTMLElement{
 
 		lx.addEventListener('lx-time-update', event=>{
 			if(!this.isMovingSlider){
-				this.updateProgessText(event.detail.fmtTime);
+				this.updateProgressText(event.detail.fmtTime);
 				this.updateProgressBar((~~(event.detail.time / event.detail.duration * 1000)) / 10);
 			}
 		});
@@ -34,7 +34,7 @@ customElements.define('lx-progress-ctrl', class extends HTMLElement{
 			this.duration = event.detail.music.duration;
 		});
 		lx.addEventListener('lx-music-ended', ()=>{
-			this.updateProgessText('00:00');
+			this.updateProgressText('00:00');
 			this.updateProgressBar(0);
 			this.duration = 0;
 		});
@@ -51,7 +51,7 @@ customElements.define('lx-progress-ctrl', class extends HTMLElement{
 	 * 
 	 * @param {string} time 已播放时间 mm:ss[?.ms]
 	 */
-	updateProgessText(time){
+	updateProgressText(time){
 		// discard milliseconds
 		time = time.split('.')[0];
 		this.progressText.innerText = time;
@@ -74,7 +74,7 @@ customElements.define('lx-progress-ctrl', class extends HTMLElement{
 
 	stopMoveSlider(){
 		if (this.isMovingSlider){
-			lx.player.goto(this.sliderGoingto);
+			lx.player.goto(this.sliderGoingTo);
 			this.isMovingSlider = false;
 		}
 	}
@@ -83,26 +83,26 @@ customElements.define('lx-progress-ctrl', class extends HTMLElement{
 		this.isMovingSlider = true;
 		let durationBarRect = this.durationBar.getBoundingClientRect();
 
-		this.leftExtremumOfSlider = durationBarRect.left;
-		this.rightExtremumOfSlider = durationBarRect.right;
+		this.leftMax = durationBarRect.left;
+		this.rightMax = durationBarRect.right;
 		this.rangeOfSlider = durationBarRect.width;
 	}
 
 	moveSlider(event){
 		if (this.isMovingSlider && this.duration){
-			if (event.clientX <= this.leftExtremumOfSlider){
-				this.sliderGoingto = 0;
+			if (event.clientX <= this.leftMax){
+				this.sliderGoingTo = 0;
 			}
-			else if (event.clientX >= this.rightExtremumOfSlider){
-				this.sliderGoingto = this.duration;
+			else if (event.clientX >= this.rightMax){
+				this.sliderGoingTo = this.duration;
 			}
 			else {
-				let percentage = (event.clientX - this.leftExtremumOfSlider) / this.rangeOfSlider;
+				let percentage = (event.clientX - this.leftMax) / this.rangeOfSlider;
 
-				this.sliderGoingto = percentage * this.duration;
+				this.sliderGoingTo = percentage * this.duration;
 			}
-			this.updateProgressBar((~~(this.sliderGoingto / this.duration * 1000)) / 10);
-			this.updateProgessText(Helper.formatTime(this.sliderGoingto));
+			this.updateProgressBar((~~(this.sliderGoingTo / this.duration * 1000)) / 10);
+			this.updateProgressText(Helper.formatTime(this.sliderGoingTo));
 		}
 	}
 
@@ -113,9 +113,9 @@ customElements.define('lx-progress-ctrl', class extends HTMLElement{
 		}
 		let durationBarRect = this.durationBar.getBoundingClientRect();
 
-		this.leftExtremumOfSlider = durationBarRect.left;
+		this.leftMax = durationBarRect.left;
 		this.rangeOfSlider = durationBarRect.width;
-		let percentage = (event.clientX - this.leftExtremumOfSlider) / this.rangeOfSlider;
+		let percentage = (event.clientX - this.leftMax) / this.rangeOfSlider;
 
 		lx.player.goto(percentage * this.duration);
 	}

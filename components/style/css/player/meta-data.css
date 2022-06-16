@@ -59,6 +59,7 @@ lx-player[lyric-mode=true] lx-meta-data * {
 lx-player[lyric-mode=true] .cover.cover-shortcut {
   width: 80px;
   height: 80px;
+  flex: 0 0 80px;
 }
 lx-player[lyric-mode=true] .cover.cover-shortcut:hover::after {
   content: "\ee04";
@@ -67,6 +68,7 @@ lx-player[lyric-mode=true] .cover.cover-shortcut:hover::after {
   lx-player[lyric-mode=true] .cover.cover-shortcut {
     width: 60px;
     height: 60px;
+    flex: 0 0 60px;
   }
 }
 @media screen and (max-width: 600px) {
