@@ -1,5 +1,5 @@
 /* eslint-disable require-unicode-regexp */
-class Lyric extends HTMLElement{
+customElements.define('lx-lyric', class extends HTMLElement{
 
 	fmtLyric;
 
@@ -140,6 +140,4 @@ class Lyric extends HTMLElement{
 
 	// }
 
-}
-
-customElements.define('lx-lyric', Lyric);
+});

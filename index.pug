@@ -5,11 +5,13 @@ head
 	link(rel="stylesheet", href="components/style/css/icon.css")
 	title Listen X
 body
-	script(src='components/script/test.js)
+	script(src='components/script/test.js')
 	script(src='components/script/main.js')
 	script(src='components/script/tool-lib/helper.js')
 	script(src='components/script/tool-lib/crypto-js.min.js')
 	include components/pug/player/player.pug
-	lx-player(lyric-mode='true')
+	include components/pug/pages/side-panel.pug
+	lx-side-panel
+	lx-player(lyric-mode='false')
 	script(src='components/script/provider/netease.js')
 	

@@ -1,4 +1,4 @@
-class Player extends HTMLElement{
+customElements.define('lx-player', class extends HTMLElement{
 
 	/** @type {HTMLButtonElement} */
 	play_pause;
@@ -141,5 +141,4 @@ class Player extends HTMLElement{
 	}
 
 
-}
-customElements.define('lx-player', Player);
+});

@@ -98,4 +98,31 @@ li.playing-list-item[playing]::before {
   opacity: 1;
 }
 
+#side-panel-list > *::before {
+  font-family: fabric;
+  font-size: 14px;
+  line-height: 40px;
+  display: inline-block;
+  position: relative;
+  margin-right: 6px;
+}
+#side-panel-list #spi-my-music::before {
+  content: "\e940";
+}
+#side-panel-list #spi-explore::before {
+  content: "\e942";
+}
+#side-panel-list #spi-playlists::before {
+  content: "\e93f";
+}
+#side-panel-list #spi-recommend::before {
+  content: "\e728";
+}
+#side-panel-list #spi-extension::before {
+  content: "\ea86";
+}
+#side-panel-list #spi-settings::before {
+  content: "\e713";
+}
+
 /*# sourceMappingURL=icon.css.map */

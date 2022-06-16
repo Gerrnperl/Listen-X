@@ -1,4 +1,4 @@
-class PlayCtrl extends HTMLElement{
+customElements.define('lx-play-ctrl', class extends HTMLElement{
 
 	playModeSwitcher;
 	playModeContainer;
@@ -241,5 +241,4 @@ class PlayCtrl extends HTMLElement{
 		return volumeLevel;
 	}
 
-}
-customElements.define('lx-play-ctrl', PlayCtrl);
+});

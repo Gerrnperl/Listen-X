@@ -1,4 +1,4 @@
-class ProgressCtrl extends HTMLElement{
+customElements.define('lx-progress-ctrl', class extends HTMLElement{
 
 	/** @type {HTMLParagraphElement} */
 	progressText;
@@ -120,5 +120,4 @@ class ProgressCtrl extends HTMLElement{
 		lx.player.goto(percentage * this.duration);
 	}
 
-}
-customElements.define('lx-progress-ctrl', ProgressCtrl);
+});

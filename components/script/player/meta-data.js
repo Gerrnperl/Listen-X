@@ -1,4 +1,4 @@
-class MetaData extends HTMLElement{
+customElements.define('lx-meta-data', class extends HTMLElement{
 
 	/** @type {HTMLElement} */
 	songNameEle;
@@ -36,5 +36,4 @@ class MetaData extends HTMLElement{
 		this.coverEle.style.backgroundImage = `url(${detail.coverURL})`;
 	}
 
-}
-customElements.define('lx-meta-data', MetaData);
+});

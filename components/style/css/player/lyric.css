@@ -4,6 +4,7 @@ lx-lyric {
 }
 
 #lyric-body {
+  max-width: 60%;
   width: fit-content;
   height: 80%;
   overflow: auto;
