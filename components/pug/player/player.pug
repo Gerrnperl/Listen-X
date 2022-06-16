@@ -5,8 +5,8 @@ include ./lyric.pug
 
 template(id='template-player')
 	audio(id='main-palyer')
+	lx-lyric(lyric-mode='true')
 	lx-meta-data
-	lx-lyric
 	.central-ctrl
 		lx-progress-ctrl
 		#progress-ctrl-buttons
@@ -16,4 +16,4 @@ template(id='template-player')
 	lx-play-ctrl
 	link(rel="stylesheet", href="components/style/css/player/player.css")
 
-script(src='components/script/player/player.js')
+script(defer src='components/script/player/player.js')

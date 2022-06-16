@@ -13,9 +13,9 @@ template(id='template-play-ctrl')
 			li.play-mode#play-mode-play-one(play-mode='playOne') 播放单曲
 			li.play-mode#play-mode-shuffle(play-mode='shuffle',title='无重复随机') 打乱播放
 			li.play-mode#play-mode-random(play-mode='random') 随机播放
-	#volume
+	.play-ctrl-button#volume
 		#volume-slider-container(visible='false')
 			input(name='volume-slider' id='volume-slider' type='range' min='0' max='100' step='1' style='--present: 50%')
 	link(rel="stylesheet", href="components/style/css/player/play-ctrl.css")
 
-script(src="components/script/player/play-ctrl.js") 
+script(defer src="components/script/player/play-ctrl.js") 
