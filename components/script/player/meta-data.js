@@ -26,7 +26,6 @@ class MetaData extends HTMLElement{
 		this.addEventListener('click', ()=>{
 			lx.lyricMode = !lx.lyricMode;
 			lx.player.setAttribute('lyric-mode', lx.lyricMode);
-			lx.lyric.setAttribute('lyric-mode', lx.lyricMode);
 		});
 	}
 

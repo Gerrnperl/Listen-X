@@ -27,4 +27,45 @@
   color: var(--neutralPrimaryAlt);
 }
 
+lx-player[lyric-mode=true] lx-meta-data {
+  position: absolute;
+  bottom: calc(var(--lyric-mode-bottom-height) + 20px);
+  margin-left: 20px;
+  height: auto;
+}
+lx-player[lyric-mode=true] lx-meta-data * {
+  transition: all 0.3s ease;
+}
+lx-player[lyric-mode=true] .cover.cover-shortcut {
+  width: 80px;
+  height: 80px;
+}
+@media screen and (max-width: 768px) {
+  lx-player[lyric-mode=true] .cover.cover-shortcut {
+    width: 60px;
+    height: 60px;
+  }
+}
+@media screen and (max-width: 600px) {
+  lx-player[lyric-mode=true] .cover.cover-shortcut {
+    display: none;
+  }
+}
+lx-player[lyric-mode=true] .text-data .song-name {
+  font-size: 20px;
+}
+lx-player[lyric-mode=true] .text-data .artist-name {
+  font-size: 16px;
+}
+@media screen and (max-width: 768px) {
+  lx-player[lyric-mode=true] .text-data {
+    padding-top: 0px;
+  }
+}
+@media screen and (max-width: 500px) {
+  lx-player[lyric-mode=true] .text-data {
+    display: none;
+  }
+}
+
 /*# sourceMappingURL=meta-data.css.map */

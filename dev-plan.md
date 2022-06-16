@@ -1,10 +1,10 @@
 Dev Plan
 ---
-- [ ] `Preliminary` Lyric
----
 - [ ] Side Panel
+- [ ] Search 
+---
 - [ ] `Complete` Playing list
-- [ ] `Complete` Lyric
+- [ ] Play List
 ---
 - [x] Meta data
 - [x] Progress ctrl
@@ -12,3 +12,4 @@ Dev Plan
 - [x] `Preliminary` Playing list
 - [x] Next & previous song
 - [x] Volume Controller
+- [x] Lyric

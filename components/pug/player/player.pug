@@ -7,12 +7,11 @@ template(id='template-player')
 	audio(id='main-palyer')
 	lx-lyric(lyric-mode='true')
 	lx-meta-data
-	.central-ctrl
-		lx-progress-ctrl
-		#progress-ctrl-buttons
-			button#prev-song
-			button#play-pause(playing="false")
-			button#next-song
+	lx-progress-ctrl
+	#progress-ctrl-buttons
+		button#prev-song
+		button#play-pause(playing="false")
+		button#next-song
 	lx-play-ctrl
 	link(rel="stylesheet", href="components/style/css/player/player.css")
 

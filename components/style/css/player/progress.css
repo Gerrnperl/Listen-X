@@ -1,27 +1,29 @@
-#progress {
+lx-progress-ctrl {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   row-gap: 4px;
-  justify-content: center;
   padding: 9px 9px 0;
   user-select: none;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-#progress .progress-text-wrapper {
+lx-progress-ctrl .progress-text-wrapper {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   font-family: sans-serif;
   color: var(--black);
 }
-#progress .progress-bar-wrapper {
+lx-progress-ctrl .progress-bar-wrapper {
+  width: 100%;
   position: relative;
   cursor: pointer;
 }
-#progress .progress-bar-wrapper .progress-bar {
+lx-progress-ctrl .progress-bar-wrapper .progress-bar {
   width: 100%;
   height: 4px;
 }
-#progress .progress-bar-wrapper .progress-bar::after {
+lx-progress-ctrl .progress-bar-wrapper .progress-bar::after {
   position: absolute;
   top: -50%;
   z-index: 2;
@@ -29,17 +31,17 @@
   height: 450%;
   content: "";
 }
-#progress .progress-bar-wrapper #duration-bar {
+lx-progress-ctrl .progress-bar-wrapper #duration-bar {
   width: 100%;
   background-color: var(--themeLight);
 }
-#progress .progress-bar-wrapper #current-time-bar {
+lx-progress-ctrl .progress-bar-wrapper #current-time-bar {
   position: absolute;
   width: 0%;
   background-color: var(--themePrimary);
   transition: width 100ms linear;
 }
-#progress .progress-bar-wrapper #progress-slider {
+lx-progress-ctrl .progress-bar-wrapper #progress-slider {
   position: absolute;
   top: -2px;
   width: 2px;
@@ -50,7 +52,7 @@
   transform: translateX(0);
   z-index: 100;
 }
-#progress .progress-bar-wrapper #progress-slider::after {
+lx-progress-ctrl .progress-bar-wrapper #progress-slider::after {
   position: absolute;
   top: -5px;
   left: -8px;
@@ -60,7 +62,7 @@
   background-color: rgba(244, 67, 54, 0);
 }
 
-#progress:hover #progress-slider {
+lx-progress-ctrl:hover #progress-slider {
   width: 8px;
   height: 8px;
   background-color: var(--themeLight);
@@ -70,8 +72,12 @@
   transform: translate(-4px, -2px);
 }
 
-#progress:active #progress-slider {
+lx-progress-ctrl:active #progress-slider {
   background-color: var(--themeDark);
+}
+
+lx-player[lyric-mode=true] lx-progress-ctrl {
+  grid-area: lx-progress;
 }
 
 /*# sourceMappingURL=progress.css.map */

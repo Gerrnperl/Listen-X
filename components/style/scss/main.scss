@@ -4,6 +4,7 @@
 }
 :root {
 	--control-panel-height: 60px;
+	--lyric-mode-bottom-height: 80px;
 	--themeDarker: #004377;
 	--themeDark: #005ba1;
 	--themeDarkAlt: #006cbe;
@@ -48,4 +49,26 @@ lx-player {
 	height: var(--control-panel-height);
 	background-color: var(--white);
 	box-shadow: 0 -3.2px 7.2px 0 rgb(0 0 0 / 13%);
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    background: transparent;
+}
+::-webkit-scrollbar-button {
+    width: 4px;
+    height: 2px;
+    background: transparent;
+}
+::-webkit-scrollbar-corner {
+    display: none;
+}
+::-webkit-scrollbar-thumb {
+    height: auto;
+    width: 4px;
+    border-radius: 0;
+    background-color: transparent;
+}
+*:hover::-webkit-scrollbar-thumb {
+	background-color: var(--themeLighter);
 }

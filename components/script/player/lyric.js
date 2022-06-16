@@ -18,8 +18,9 @@ class Lyric extends HTMLElement{
 			this.updateLyric(event.detail.time);
 		});
 		// todo: remove this event listener
-		lx.addEventListener('lx-lyric-update', (event)=>{
-			console.log(`${event.detail.prevLyric} -> ${event.detail.lyric} -> ${event.detail.nextLyric}`);
+		lx.addEventListener('lx-lyric-update', ()=>{
+			// console.log(`${event.detail.prevLyric} -> ${event.detail.lyric} -> ${event.detail.nextLyric}`);
+			this.scrollLyric();
 		});
 		lx.addEventListener('lx-lyric-loaded', (event)=>{
 			this.renderLyric(event.detail.fmtLyric);
@@ -120,6 +121,20 @@ class Lyric extends HTMLElement{
 			this.lyricList.appendChild(li);
 		});
 	}
+
+	scrollLyric(){
+		let index = this.lyricIndex;
+		let lyricLine = this.lyricList.children[index];
+		let prevLyricLine = this.lyricList.children[index - 1];
+
+		prevLyricLine?.classList.remove('highlight');
+		lyricLine?.classList.add('highlight');
+		lyricLine?.scrollIntoView({
+			behavior: 'smooth',
+			block: 'center',
+		});
+	}
+
 
 	// renderLyricHead(detail){
 

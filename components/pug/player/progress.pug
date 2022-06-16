@@ -3,14 +3,13 @@
 //--------------------------------------------------------------
 
 template(id='template-progress')
-	#progress
-		.progress-bar-wrapper 
-			.progress-bar#current-time-bar
-			.progress-bar#duration-bar
-			#progress-slider
-		.progress-text-wrapper
-			p.progress-text#current-time-text --/--
-			p.progress-text#duration-text --/--
+	.progress-bar-wrapper 
+		.progress-bar#current-time-bar
+		.progress-bar#duration-bar
+		#progress-slider
+	//- .progress-text-wrapper
+	p.progress-text#current-time-text --/--
+	p.progress-text#duration-text --/--
 
 	link(rel="stylesheet", href="components/style/css/player/progress.css")
 

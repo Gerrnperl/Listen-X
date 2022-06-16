@@ -25,3 +25,43 @@
 		color: var(--neutralPrimaryAlt);
 	}
 }
+
+
+lx-player[lyric-mode='true'] {
+	lx-meta-data {
+		position: absolute;
+		bottom: calc(var(--lyric-mode-bottom-height) + 20px);
+		margin-left: 20px;
+		height: auto;
+		* {
+			transition: all 0.3s ease;
+		}
+	}
+
+	.cover.cover-shortcut {
+		width: 80px;
+		height: 80px;
+		@media screen and (max-width: 768px) {
+			width: 60px;
+			height: 60px;
+		}
+		@media screen and (max-width: 600px) {
+			display: none;
+		}
+	}
+	.text-data {
+		.song-name {
+			font-size: 20px;
+				
+		}
+		.artist-name {
+			font-size: 16px;
+		}
+		@media screen and (max-width: 768px) {
+			padding-top: 0px;
+		}
+		@media screen and (max-width: 500px) {
+			display: none;
+		}
+	}
+}
