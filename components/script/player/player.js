@@ -1,4 +1,4 @@
-class Player extends LxHTMLElement{
+class Player extends HTMLElement{
 
 	/** @type {HTMLButtonElement} */
 	play_pause;
@@ -12,19 +12,19 @@ class Player extends LxHTMLElement{
 	constructor(){
 		super();
 		lx.player = this;
-		this.shadowRoot.appendChild(document.querySelector('#template-player').content);
+		this.appendChild(document.querySelector('#template-player').content);
 		// Get elements
-		lx.audioEle = this.shadowRoot.querySelector('audio');
+		lx.audioEle = this.querySelector('audio');
 		lx.track = lx.audioCtx.createMediaElementSource(lx.audioEle);
 		lx.track.connect(lx.audioCtx.destination);
-		this.play_pause = this.shadowRoot.querySelector('#play-pause');
-		this.prevSong = this.shadowRoot.querySelector('#prev-song');
-		this.nextSong = this.shadowRoot.querySelector('#next-song');
+		this.play_pause = this.querySelector('#play-pause');
+		this.prevSong = this.querySelector('#prev-song');
+		this.nextSong = this.querySelector('#next-song');
 		this.goto = Helper.throttle(this.goto, 100);
 
 		// Add Event Listeners
 		lx.addEventListener('lx-loaded', (event=>{
-			lx.playCtrl.genratePlayingList(event.detail.playList);
+			lx.playCtrl.generatePlayingList(event.detail.playList);
 			let next = lx.playingList.next();
 
 			// Do not play when first load

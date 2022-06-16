@@ -1,4 +1,4 @@
-class MetaData extends LxHTMLElement{
+class MetaData extends HTMLElement{
 
 	/** @type {HTMLElement} */
 	songNameEle;
@@ -12,14 +12,21 @@ class MetaData extends LxHTMLElement{
 	constructor(){
 		super();
 		lx.metaData = this;
-		this.shadowRoot.appendChild(document.querySelector('#template-meta-data').content);
+		this.appendChild(document.querySelector('#template-meta-data').content);
 		// Get Children
-		this.songNameEle = this.shadowRoot.querySelector('.song-name');
-		this.artistNameEle = this.shadowRoot.querySelector('.artist-name');
-		this.coverEle = this.shadowRoot.querySelector('.cover');
+		this.songNameEle = this.querySelector('.song-name');
+		this.artistNameEle = this.querySelector('.artist-name');
+		this.coverEle = this.querySelector('.cover');
 
 		lx.addEventListener('lx-meta-data-update', (event)=>{
 			this.update(event.detail);
+		});
+
+		// change the lyric-mode of lx-lyric and lx-player
+		this.addEventListener('click', ()=>{
+			lx.lyricMode = !lx.lyricMode;
+			lx.player.setAttribute('lyric-mode', lx.lyricMode);
+			lx.lyric.setAttribute('lyric-mode', lx.lyricMode);
 		});
 	}
 

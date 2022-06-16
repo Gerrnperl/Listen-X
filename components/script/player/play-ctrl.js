@@ -1,4 +1,4 @@
-class PlayCtrl extends LxHTMLElement{
+class PlayCtrl extends HTMLElement{
 
 	playModeSwitcher;
 	playModeContainer;
@@ -9,21 +9,23 @@ class PlayCtrl extends LxHTMLElement{
 	constructor(){
 		super();
 		lx.playCtrl = this;
-		this.shadowRoot.appendChild(document.querySelector('#template-play-ctrl').content);
+		this.appendChild(document.querySelector('#template-play-ctrl').content);
 		// Get Children
-		this.playModeSwitcher = this.shadowRoot.querySelector('#play-mode-switcher');
-		this.playModeContainer = this.shadowRoot.querySelector('#play-mode-selector-container');
-		this.playingList = this.shadowRoot.querySelector('#playing-list');
-		this.playingListPanel = this.shadowRoot.querySelector('#playing-list-panel');
-		this.playingListTrigger = this.shadowRoot.querySelector('#playing-list-trigger');
-		this.volumeTrigger = this.shadowRoot.querySelector('#volume');
-		this.volumeSlider = this.shadowRoot.querySelector('#volume-slider');
+		this.playModeSwitcher = this.querySelector('#play-mode-switcher');
+		this.playModeContainer = this.querySelector('#play-mode-selector-container');
+		this.playingList = this.querySelector('#playing-list');
+		this.playingListPanel = this.querySelector('#playing-list-panel');
+		this.playingListTrigger = this.querySelector('#playing-list-trigger');
+		this.volumeTrigger = this.querySelector('#volume');
+		this.volumeSlider = this.querySelector('#volume-slider');
 
 		// TODO:This `0.5` should be replaced by user-configued value
-		this.changeVolume(0.5);
+		lx.addEventListener('lx-loaded', ()=>{
+			this.changeVolume(0.5);
+		});
 
 		// Switch play mode
-		this.shadowRoot.querySelectorAll('#play-mode-selector-container li.play-mode').forEach(li=>{
+		this.querySelectorAll('#play-mode-selector-container li.play-mode').forEach(li=>{
 			li.addEventListener('click', event=>{
 				let playMode = event.target.getAttribute('play-mode');
 
@@ -107,18 +109,18 @@ class PlayCtrl extends LxHTMLElement{
 			}).bind(this));
 			this.playingList.appendChild(li);
 		});
-		this.shadowRoot.querySelector(' #playing-list-panel-head span.plph-summary').innerText = `播放列表 [${pl.list.length}]`;
+		this.querySelector(' #playing-list-panel-head span.plph-summary').innerText = `播放列表 [${pl.list.length}]`;
 	}
 
 	switchPlayingMusic(from, to){
-		let playingListUI = this.shadowRoot.querySelectorAll('#playing-list .playing-list-item');
+		let playingListUI = this.querySelectorAll('#playing-list .playing-list-item');
 
 		playingListUI[from]?.removeAttribute('playing');
 		playingListUI[to].setAttribute('playing', '');
 	}
 
 
-	genratePlayingList(musics){
+	generatePlayingList(musics){
 		let playList = {
 			list: musics,
 			playingIndex: -1,

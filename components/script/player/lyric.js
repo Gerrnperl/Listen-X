@@ -1,5 +1,5 @@
 /* eslint-disable require-unicode-regexp */
-class Lyric extends LxHTMLElement{
+class Lyric extends HTMLElement{
 
 	fmtLyric;
 
@@ -8,8 +8,9 @@ class Lyric extends LxHTMLElement{
 	constructor(){
 		super();
 		lx.lyric = this;
-		this.shadowRoot.appendChild(document.querySelector('#template-lyric').content);
-		this.lyricList = this.shadowRoot.querySelector('#lyric-list');
+		this.appendChild(document.querySelector('#template-lyric').content);
+		this.lyricList = this.querySelector('#lyric-list');
+		// this.lyric
 		lx.addEventListener('lx-music-loading', (event)=>{
 			this.loadLyric(event.detail.music);
 		});
@@ -19,6 +20,9 @@ class Lyric extends LxHTMLElement{
 		// todo: remove this event listener
 		lx.addEventListener('lx-lyric-update', (event)=>{
 			console.log(`${event.detail.prevLyric} -> ${event.detail.lyric} -> ${event.detail.nextLyric}`);
+		});
+		lx.addEventListener('lx-lyric-loaded', (event)=>{
+			this.renderLyric(event.detail.fmtLyric);
 		});
 	}
 
@@ -72,6 +76,11 @@ class Lyric extends LxHTMLElement{
 
 		this.fmtLyric = this.formatLyric(lyric);
 		this.lyricIndex = 0;
+		lx.dispatchEvent(new CustomEvent('lx-lyric-loaded', {
+			detail: {
+				fmtLyric: this.fmtLyric,
+			},
+		}));
 	}
 
 	updateLyric(time){
@@ -100,6 +109,21 @@ class Lyric extends LxHTMLElement{
 			}));
 		}
 	}
+
+	renderLyric(lyric){
+		this.lyricList.innerHTML = '';
+		lyric.forEach(item=>{
+			let li = document.createElement('li');
+
+			li.className = 'lyric-line';
+			li.innerText = item.text;
+			this.lyricList.appendChild(li);
+		});
+	}
+
+	// renderLyricHead(detail){
+
+	// }
 
 }
 
