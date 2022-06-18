@@ -50,7 +50,7 @@ lx-side-panel {
 
 	@media screen and (max-width: 768px) {
 		width: 40px;
-		&:hover {
+		&[open=true] {
 			width: 200px;
 			ul#side-panel-list {
 				.spi-content {

@@ -5,6 +5,10 @@ customElements.define('lx-explore', class extends HTMLElement{
 		lx.myMusic = this;
 		this.appendChild(document.querySelector('#template-explore').content);
 		// Get Children
+
+		this.addEventListener('mouseover', event=>{
+			event.stopPropagation();
+		});
 	}
 
 });

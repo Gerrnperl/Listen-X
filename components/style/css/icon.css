@@ -92,10 +92,11 @@ li.play-mode#play-mode-random::before {
   content: "\e995";
 }
 
-li.playing-list-item[playing]::before {
+li.music-list-item[playing]::before {
   color: var(--themePrimary);
   content: "\f5b0";
   opacity: 1;
+  font-family: fabric;
 }
 
 #side-panel-list > *::before {

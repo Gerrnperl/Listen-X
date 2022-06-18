@@ -1,6 +1,7 @@
 /**
  * @typedef {{
  * 	albumName: string;
+ *  albumArtistList: string[];
  * 	artistList: string[];
  * 	bitRate: number,
  * 	blob   : Blob,

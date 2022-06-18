@@ -5,6 +5,10 @@ customElements.define('lx-playlists', class extends HTMLElement{
 		lx.playLists = this;
 		this.appendChild(document.querySelector('#template-playlists').content);
 		// Get Children
+
+		this.addEventListener('mouseover', event=>{
+			event.stopPropagation();
+		});
 	}
 
 });

@@ -9,8 +9,9 @@ lx.storage = new (class LxStorage{
 			options: {keyPath: 'id', autoIncrement: false},
 			fields: [
 				{name: 'music', keyPath: 'music', options:{unique: true}},
-				{name: 'artists', keyPath: 'artists', options:{unique: false}},
-				{name: 'album', keyPath: 'album', options:{unique: false}},
+				{name: 'artistList', keyPath: 'artistList', options:{unique: false}},
+				{name: 'albumArtistList', keyPath: 'albumArtistList', options:{unique: false}},
+				{name: 'albumName', keyPath: 'albumName', options:{unique: false}},
 				{name: 'provider', keyPath: 'provider', options:{unique: false}},
 				{name: 'duration', keyPath: 'duration', options:{unique: false}},
 				{name: 'blob', keyPath: 'blob', options:{unique: false}},

@@ -140,9 +140,13 @@ class Netease{
 		let albumName = item.album.name;
 		let duration = item.duration / 1000;
 		let artists = [];
+		let albumArtists = [];
 
 		item.artists.forEach(artist => {
 			artists.push(artist.name);
+		});
+		item.album.artists.forEach(artist => {
+			albumArtists.push(artist.name);
 		});
 		return {
 			id,
@@ -150,6 +154,7 @@ class Netease{
 			coverURL: coverImage,
 			albumName,
 			artistList: artists,
+			albumArtistList: albumArtists,
 			duration,
 			provider: 'netease',
 		};

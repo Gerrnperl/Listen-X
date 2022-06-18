@@ -1,0 +1,49 @@
+lx-music-list {
+  height: 0;
+  overflow: hidden;
+  list-style: none;
+  counter-reset: playing-list-item;
+  transition: none;
+}
+lx-music-list li.music-list-item {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px 8px 0;
+  font-size: 12px;
+  color: var(--black);
+  transition: all ease 0.2s;
+  cursor: pointer;
+}
+lx-music-list li.music-list-item[odd-even=odd] {
+  background-color: var(--themeLighterAlt);
+}
+lx-music-list li.music-list-item::before {
+  flex: 0 0 30px;
+  font-size: 8px;
+  color: var(--neutralPrimaryAlt);
+  text-align: center;
+  content: counter(playing-list-item);
+  counter-increment: playing-list-item;
+  opacity: 0;
+  transition: all ease 0.3s;
+}
+lx-music-list li.music-list-item span {
+  flex: 1 1 75px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+lx-music-list li.music-list-item span.music-list-item-songName {
+  flex: 12 12 150px;
+}
+lx-music-list li.music-list-item:hover {
+  color: var(--neutralPrimary);
+  background-color: var(--themeLighter);
+}
+lx-music-list li.music-list-item:hover::before {
+  opacity: 1;
+}
+
+/*# sourceMappingURL=music-list.css.map */

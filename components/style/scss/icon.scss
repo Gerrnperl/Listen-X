@@ -108,10 +108,11 @@ li.play-mode#play-mode-random::before {
 // Playing List[n]
 // ----------------------------------------------
 // ▶ Song Name				artist		duration
-li.playing-list-item[playing]::before {
+li.music-list-item[playing]::before {
 	color: var(--themePrimary);
 	content: '';
 	opacity: 1;
+	font-family: fabric;
 }
 
 

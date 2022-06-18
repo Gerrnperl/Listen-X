@@ -21,61 +21,18 @@
 #playing-list-trigger div#playing-list-panel-head span.plph-summary {
   font-size: 14px;
 }
-#playing-list-trigger ul#playing-list {
-  height: 0;
-  overflow: hidden;
-  list-style: none;
-  counter-reset: playing-list-item;
-  transition: none;
-}
-#playing-list-trigger li.playing-list-item {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 10px 8px 0;
-  font-size: 12px;
-  color: var(--black);
-  transition: all ease 0.2s;
-  cursor: pointer;
-}
-#playing-list-trigger li.playing-list-item[odd-even=odd] {
-  background-color: var(--themeLighterAlt);
-}
-#playing-list-trigger li.playing-list-item::before {
-  flex: 0 0 30px;
-  font-size: 8px;
-  color: var(--neutralPrimaryAlt);
-  text-align: center;
-  content: counter(playing-list-item);
-  counter-increment: playing-list-item;
-  opacity: 0;
-  transition: all ease 0.3s;
-}
-#playing-list-trigger li.playing-list-item span.playing-list-item-name {
+#playing-list-trigger lx-music-list#playing-list li.music-list-item span.music-list-item-songName {
   flex: 12 12 150px;
 }
-#playing-list-trigger li.playing-list-item span.playing-list-item-artists {
+#playing-list-trigger lx-music-list#playing-list li.music-list-item span.music-list-item-artistList {
   flex: 1 1 75px;
   overflow: hidden;
   text-overflow: ellipsis;
   /* max-width: 75px; */
   white-space: nowrap;
 }
-#playing-list-trigger li.playing-list-item span.playing-list-item-duration {
+#playing-list-trigger lx-music-list#playing-list li.music-list-item span.music-list-item-duration {
   flex: 0 0;
-}
-#playing-list-trigger li.playing-list-item[playing] {
-  /* background-color: var(--themeLighter); */
-  border: var(--themeLight) 1px solid;
-}
-#playing-list-trigger li.playing-list-item:hover {
-  color: var(--neutralPrimary);
-  background-color: var(--themeLighter);
-  /* box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%); */
-}
-#playing-list-trigger li.playing-list-item:hover::before {
-  opacity: 1;
 }
 #playing-list-trigger #playing-list-panel[visible=true] {
   background-color: var(--white);
@@ -88,10 +45,11 @@
   transition: height ease 0.3s, opacity ease 0.3s;
   transform: translateX(-50%) translateY(-20%);
 }
-#playing-list-trigger #playing-list-panel[visible=true] ul#playing-list {
+#playing-list-trigger #playing-list-panel[visible=true] lx-music-list#playing-list {
   height: calc(100% - 40px);
   overflow: auto;
   list-style: none;
+  display: block;
 }
 
 #play-mode {

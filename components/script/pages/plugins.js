@@ -5,6 +5,10 @@ customElements.define('lx-plugins', class extends HTMLElement{
 		lx.plugins = this;
 		this.appendChild(document.querySelector('#template-plugins').content);
 		// Get Children
+
+		this.addEventListener('mouseover', event=>{
+			event.stopPropagation();
+		});
 	}
 
 });

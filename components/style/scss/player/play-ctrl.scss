@@ -22,63 +22,24 @@
 			font-size: 14px;
 		}
 	}
-	ul#playing-list {
-		height: 0;
-		overflow: hidden;
-		list-style: none;
-		counter-reset: playing-list-item;
-		transition: none;
-	}
-	li.playing-list-item {
-		display: flex;
-		flex-flow: row wrap;
-		align-items: center;
-		justify-content: space-between;
-		padding: 8px 10px 8px 0;
-		font-size: 12px;
-		color: var(--black);
-		transition: all ease 0.2s;
-		cursor: pointer;
-		&[odd-even='odd'] {
-			background-color: var(--themeLighterAlt);
-		}
-		&::before {
-			flex: 0 0 30px;
-			font-size: 8px;
-			color: var(--neutralPrimaryAlt);
-			text-align: center;
-			content: counter(playing-list-item);
-			counter-increment: playing-list-item;
-			opacity: 0;
-			transition: all ease 0.3s;
-		}
-		span.playing-list-item-name {
-			flex: 12 12 150px;
-		}
-		span.playing-list-item-artists {
-			flex: 1 1 75px;
-			overflow: hidden;
-			text-overflow: ellipsis;
+	lx-music-list#playing-list {
+		
+		li.music-list-item {
+			span.music-list-item-songName {
+				flex: 12 12 150px;
+			}
+			span.music-list-item-artistList {
+				flex: 1 1 75px;
+				overflow: hidden;
+				text-overflow: ellipsis;
 
-			/* max-width: 75px; */
-			white-space: nowrap;
+				/* max-width: 75px; */
+				white-space: nowrap;
+			}
+			span.music-list-item-duration {
+				flex: 0 0;
+			}
 		}
-		span.playing-list-item-duration {
-			flex: 0 0;
-		}
-	}
-	li.playing-list-item[playing] {
-		/* background-color: var(--themeLighter); */
-		border: var(--themeLight) 1px solid;
-	}
-	li.playing-list-item:hover {
-		color: var(--neutralPrimary);
-		background-color: var(--themeLighter);
-		&::before {
-			opacity: 1;
-		}
-
-		/* box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%); */
 	}
 	#playing-list-panel[visible='true'] {
 		background-color: var(--white);
@@ -90,10 +51,11 @@
 		opacity: 1;
 		transition: height ease 0.3s,opacity ease 0.3s;
 		transform: translateX(-50%) translateY(-20%);
-		ul#playing-list {
+		lx-music-list#playing-list {
 			height: calc(100% - 40px);
 			overflow: auto;
 			list-style: none;
+			display: block;
 		}
 	}
 }

@@ -42,6 +42,8 @@ body {
   height: 100vh;
   min-height: 183px;
   overflow: hidden;
+  bottom: 0;
+  position: fixed;
 }
 
 lx-side-panel {

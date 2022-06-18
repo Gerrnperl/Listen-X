@@ -3,7 +3,7 @@ customElements.define('lx-play-ctrl', class extends HTMLElement{
 	playModeSwitcher;
 	playModeContainer;
 	playingListPanel;
-	playingList;
+	playingListUI;
 	playingListTrigger;
 
 	constructor(){
@@ -13,7 +13,7 @@ customElements.define('lx-play-ctrl', class extends HTMLElement{
 		// Get Children
 		this.playModeSwitcher = this.querySelector('#play-mode-switcher');
 		this.playModeContainer = this.querySelector('#play-mode-selector-container');
-		this.playingList = this.querySelector('#playing-list');
+		// this.playingListUI = this.querySelector('#playing-list');
 		this.playingListPanel = this.querySelector('#playing-list-panel');
 		this.playingListTrigger = this.querySelector('#playing-list-trigger');
 		this.volumeTrigger = this.querySelector('#volume');
@@ -89,38 +89,23 @@ customElements.define('lx-play-ctrl', class extends HTMLElement{
 	}
 
 	renderPlayingList(){
-		// short-cut
-		let pl = lx.playingList;
-
-		pl.list.forEach((music, index)=>{
-			let li = document.createElement('li');
-
-			li.className = 'playing-list-item';
-			li.id = `playing-list-item-${index}`;
-			li.setAttribute('odd-even', index % 2 ? 'odd' : 'even');
-			li.innerHTML = `
-				<span class="playing-list-item-name">${music.songName}</span>
-				<span class="playing-list-item-artists">${music.artistList.join(', ')}</span>
-				<span class="playing-list-item-duration">${Helper.formatTime(music.duration).split('.')[0]}</span>
-			`;
-
-			// Switch playing music
-			li.addEventListener('click', (()=>{
-				pl.playingIndex = index;
-				this.switchPlayingMusic(pl.playedStack.at(-1), index);
-				pl.playedStack.push(index);
-				lx.player.loadMusic(music);
+		this.playingListUI = new MusicList(lx.playingList.list);
+		this.playingListPanel.appendChild(this.playingListUI);
+		this.playingListUI.listElement.forEach((ele, index)=>{
+			ele.addEventListener('click', (()=>{
+				lx.playingList.playingIndex = index;
+				this.switchPlayingMusic(lx.playingList.playedStack.at(-1), index);
+				lx.playingList.playedStack.push(index);
+				lx.player.loadMusic(this.playingListUI.list[index]);
 			}).bind(this));
-			this.playingList.appendChild(li);
 		});
-		this.querySelector(' #playing-list-panel-head span.plph-summary').innerText = `播放列表 [${pl.list.length}]`;
+		this.playingListUI.id = 'playing-list';
+		this.querySelector(' #playing-list-panel-head span.plph-summary').innerText = `播放列表 [${lx.playingList.list.length}]`;
 	}
 
 	switchPlayingMusic(from, to){
-		let playingListUI = this.querySelectorAll('#playing-list .playing-list-item');
-
-		playingListUI[from]?.removeAttribute('playing');
-		playingListUI[to].setAttribute('playing', '');
+		this.playingListUI.listElement[from]?.removeAttribute('playing');
+		this.playingListUI.listElement[to].setAttribute('playing', '');
 	}
 
 

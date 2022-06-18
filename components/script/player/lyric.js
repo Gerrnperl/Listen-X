@@ -133,6 +133,10 @@ customElements.define('lx-lyric', class extends HTMLElement{
 			behavior: 'smooth',
 			block: 'center',
 		});
+		document.body.scrollIntoView({
+			behavior: 'smooth',
+			block: 'center',
+		});
 	}
 
 

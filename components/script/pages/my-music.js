@@ -5,6 +5,10 @@ class MyMusic extends HTMLElement{
 		lx.myMusic = this;
 		this.appendChild(document.querySelector('#template-my-music').content);
 		// Get Children
+
+		this.addEventListener('mouseover', event=>{
+			event.stopPropagation();
+		});
 	}
 
 }

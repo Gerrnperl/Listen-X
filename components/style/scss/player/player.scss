@@ -1,6 +1,6 @@
 lx-player {  
 	display: grid;
-	grid-template-columns: minmax(0, 140px) 1fr max-content;
+	grid-template-columns: max-content auto max-content;
 	grid-template-rows: 1fr 36px;
 	grid-auto-columns: 1fr;
 	grid-auto-rows: 1fr;

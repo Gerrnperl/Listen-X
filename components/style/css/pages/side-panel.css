@@ -50,10 +50,10 @@ lx-side-panel ul#side-panel-list .spi-content {
   lx-side-panel {
     width: 40px;
   }
-  lx-side-panel:hover {
+  lx-side-panel[open=true] {
     width: 200px;
   }
-  lx-side-panel:hover ul#side-panel-list .spi-content {
+  lx-side-panel[open=true] ul#side-panel-list .spi-content {
     opacity: 1;
   }
   lx-side-panel ul#side-panel-list {

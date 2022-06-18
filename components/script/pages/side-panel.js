@@ -16,6 +16,13 @@ customElements.define('lx-side-panel', class extends HTMLElement{
 				item.setAttribute('focus', 'focus');
 			});
 		});
+
+		this.addEventListener('mouseover', ()=>{
+			this.setAttribute('open', 'true');
+		});
+		this.addEventListener('mouseout', ()=>{
+			this.setAttribute('open', 'false');
+		});
 	}
 
 });

@@ -5,6 +5,10 @@ customElements.define('lx-recommend', class extends HTMLElement{
 		lx.recommend = this;
 		this.appendChild(document.querySelector('#template-recommend').content);
 		// Get Children
+
+		this.addEventListener('mouseover', event=>{
+			event.stopPropagation();
+		});
 	}
 
 });
