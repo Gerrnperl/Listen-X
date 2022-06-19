@@ -103,9 +103,10 @@ let lx = new (class LX extends EventTarget{
 	 * @param {string} name 
 	 * The identification name of the provider.
 	 */
-	registerProvider(provider, name){
+	registerProvider(provider, name, displayName){
 		// TODO: Reconstitute it. providers should be an array contains objs {lib:class, name, id_name...}
 		lx.providers[name] = provider;
+		provider.displayName = displayName;
 	}
 
 	/**
@@ -149,4 +150,6 @@ document.addEventListener('DOMContentLoaded', async()=>{
 	));
 });
 
-
+lx.addEventListener('lx-meta-data-update', (event)=>{
+	document.querySelector('#player-background').style.backgroundImage = `url(${event.detail.coverURL})`;
+});

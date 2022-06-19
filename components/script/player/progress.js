@@ -30,7 +30,7 @@ customElements.define('lx-progress-ctrl', class extends HTMLElement{
 		});
 		lx.addEventListener('lx-music-ready', event=>{
 			console.log(event.detail.music);
-			this.renderDurationText(Helper.formatTime(event.detail.music.duration));
+			this.renderDurationText(lx.Utils.formatTime(event.detail.music.duration));
 			this.duration = event.detail.music.duration;
 		});
 		lx.addEventListener('lx-music-ended', ()=>{
@@ -42,7 +42,7 @@ customElements.define('lx-progress-ctrl', class extends HTMLElement{
 		this.slider.addEventListener('mousedown', this.activeSlider.bind(this));
 		document.body.addEventListener('mouseup', this.stopMoveSlider.bind(this));
 		document.body.addEventListener('mouseleave', this.stopMoveSlider.bind(this));
-		document.body.addEventListener('mousemove', Helper.throttle(this.moveSlider).bind(this));
+		document.body.addEventListener('mousemove', lx.Utils.throttle(this.moveSlider).bind(this));
 		this.progressBar.onclick = this.flashSlider.bind(this);
 		this.durationBar.onclick = this.flashSlider.bind(this);
 	}
@@ -102,7 +102,7 @@ customElements.define('lx-progress-ctrl', class extends HTMLElement{
 				this.sliderGoingTo = percentage * this.duration;
 			}
 			this.updateProgressBar((~~(this.sliderGoingTo / this.duration * 1000)) / 10);
-			this.updateProgressText(Helper.formatTime(this.sliderGoingTo));
+			this.updateProgressText(lx.Utils.formatTime(this.sliderGoingTo));
 		}
 	}
 

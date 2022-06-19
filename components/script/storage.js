@@ -9,8 +9,8 @@ lx.storage = new (class LxStorage{
 			options: {keyPath: 'id', autoIncrement: false},
 			fields: [
 				{name: 'music', keyPath: 'music', options:{unique: true}},
+				{name: 'songName', keyPath: 'songName', options:{unique: true}},
 				{name: 'artistList', keyPath: 'artistList', options:{unique: false}},
-				{name: 'albumArtistList', keyPath: 'albumArtistList', options:{unique: false}},
 				{name: 'albumName', keyPath: 'albumName', options:{unique: false}},
 				{name: 'provider', keyPath: 'provider', options:{unique: false}},
 				{name: 'duration', keyPath: 'duration', options:{unique: false}},
@@ -241,6 +241,19 @@ lx.storage = new (class LxStorage{
 			});
 			alert('All data has been cleared, please refresh page');
 		}
+	}
+
+	cacheMusic(music){
+		this.update('music', {
+			id			: `${music.provider}-${music.id}`,
+			music		: music,
+			songName	: music.songName,
+			artistList	: music.artistList,
+			albumName	: music.albumName,
+			provider	: music.provider,
+			duration	: music.duration,
+			blob		: music.blob,
+		});
 	}
 
 })();

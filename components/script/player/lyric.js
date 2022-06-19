@@ -18,9 +18,10 @@ customElements.define('lx-lyric', class extends HTMLElement{
 			this.updateLyric(event.detail.time);
 		});
 		// todo: remove this event listener
-		lx.addEventListener('lx-lyric-update', ()=>{
+		lx.addEventListener('lx-lyric-update', event=>{
 			// console.log(`${event.detail.prevLyric} -> ${event.detail.lyric} -> ${event.detail.nextLyric}`);
 			this.scrollLyric();
+			document.title = event.detail.lyric || 'Listen X';
 		});
 		lx.addEventListener('lx-lyric-loaded', (event)=>{
 			this.renderLyric(event.detail.fmtLyric);
@@ -130,10 +131,6 @@ customElements.define('lx-lyric', class extends HTMLElement{
 		prevLyricLine?.classList.remove('highlight');
 		lyricLine?.classList.add('highlight');
 		lyricLine?.scrollIntoView({
-			behavior: 'smooth',
-			block: 'center',
-		});
-		document.body.scrollIntoView({
 			behavior: 'smooth',
 			block: 'center',
 		});

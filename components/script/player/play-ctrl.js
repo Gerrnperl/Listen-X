@@ -14,7 +14,7 @@ customElements.define('lx-play-ctrl', class extends HTMLElement{
 		this.playModeSwitcher = this.querySelector('#play-mode-switcher');
 		this.playModeContainer = this.querySelector('#play-mode-selector-container');
 		// this.playingListUI = this.querySelector('#playing-list');
-		this.playingListPanel = this.querySelector('#playing-list-panel');
+		this.playingListPanel = lx.player.querySelector('#playing-list-panel');
 		this.playingListTrigger = this.querySelector('#playing-list-trigger');
 		this.volumeTrigger = this.querySelector('#volume');
 		this.volumeSlider = this.querySelector('#volume-slider');
@@ -100,7 +100,7 @@ customElements.define('lx-play-ctrl', class extends HTMLElement{
 			}).bind(this));
 		});
 		this.playingListUI.id = 'playing-list';
-		this.querySelector(' #playing-list-panel-head span.plph-summary').innerText = `播放列表 [${lx.playingList.list.length}]`;
+		lx.player.querySelector(' #playing-list-panel-head span.plph-summary').innerText = `播放列表 [${lx.playingList.list.length}]`;
 	}
 
 	switchPlayingMusic(from, to){
@@ -145,17 +145,17 @@ customElements.define('lx-play-ctrl', class extends HTMLElement{
 						for (let i = 0; i < this.list.length; i++){
 							this.shuffledOrder[i] = i;
 						}
-						Helper.shuffleArray(this.shuffledOrder);
+						lx.Utils.shuffleArray(this.shuffledOrder);
 					}
 					if(this.playingIndex >= this.list.length - 1){
 						this.playingIndex = -1;
-						Helper.shuffleArray(this.shuffledOrder);
+						lx.Utils.shuffleArray(this.shuffledOrder);
 					}
 					toPlayIndex = this.shuffledOrder[++this.playingIndex];
 					break;
 
 				case 'random':
-					toPlayIndex = Helper.getRandomInt(0, this.list.length - 1);
+					toPlayIndex = lx.Utils.getRandomInt(0, this.list.length - 1);
 					break;
 				default:
 					break;

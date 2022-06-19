@@ -1,12 +1,12 @@
 template(id='template-play-ctrl')
 	.play-ctrl-button#playing-list-trigger
-		#playing-list-panel(visible='false')
-			#playing-list-panel-head
-				span.plph-summary
+		//- #playing-list-panel(visible='false')
+		//- 	#playing-list-panel-head
+		//- 		span.plph-summary
 			//- ul#playing-list
 	#play-mode
 		.play-ctrl-button#play-mode-switcher(play-mode='repeatAll')
-		ul.context-menu#play-mode-selector-container(visible='false',title='切换播放模式')
+		ul.popup-block.context-menu#play-mode-selector-container(visible='false',title='切换播放模式')
 			li.play-mode#play-mode-repeat-all(play-mode='repeatAll') 列表循环
 			li.play-mode#play-mode-repeat-one(play-mode='repeatOne') 单曲循环
 			li.play-mode#play-mode-play-all(play-mode='playAll') 播放列表

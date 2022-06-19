@@ -13,6 +13,9 @@ template(id='template-player')
 		button#play-pause(playing="false")
 		button#next-song
 	lx-play-ctrl
+	.popup-block#playing-list-panel(visible='false')
+		#playing-list-panel-head
+			span.plph-summary
 	link(rel="stylesheet", href="components/style/css/player/player.css")
 
 script(defer src='components/script/player/player.js')

@@ -91,6 +91,9 @@ lx-player[lyric-mode=true] {
   height: 100vh;
   bottom: 0;
   flex-direction: column;
+  background: rgba(255, 255, 255, 0.3333333333);
+  z-index: 10;
+  position: fixed;
   display: grid;
   grid-template-columns: auto 1fr auto;
   grid-template-rows: 1fr 32px 48px;
@@ -112,6 +115,85 @@ lx-player[lyric-mode=true] lx-play-ctrl {
 
 lx-player[lyric-mode=true], lx-player > * {
   transition: all ease 0.3s;
+}
+
+#playing-list-panel {
+  position: absolute;
+  bottom: 65px;
+  left: 50vw;
+  width: 80vw;
+  max-width: 600px;
+  box-shadow: 0 6.4px 14.4px 0 rgba(0, 0, 0, 0.13), 0 1.2px 3.6px 0 rgba(0, 0, 0, 0.11);
+  transform: translateX(-50%) translateY(0%);
+}
+#playing-list-panel div#playing-list-panel-head {
+  height: 20px;
+  padding: 10px;
+  border-bottom: var(--themeTertiary) 1px solid;
+}
+#playing-list-panel div#playing-list-panel-head span.plph-summary {
+  font-size: 14px;
+}
+#playing-list-panel lx-music-list#playing-list li.music-list-item span.music-list-item-songName {
+  flex: 12 12 150px;
+}
+#playing-list-panel lx-music-list#playing-list li.music-list-item span.music-list-item-artistList {
+  flex: 1 1 75px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* max-width: 75px; */
+  white-space: nowrap;
+}
+#playing-list-panel lx-music-list#playing-list li.music-list-item span.music-list-item-duration {
+  flex: 1 1 75px;
+  text-align: right;
+  margin-left: 5px;
+}
+
+#playing-list-panel[visible=true] {
+  background-color: var(--white);
+  bottom: calc(var(--control-panel-height) - 50px);
+  height: 295px;
+  padding: 5px 0;
+  overflow: visible;
+  transform: translateX(-50%) translateY(-20%);
+}
+#playing-list-panel[visible=true] lx-music-list#playing-list {
+  height: calc(100% - 40px);
+  overflow: auto;
+  list-style: none;
+  display: block;
+}
+
+lx-player[lyric-mode=true] #playing-list-panel {
+  transform: translateX(0%) translateY(0%);
+}
+
+lx-player[lyric-mode=true][viewing-playing-list=true] {
+  top: calc(var(--lyric-mode-bottom-height) - 80vh);
+}
+lx-player[lyric-mode=true][viewing-playing-list=true] #playing-list-panel {
+  width: 100vw;
+  max-width: 100vw;
+  bottom: 0;
+  left: 0;
+  transform: none;
+  position: fixed;
+  box-shadow: none;
+  height: calc(78vh - var(--lyric-mode-bottom-height));
+  background: rgba(255, 255, 255, 0.3333333333);
+}
+lx-player[lyric-mode=true][viewing-playing-list=true] #playing-list-panel lx-music-list li.music-list-item {
+  color: var(--neutralPrimary);
+}
+lx-player[lyric-mode=true][viewing-playing-list=true] #playing-list-panel lx-music-list li.music-list-item[odd-even=odd] {
+  background: rgba(255, 255, 255, 0.3333333333);
+}
+lx-player[lyric-mode=true][viewing-playing-list=true] #playing-list-panel-head {
+  display: none;
+}
+lx-player[lyric-mode=true][viewing-playing-list=true] lx-lyric #lyric-body {
+  height: 15vh;
 }
 
 /*# sourceMappingURL=player.css.map */
