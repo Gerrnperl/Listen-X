@@ -29,12 +29,19 @@ class MusicList extends HTMLElement{
 		li.className = 'music-list-item';
 		li.setAttribute('index', index);
 		li.setAttribute('odd-even', index % 2 ? 'odd' : 'even');
+		li.music = music;
 		this.columns.forEach(column=>{
 			let span = document.createElement('span');
 
 			span.className = `music-list-item-${column}`;
 			if(Array.isArray(music[column])){
 				span.innerText = music[column].join(', ');
+			}
+			else if(column === 'duration'){
+				span.innerText = lx.Utils.formatTime(music[column]).split('.')[0];
+			}
+			else if(column === 'provider'){
+				span.innerText = lx.providers[music[column]].displayName;
 			}
 			else{
 				span.innerText = music[column];
@@ -89,12 +96,12 @@ class MusicList extends HTMLElement{
 	}
 
 	sortBy(column, order = 'asc'){
-		this.list.sort((a, b)=>{
+		this.listElement.sort((a, b)=>{
 			if(order === 'asc'){
-				return a[column] > b[column] ? 1 : -1;
+				return a.music[column] > b.music[column] ? 1 : -1;
 			}
 
-			return a[column] < b[column] ? 1 : -1;
+			return a.music[column] < b.music[column] ? 1 : -1;
 		});
 
 		this.listElement.forEach((li, index)=>{
@@ -103,7 +110,8 @@ class MusicList extends HTMLElement{
 		}
 		);
 
-		this.appendChild(this.listElement);
+		this.replaceChildren(...this.listElement);
+		// this.appendChild(this.listElement);
 	}
 
 }

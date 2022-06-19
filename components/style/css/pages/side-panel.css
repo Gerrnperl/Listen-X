@@ -71,20 +71,35 @@ lx-side-panel ul#side-panel-list .spi-content {
 lx-side-panel .spi-page {
   display: none;
   position: fixed;
-  width: calc(100vw - var(--side-panel-width-wide));
-  right: 0;
+  width: calc(98vw - var(--side-panel-width-wide));
+  right: 1vw;
   height: calc(100vh - var(--control-panel-height));
   top: 0;
+  color: #000;
+}
+lx-side-panel .spi-page header.page-header {
+  padding-left: 0.6rem;
+}
+lx-side-panel .spi-page header.page-header h1 {
+  text-align: left;
+  font-family: sans-serif, ui-sans-serif, system-ui;
+  font-size: 2rem;
+  line-height: 2em;
+  font-weight: 100;
+  letter-spacing: 0em;
+}
+lx-side-panel .spi-page nav {
+  border-bottom: 1px solid var(--black);
 }
 @media screen and (max-width: 768px) {
   lx-side-panel .spi-page {
-    width: calc(100vw - var(--side-panel-width-narrow));
+    width: calc(98vw - var(--side-panel-width-narrow));
   }
 }
 
 lx-side-panel li.side-panel-item[focus] .spi-page {
   pointer-events: all;
-  user-select: all;
+  user-select: text;
   display: block;
 }
 
