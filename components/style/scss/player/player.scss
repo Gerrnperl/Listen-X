@@ -211,6 +211,9 @@ lx-player[lyric-mode='true'][viewing-playing-list='true']{
 		}
 		lx-music-list li.music-list-item[odd-even=odd]{
 			background: #ffffff55;
+			&:hover {
+				background-color: var(--themeLighter);
+			}
 		}
 	}
 	

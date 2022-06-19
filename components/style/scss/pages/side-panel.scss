@@ -75,13 +75,16 @@ lx-side-panel {
 }
 
 lx-side-panel .spi-page {
-	display: none;
+	opacity: 0;
     position: fixed;
-	width: calc(98vw - var(--side-panel-width-wide));
-	right: 1vw;
-	height: calc(100vh - var(--control-panel-height));
+    width: calc(99vw - var(--side-panel-width-wide));
+    right: 0vw;
+    height: calc(100vh - var(--control-panel-height));
+    padding-right: 1vw;
+    pointer-events: none;
     top: 0;
-	color: #000;
+    color: #000;
+    transform: translateY(20%);
 
 	header.page-header {
 		padding-left: 0.6rem;
@@ -99,6 +102,37 @@ lx-side-panel .spi-page {
 
 	nav {
 		border-bottom: 1px solid var(--black);
+		background-color: var(--white);
+		z-index: 5;
+		position: relative;
+
+		.nav-item {
+			/* display: inline-block; */
+			display: inline-flex;
+			height: 2rem;
+			/* line-height: 2rem; */
+			align-items: flex-end;
+			justify-content: center;
+			min-width: 5rem;
+			font-size: 1.2rem;
+			color: var(--neutralDark);
+			z-index: 10;
+
+			&[focus] {
+				color: var(--themePrimary);
+			}
+		}
+
+		&::after {
+			content: '';
+			transition: all ease 0.3s;
+			width: var(--focus-width);
+			position: absolute;
+			left: var(--focus-offset);
+			height: 4px;
+			background-color: var(--themePrimary);
+			bottom: -2px;
+		}
 	}
 
 	@media screen and (max-width: 768px) {
@@ -106,7 +140,12 @@ lx-side-panel .spi-page {
 	}
 }
 lx-side-panel li.side-panel-item[focus] .spi-page {
+	z-index: -10;
+	overflow: auto;
 	pointer-events: all;
-	user-select: text;
-	display: block;
+    user-select: text;
+    display: block;
+    transform: none;
+    opacity: 1;
+    transition: all ease 0.3s;
 }

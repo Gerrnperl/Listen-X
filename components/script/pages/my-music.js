@@ -22,6 +22,21 @@ class MyMusic extends HTMLElement{
 				// this.renderMySongs();
 			});
 		});
+
+		// fix the position of .page-content-header when scrolling
+		this.addEventListener('scroll', ()=>{
+			let header = this.querySelector('.page-content-header');
+			let scrollTop = this.scrollTop;
+			let headerTop = header.offsetTop;
+			let headerTransform = `translateY(${scrollTop - headerTop + 33}px)`;
+
+			if(scrollTop > 64){
+				header.style.transform = headerTransform;
+			}
+			else{
+				header.style.transform = 'none';
+			}
+		});
 	}
 
 	renderMySongs(){

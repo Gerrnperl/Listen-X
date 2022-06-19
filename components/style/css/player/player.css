@@ -189,6 +189,9 @@ lx-player[lyric-mode=true][viewing-playing-list=true] #playing-list-panel lx-mus
 lx-player[lyric-mode=true][viewing-playing-list=true] #playing-list-panel lx-music-list li.music-list-item[odd-even=odd] {
   background: rgba(255, 255, 255, 0.3333333333);
 }
+lx-player[lyric-mode=true][viewing-playing-list=true] #playing-list-panel lx-music-list li.music-list-item[odd-even=odd]:hover {
+  background-color: var(--themeLighter);
+}
 lx-player[lyric-mode=true][viewing-playing-list=true] #playing-list-panel-head {
   display: none;
 }
