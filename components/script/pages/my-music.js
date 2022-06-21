@@ -2,33 +2,52 @@ class MyMusic extends HTMLElement{
 
 	songsList;
 
+	usrSongs = [];
+
+	/** @type {HTMLElement} */
+	tags = [];
+
 	constructor(){
 		super();
 		lx.myMusic = this;
 		this.appendChild(document.querySelector('#template-my-music').content);
-		// Get Children
-		this.renderMySongs();
+
+		this.getTags();
+
+		lx.addEventListener('lx-loaded', this.render.bind(this));
 
 		this.addEventListener('mouseover', event=>{
 			event.stopPropagation();
+		});
+
+		this.querySelectorAll('.nav-item').forEach((nav, index)=>{
+			nav.addEventListener('click', ()=>{
+				this.tags.forEach(tag=>{
+					tag.removeAttribute('visible');
+				});
+				this.tags[index].setAttribute('visible', 'visible');
+			});
 		});
 
 		this.querySelectorAll('span.content-header-item').forEach(header=>{
 			header.addEventListener('click', event=>{
 				let column = event.target.id.split('-').at(-1);
 
-				console.log(this.songsList);
+				// // console.log(this.songsList);
 				this.songsList.sortBy(column);
-				// this.renderMySongs();
 			});
 		});
 
-		// fix the position of .page-content-header when scrolling
+		this.fixHeader();
+	}
+
+	// fix the position of .page-content-header when scrolling
+	fixHeader(){
 		this.addEventListener('scroll', ()=>{
 			let header = this.querySelector('.page-content-header');
 			let scrollTop = this.scrollTop;
 			let headerTop = header.offsetTop;
-			let headerTransform = `translateY(${scrollTop - headerTop + 33}px)`;
+			let headerTransform = `translateY(${scrollTop - headerTop - 48}px)`;
 
 			if(scrollTop > 64){
 				header.style.transform = headerTransform;
@@ -39,20 +58,48 @@ class MyMusic extends HTMLElement{
 		});
 	}
 
+	getTags(){
+		this.tags.push(this.querySelector('#page-content-songs'));
+		this.tags.push(this.querySelector('#page-content-albums'));
+		this.tags.push(this.querySelector('#page-content-artists'));
+	}
+
+	render(){
+		lx.storage.getAll('music', successEvent=>{
+			let musicArr = successEvent.target.result;
+
+			musicArr.forEach(data => {
+				delete data.music.blob;
+				this.usrSongs.push(data.music);
+			});
+
+			this.renderMySongs();
+			this.renderAlbums();
+		});
+	}
+
 	renderMySongs(){
 		let mySongsUI = document.querySelector('#page-content-songs');
 
-		lx.storage.getAll('music', successEvent=>{
-			let datas = successEvent.target.result;
-			let usrSongs = [];
+		this.songsList = new MusicList(this.usrSongs, ['provider', 'songName', 'albumName', 'artistList', 'duration']);
+		mySongsUI.appendChild(this.songsList);
+	}
 
-			datas.forEach(data => {
-				usrSongs.push(data.music);
-			});
+	renderAlbums(){
+		let albumsUI = document.querySelector('#page-content-albums');
+		let fragment = document.createDocumentFragment();
 
-			this.songsList = new MusicList(usrSongs,['provider', 'songName','albumName','artistList', 'duration']);
-			mySongsUI.appendChild(this.songsList);
+		this.usrSongs.forEach(music => {
+			let albumUI = document.createElement('div');
+
+			albumUI.classList.add('album');
+			albumUI.innerHTML = `
+				<img src="${music.coverURL}" alt="album">
+				<div class="album-name">${music.albumName}</div>`;
+			fragment.appendChild(albumUI);
 		});
+
+		albumsUI.appendChild(fragment);
 	}
 
 }

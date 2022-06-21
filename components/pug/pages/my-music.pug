@@ -2,16 +2,22 @@ template(id='template-my-music')
 	header.page-header
 		h1  我的音乐
 	nav
-		.nav-item(focus) 音乐 
+		.nav-item(focus) 音乐
 		.nav-item 专辑
-		.nav-item 作者 
-	.page-content#page-content-songs
-		.page-content-header
-			span.content-header-item#content-header-item-provider 源
-			span.content-header-item#content-header-item-songName 音乐
-			span.content-header-item#content-header-item-albumName 专辑
-			span.content-header-item#content-header-item-artistList 作者
-			span.content-header-item#content-header-item-duration 时长
+		.nav-item 作者
+	.page-contents
+		.page-content#page-content-songs(visible)
+			.page-content-header
+				span.content-header-item#content-header-item-provider 源
+				span.content-header-item#content-header-item-songName 音乐
+				span.content-header-item#content-header-item-albumName 专辑
+				span.content-header-item#content-header-item-artistList 作者
+				span.content-header-item#content-header-item-duration 时长
+		.page-content#page-content-albums
+			.collection#albums-collection albums
+		.page-content#page-content-artists
+			.collection#artists-collection artists
+
 	link(rel='stylesheet', href='components/style/css/pages/my-music.css')
 
 script(defer src='components/script/pages/my-music.js')

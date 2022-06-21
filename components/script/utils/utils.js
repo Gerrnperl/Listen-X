@@ -179,4 +179,4 @@ lx.Utils = class Utils{
 		return wrapper;
 	}
 
-}
+};
