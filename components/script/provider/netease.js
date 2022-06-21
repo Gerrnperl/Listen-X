@@ -151,7 +151,7 @@ class Netease{
 		return {
 			id,
 			songName: name,
-			coverURL: coverImage,
+			coverURL: `${coverImage}?param=140y140`,
 			albumName,
 			artistList: artists,
 			albumArtistList: albumArtists,

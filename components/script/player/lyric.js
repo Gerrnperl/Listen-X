@@ -11,8 +11,8 @@ customElements.define('lx-lyric', class extends HTMLElement{
 		this.appendChild(document.querySelector('#template-lyric').content);
 		this.lyricList = this.querySelector('#lyric-list');
 		// this.lyric
-		lx.addEventListener('lx-music-loading', (event)=>{
-			this.loadLyric(event.detail.music);
+		lx.addEventListener('lx-music-loading', ()=>{
+			this.loadLyric(lx.activeMusic);
 		});
 		lx.addEventListener('lx-time-update', (event)=>{
 			this.updateLyric(event.detail.time);

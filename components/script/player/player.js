@@ -46,8 +46,20 @@ customElements.define('lx-player', class extends HTMLElement{
 		});
 
 		lx.audioEle.addEventListener('ended', ()=>{
+			let music = lx.playingList.list[lx.playingList.playingIndex];
+			// // console.log(music);
+			URL.revokeObjectURL(lx.activeMusic.objURL);
+			delete lx.activeMusic;
+			URL.revokeObjectURL(music.objURL);
 			this.gotoNext();
 			lx.dispatchEvent(new CustomEvent('lx-music-ended'));
+		});
+
+		lx.addEventListener('lx-music-ended', ()=>{
+			// // console.log(musicWithBlob);
+			delete lx.activeMusic.blob;
+			delete lx.activeMusic;
+			// // console.log(musicWithBlob);
 		});
 	}
 
@@ -77,12 +89,14 @@ customElements.define('lx-player', class extends HTMLElement{
 			if(!musicWithBlob.objURL){
 				musicWithBlob.objURL = URL.createObjectURL(musicWithBlob.blob);
 			}
+			// // console.log(musicWithBlob);
 			lx.audioEle.src = musicWithBlob.objURL;
-			lx.dispatchEvent(new CustomEvent('lx-music-ready', {
-				'detail':{
-					music: musicWithBlob,
-				}}
-			));
+			// lx.dispatchEvent(new CustomEvent('lx-music-ready', {
+			// 	'detail':{
+			// 		music: musicWithBlob,
+			// 	}}
+			// ));
+			lx.dispatchEvent(new CustomEvent('lx-music-ready'));
 			lx.dispatchEvent(new CustomEvent('lx-meta-data-update', {
 				'detail':{
 					songName: musicWithBlob.songName,
@@ -95,11 +109,13 @@ customElements.define('lx-player', class extends HTMLElement{
 				lx.player.playAudio();
 			}
 		}
-		lx.dispatchEvent(new CustomEvent('lx-music-loading', {
-			detail: {
-				music: music,
-			},
-		}));
+		// lx.dispatchEvent(new CustomEvent('lx-music-loading', {
+		// 	detail: {
+		// 		music: music,
+		// 	},
+		// }));
+		lx.activeMusic = music;
+		lx.dispatchEvent(new CustomEvent('lx-music-loading'));
 	}
 
 	async getBlob(music){

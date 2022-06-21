@@ -28,10 +28,10 @@ customElements.define('lx-progress-ctrl', class extends HTMLElement{
 				this.updateProgressBar((~~(event.detail.time / event.detail.duration * 1000)) / 10);
 			}
 		});
-		lx.addEventListener('lx-music-ready', event=>{
-			console.log(event.detail.music);
-			this.renderDurationText(lx.Utils.formatTime(event.detail.music.duration));
-			this.duration = event.detail.music.duration;
+		lx.addEventListener('lx-music-ready', ()=>{
+			// // console.log(event.detail.music);
+			this.renderDurationText(lx.Utils.formatTime(lx.activeMusic.duration));
+			this.duration =lx.activeMusic.duration;
 		});
 		lx.addEventListener('lx-music-ended', ()=>{
 			this.updateProgressText('00:00');

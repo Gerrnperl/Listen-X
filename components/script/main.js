@@ -92,6 +92,9 @@ let lx = new (class LX extends EventTarget{
 
 	track;
 
+	/** @type {music} */
+	activeMusic;
+
 	constructor(){
 		super();
 	}
@@ -141,13 +144,22 @@ let lx = new (class LX extends EventTarget{
 // }
 
 document.addEventListener('DOMContentLoaded', async()=>{
-	lx.dispatchEvent(new CustomEvent('lx-loaded',
-		{
+	lx.storage.getAll('music', successEvent=>{
+		let results = successEvent.target.result;
+		let music = [];
+
+		results.forEach(result=>{
+			delete result.music.blob;
+			music.push(result.music);
+		});
+		// // console.log(music);
+
+		lx.dispatchEvent(new CustomEvent('lx-loaded', {
 			'detail':{
-				playList: await lx.getStoredPlayingList(),
+				playList: music, // await lx.getStoredPlayingList(),
 			},
-		}
-	));
+		}));
+	});
 });
 
 lx.addEventListener('lx-meta-data-update', (event)=>{
