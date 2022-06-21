@@ -1,4 +1,5 @@
 .page-content-header {
+  z-index: 5;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -6,17 +7,16 @@
   padding: 8px 10px 8px 0;
   font-size: 14px;
   color: var(--black);
-  background-color: var(--white);
-  z-index: 5;
-  border-bottom: 1px solid var(--themeLighter);
   cursor: pointer;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--themeLighter);
 }
 .page-content-header span {
   flex: 1 1 75px;
+  margin-right: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-right: 5px;
 }
 .page-content-header::before {
   flex: 0 0 30px;
@@ -28,32 +28,67 @@
   transition: all ease 0.3s;
 }
 
-#content-header-item-provider, li.music-list-item span.music-list-item-provider {
+#content-header-item-provider,
+li.music-list-item span.music-list-item-provider {
+  display: inline-block;
   flex: 0 0;
   flex-basis: unset;
   width: 2rem;
-  display: inline-block;
-  text-align: center;
-  font-size: 0.5rem;
   margin-right: 0.5rem;
+  font-size: 0.5rem;
+  text-align: center;
   border: 1px solid;
 }
 
 #content-header-item-provider {
-  border: none;
-  font-size: 14px;
-  opacity: 1;
   z-index: 10;
+  font-size: 14px;
+  border: none;
+  opacity: 1;
 }
 
 #content-header-item-songName {
   flex: 12 12 100px;
 }
 
-#content-header-item-duration, li.music-list-item span.music-list-item-duration {
+#content-header-item-duration,
+li.music-list-item span.music-list-item-duration {
   flex: 1 1 75px;
-  text-align: right;
   margin-left: 5px;
+  text-align: right;
+}
+
+.page-content {
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  transition: all ease 0.3s;
+  position: absolute;
+  width: 100%;
+}
+.page-content:nth-child(1) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(1)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content:nth-child(2) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(2)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content:nth-child(3) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(3)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content[visible=visible] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  display: block;
 }
 
 /*# sourceMappingURL=my-music.css.map */

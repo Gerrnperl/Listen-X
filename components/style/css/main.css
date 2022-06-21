@@ -37,23 +37,23 @@
 }
 
 body {
+  position: fixed;
+  bottom: 0;
   width: 100vw;
   min-width: 300px;
   height: 100vh;
   min-height: 183px;
   overflow: hidden;
-  bottom: 0;
-  position: fixed;
 }
 
 lx-side-panel {
+  display: block;
   width: 200px;
   height: calc(100vh - var(--control-panel-height));
+  user-select: none;
   background-color: var(--neutralLighterAlt);
   border-right: 1px solid var(--neutralTertiaryAlt);
   transition: width ease 0.3s;
-  user-select: none;
-  display: block;
 }
 
 lx-player {
@@ -69,22 +69,22 @@ lx-player {
 
 lx-player[lyric-mode=true] ~ div#player-background {
   display: block;
-  opacity: 1;
-  background-repeat: space;
-  background-size: cover;
-  background-position: center;
   filter: blur(20px);
+  background-repeat: space;
+  background-position: center;
+  background-size: cover;
+  opacity: 1;
 }
 
 div#player-background {
-  width: 110vw;
-  height: 110vh;
-  display: none;
-  opacity: 0;
-  z-index: 1;
   position: fixed;
   top: -5vh;
   left: -5vw;
+  z-index: 1;
+  display: none;
+  width: 110vw;
+  height: 110vh;
+  opacity: 0;
 }
 
 .popup-block {
@@ -116,10 +116,10 @@ div#player-background {
 }
 
 ::-webkit-scrollbar-thumb {
-  height: auto;
   width: 4px;
-  border-radius: 0;
+  height: auto;
   background-color: transparent;
+  border-radius: 0;
 }
 
 *:hover::-webkit-scrollbar-thumb {

@@ -1,7 +1,6 @@
 lx-side-panel {
 	div#side-panel-title {
 		height: 50px;
-		white-space: nowrap;
 		font-family: sans-serif;
 		font-size: 2rem;
 		font-variant: petite-caps;
@@ -9,16 +8,17 @@ lx-side-panel {
 		color: var(--white);
 		text-align: center;
 		text-shadow: 0 1px 1px var(--themePrimary);
-		transition: all ease 0.3s;
+		white-space: nowrap;
 		opacity: 1;
+		transition: all ease 0.3s;
 	}
 	ul#side-panel-list {
 		display: flex;
 		flex-flow: column nowrap;
 		height: calc(100% - 50px);
+		overflow: hidden;
 		list-style: none;
 		transition: all ease 0.3s;
-		overflow:hidden;
 		.side-panel-item {
 			position: relative;
 			height: 40px;
@@ -39,18 +39,18 @@ lx-side-panel {
 			border-left: 5px solid var(--themePrimary);
 		}
 		.spi-content {
-			transition: all ease 0.3s;
+			position: absolute;
+			display: inline-block;
 			font-size: 14px;
 			line-height: 40px;
-			display: inline-block;
-			position: absolute;
 			opacity: 1;
+			transition: all ease 0.3s;
 		}
 	}
 
 	@media screen and (max-width: 768px) {
 		width: 40px;
-		&[open=true] {
+		&[open='true'] {
 			width: 200px;
 			ul#side-panel-list {
 				.spi-content {
@@ -61,10 +61,9 @@ lx-side-panel {
 		ul#side-panel-list {
 			height: 100%;
 		}
-
 		div#side-panel-title {
+			height: 0;
 			opacity: 0;
-			height: 0px;
 		}
 		ul#side-panel-list {
 			.spi-content {
@@ -73,65 +72,61 @@ lx-side-panel {
 		}
 	}
 }
-
 lx-side-panel .spi-page {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: calc(99vw - var(--side-panel-width-wide));
+	height: 100vh;
+	color: #000000;
+	pointer-events: none;
 	opacity: 0;
-    position: fixed;
-    width: calc(99vw - var(--side-panel-width-wide));
-    right: 0vw;
-    height: calc(100vh - var(--control-panel-height));
-    padding-right: 1vw;
-    pointer-events: none;
-    top: 0;
-    color: #000;
-    transform: translateY(20%);
+	transform: translateY(20%);
 
+	--focus-offset: 0;
+	--focus-width: 80px;
 	header.page-header {
 		padding-left: 0.6rem;
-
 		h1 {
-			text-align: left;
 			font-family: sans-serif, ui-sans-serif, system-ui;
-			font-size: 2rem;
-			line-height: 2em;
+			font-size: 1.5rem;
 			font-weight: 100;
-			letter-spacing: 0em;
+			line-height: 2em;
+			text-align: left;
+			letter-spacing: 0;
 		}
-
 	}
-
 	nav {
-		border-bottom: 1px solid var(--black);
-		background-color: var(--white);
-		z-index: 5;
 		position: relative;
-
+		z-index: 5;
+		background-color: var(--white);
+		border-bottom: 1px solid var(--neutralTertiary);
 		.nav-item {
+			z-index: 10;
+
 			/* display: inline-block; */
 			display: inline-flex;
-			height: 2rem;
+
 			/* line-height: 2rem; */
 			align-items: flex-end;
 			justify-content: center;
 			min-width: 5rem;
+			height: 2rem;
 			font-size: 1.2rem;
 			color: var(--neutralDark);
-			z-index: 10;
-
 			&[focus] {
 				color: var(--themePrimary);
 			}
 		}
-
 		&::after {
-			content: '';
-			transition: all ease 0.3s;
-			width: var(--focus-width);
 			position: absolute;
+			bottom: -1px;
 			left: var(--focus-offset);
-			height: 4px;
+			width: var(--focus-width);
+			height: 2px;
+			content: '';
 			background-color: var(--themePrimary);
-			bottom: -2px;
+			transition: all ease 0.3s;
 		}
 	}
 
@@ -141,11 +136,11 @@ lx-side-panel .spi-page {
 }
 lx-side-panel li.side-panel-item[focus] .spi-page {
 	z-index: -10;
+	display: block;
 	overflow: auto;
 	pointer-events: all;
-    user-select: text;
-    display: block;
-    transform: none;
-    opacity: 1;
-    transition: all ease 0.3s;
+	user-select: text;
+	opacity: 1;
+	transition: all ease 0.3s;
+	transform: none;
 }

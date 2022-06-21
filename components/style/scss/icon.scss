@@ -6,14 +6,17 @@
 	font-weight: bolder;
 	cursor: pointer;
 }
+
 //  |ᐊ
 #prev-song::before {
 	content: '\e892';
 }
-//  ᐅ|  
+
+//  ᐅ|
 #next-song::before {
 	content: '\e893';
 }
+
 //  ⏸
 #play-pause::before {
 	position: relative;
@@ -21,6 +24,7 @@
 	font-size: 28px;
 	content: '\e769';
 }
+
 //  ᐅ
 #play-pause[playing='false']::before {
 	left: 0;
@@ -31,12 +35,13 @@
 //   │ .. │
 //   └─⌵─┘
 //  ॱ𝄘 🔁 🔉══════║═════
-.play-ctrl-button::before, li.play-mode::before {
-	font-family: fabric;
+.play-ctrl-button::before,
+li.play-mode::before {
 	position: relative;
+	top: -2px;
+	font-family: fabric;
 	font-size: 16px;
 	cursor: pointer;
-	top: -2px;
 }
 
 //  ॱ𝄘
@@ -45,60 +50,70 @@
 	top: -3px;
 	content: '\e93f';
 }
+
 //  🔁
 #play-mode-switcher[play-mode='repeatAll']::before,
 li.play-mode#play-mode-repeat-all::before {
 	content: '\e8ee';
 }
+
 //  🔂
 #play-mode-switcher[play-mode='repeatOne']::before,
 li.play-mode#play-mode-repeat-one::before {
 	content: '\e8ed';
 }
+
 //  ⟶
 #play-mode-switcher[play-mode='playAll']::before,
 li.play-mode#play-mode-play-all::before {
 	content: '\e72a';
 }
+
 //  🀱
 #play-mode-switcher[play-mode='playOne']::before,
 li.play-mode#play-mode-play-one::before {
 	content: '㏢';
 }
+
 //  🔀
 #play-mode-switcher[play-mode='shuffle']::before,
 li.play-mode#play-mode-shuffle::before {
 	content: '㏠';
 }
+
 //  🎲
 #play-mode-switcher[play-mode='random']::before,
 li.play-mode#play-mode-random::before {
 	content: '㏡';
 }
-
 #volume {
 	&::before {
 		left: px;
 		font-size: 17px;
 		content: '';
 	}
+
 	// 🔇
 	&[volume='muted']::before {
 		content: '\ea85';
 		transform: scale(1.05) translateX(-3.7px);
 	}
+
 	// 🔈
 	&[volume='no']::before {
 		content: '\e992';
 	}
+
 	// 🔉
 	&[volume='low']::before {
 		content: '\e993';
 	}
+
 	// 🔈𝁒
 	&[volume='medium']::before {
 		content: '\e994';
 	}
+
 	// 🔊
 	&[volume='high']::before {
 		content: '\e995';
@@ -109,12 +124,11 @@ li.play-mode#play-mode-random::before {
 // ----------------------------------------------
 // ▶ Song Name				artist		duration
 li.music-list-item[playing]::before {
+	font-family: fabric;
 	color: var(--themePrimary);
 	content: '';
 	opacity: 1;
-	font-family: fabric;
 }
-
 
 // Listen X
 // ┃♫ My Music
@@ -126,33 +140,39 @@ li.music-list-item[playing]::before {
 //  ⚙ Settings
 #side-panel-list {
 	& > *::before {
+		position: relative;
+		display: inline-block;
+		margin-right: 6px;
 		font-family: fabric;
 		font-size: 14px;
 		line-height: 40px;
-		display: inline-block;
-		position: relative;
-		margin-right: 6px;
 	}
-	// ♫ 
+
+	// ♫
 	#spi-my-music::before {
 		content: '\e940';
 	}
+
 	//  🧭
 	#spi-explore::before {
 		content: '\e942';
 	}
+
 	//  ॱ𝄘
 	#spi-playlists::before {
 		content: '\e93f';
 	}
+
 	//  ☆𝍢
 	#spi-recommend::before {
 		content: '\e728';
 	}
+
 	//  🧩
 	#spi-plugins::before {
 		content: '\ea86';
 	}
+
 	//  ⚙
 	#spi-settings::before {
 		content: '\e713';

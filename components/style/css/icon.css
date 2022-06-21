@@ -26,12 +26,13 @@
   content: "\e768";
 }
 
-.play-ctrl-button::before, li.play-mode::before {
-  font-family: fabric;
+.play-ctrl-button::before,
+li.play-mode::before {
   position: relative;
+  top: -2px;
+  font-family: fabric;
   font-size: 16px;
   cursor: pointer;
-  top: -2px;
 }
 
 #playing-list-trigger::before {
@@ -93,19 +94,19 @@ li.play-mode#play-mode-random::before {
 }
 
 li.music-list-item[playing]::before {
+  font-family: fabric;
   color: var(--themePrimary);
   content: "\f5b0";
   opacity: 1;
-  font-family: fabric;
 }
 
 #side-panel-list > *::before {
+  position: relative;
+  display: inline-block;
+  margin-right: 6px;
   font-family: fabric;
   font-size: 14px;
   line-height: 40px;
-  display: inline-block;
-  position: relative;
-  margin-right: 6px;
 }
 #side-panel-list #spi-my-music::before {
   content: "\e940";

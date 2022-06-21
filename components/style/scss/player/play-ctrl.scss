@@ -1,7 +1,5 @@
 #playing-list-trigger {
 	flex: 0 0 16px;
-
-	
 }
 #play-mode {
 	position: relative;
@@ -27,8 +25,8 @@
 			height: 36px;
 			padding: 0 15px;
 			line-height: 36px;
-			transition: all ease 0.2s;
 			cursor: pointer;
+			transition: all ease 0.2s;
 			&:hover {
 				background-color: var(--neutralQuaternary);
 			}
@@ -66,12 +64,11 @@
 	flex-flow: row nowrap;
 	align-items: center;
 	width: max-content;
-	#volume-slider-container{
-		top: -4px;
+	#volume-slider-container {
 		position: relative;
+		top: -4px;
 		transition: 0.3s ease all;
 	}
-	
 	input#volume-slider {
 		position: relative;
 		top: -2px;
@@ -103,46 +100,44 @@
 		&::-webkit-slider-thumb { @include volume-thumb; }
 		&::-moz-range-thumb { @include volume-thumb; }
 		&::-ms-thumb { @include volume-thumb; }
-
 	}
 }
-
 
 @media screen and (max-width: 768px) {
 	lx-player[lyric-mode='false'] #volume {
 		width: min-content;
 	}
-	lx-player[lyric-mode='false'] #volume-slider-container{
+	lx-player[lyric-mode='false'] #volume-slider-container {
 		position: absolute !important;
-		transform: rotateZ(-90deg) translate(35px, -64px)  scaleX(95%);
-		height: max-content;
 		width: 0;
+		height: max-content;
 		padding: 5px 0;
 		overflow: hidden;
 		background-color: var(--white);
-		box-shadow: 0 1.2px 14.4px 0 rgb(0 0 0 / 13%), -3.6px 0px 3.6px 0 rgb(0 0 0 / 11%);
+		box-shadow: 0 1.2px 14.4px 0 rgb(0 0 0 / 13%), -3.6px 0 3.6px 0 rgb(0 0 0 / 11%);
 		opacity: 0;
-		transition: height ease 0.3s,opacity ease 0.3s,transform ease 0.3s;
+		transition: height ease 0.3s, opacity ease 0.3s, transform ease 0.3s;
+		transform: rotateZ(-90deg) translate(35px, -64px)  scaleX(95%);
 		&[visible='true'] {
-			height: max-content;
 			width: max-content;
+			height: max-content;
 			padding: 5px 0;
 			overflow: visible;
 			opacity: 1;
 			transform: rotateZ(-90deg) translate(65px, -64px);
-			input#volume-slider{
+			input#volume-slider {
 				top: -4px;
 			}
-			&::after{
+			&::after {
 				position: absolute;
-				left: -6px;
 				top: calc(50% - 5px);
+				left: -6px;
 				width: 12px;
 				height: 12px;
-				clip-path: polygon(-100% -100%, 200% 200%,200% 300%, -100% 300%, -200% -100%);
-				content: "";
+				clip-path: polygon(-100% -100%, 200% 200%, 200% 300%, -100% 300%, -200% -100%);
+				content: '';
 				background-color: var(--white);
-				box-shadow: 0px 3px 3.6px 0 rgb(0 0 0 / 11%);
+				box-shadow: 0 3px 3.6px 0 rgb(0 0 0 / 11%);
 				transform: rotate(45deg);
 			}
 		}

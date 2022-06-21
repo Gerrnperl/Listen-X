@@ -1,28 +1,25 @@
-
-
 .page-content-header {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 10px 8px 0;
-    font-size: 14px;
-    color: var(--black);
-    // width: calc(97.5vw - var(--side-panel-width-wide));;
-    // transition: all ease 0.2s;
-    background-color: var(--white);
-    z-index: 5;
-	border-bottom: 1px solid var(--themeLighter);
-    cursor: pointer;
+	z-index: 5;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 10px 8px 0;
+	font-size: 14px;
+	color: var(--black);
+	cursor: pointer;
 
+	// width: calc(97.5vw - var(--side-panel-width-wide));;
+	// transition: all ease 0.2s;
+	background-color: var(--white);
+	border-bottom: 1px solid var(--themeLighter);
 	span {
 		flex: 1 1 75px;
+		margin-right: 5px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		margin-right: 5px;
 	}
-
 	&::before {
 		flex: 0 0 30px;
 		font-size: 8px;
@@ -33,28 +30,70 @@
 		transition: all ease 0.3s;
 	}
 }
-
-#content-header-item-provider, li.music-list-item  span.music-list-item-provider {
-    flex: 0 0;
-    flex-basis: unset;
-    width: 2rem;
-    display: inline-block;
-    text-align: center;
-    font-size: 0.5rem;
-    margin-right: 0.5rem;
-    border: 1px solid;
+#content-header-item-provider,
+li.music-list-item span.music-list-item-provider {
+	display: inline-block;
+	flex: 0 0;
+	flex-basis: unset;
+	width: 2rem;
+	margin-right: 0.5rem;
+	font-size: 0.5rem;
+	text-align: center;
+	border: 1px solid;
 }
-#content-header-item-provider{
-	border: none;
+#content-header-item-provider {
+	z-index: 10;
 	font-size: 14px;
+	border: none;
 	opacity: 1;
-    z-index: 10;
 }
-#content-header-item-songName{
+#content-header-item-songName {
 	flex: 12 12 100px;
 }
-#content-header-item-duration, li.music-list-item span.music-list-item-duration {
+#content-header-item-duration,
+li.music-list-item span.music-list-item-duration {
 	flex: 1 1 75px;
-	text-align: right;
 	margin-left: 5px;
+	text-align: right;
 }
+
+
+// @for $i from 1 through 3 {
+// 	.page-content:nth-child(#{$i}) {
+// 		transform: ;
+// 	}
+//   }
+
+// Slide to switch three pages, when switching, the target page slides to the middle. The current page slides to the left or the right according to is the target page is the left or right page.
+
+.page-content {
+	display: block;
+	opacity: 0;
+	pointer-events: none;
+	transition: all ease 0.3s;
+	position: absolute;
+	width: 100%;
+
+	
+
+	@for $i from 1 through 3 {
+		&:nth-child(#{$i}) {
+			transform: translateX(-100%);
+		}
+		&:nth-child(#{$i})[visible=visible] ~ & {
+			transform: translateX(100%);
+		}
+	}
+	
+	&[visible=visible] {
+		opacity: 1;
+		transform: none;
+		pointer-events: auto;
+		display: block;
+	}
+	
+}
+
+
+
+

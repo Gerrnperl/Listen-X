@@ -4,7 +4,6 @@ lx-music-list {
 	list-style: none;
 	counter-reset: playing-list-item;
 	transition: none;
-
 	li.music-list-item {
 		display: flex;
 		flex-flow: row wrap;
@@ -13,9 +12,9 @@ lx-music-list {
 		padding: 8px 10px 8px 0;
 		font-size: 14px;
 		color: var(--black);
-		transition: all ease 0.2s;
 		cursor: pointer;
-		&[odd-even='odd'] {
+		transition: all ease 0.2s;
+		&:nth-child(odd) {
 			background-color: var(--themeLighterAlt);
 		}
 		&::before {
@@ -30,15 +29,14 @@ lx-music-list {
 		}
 		span {
 			flex: 1 1 75px;
+			margin-right: 5px;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
-			margin-right: 5px;
 		}
 		span.music-list-item-songName {
 			flex: 12 12 100px;
 		}
-		
 	}
 	li.music-list-item:hover {
 		color: var(--neutralPrimary);

@@ -13,10 +13,10 @@ lx-music-list li.music-list-item {
   padding: 8px 10px 8px 0;
   font-size: 14px;
   color: var(--black);
-  transition: all ease 0.2s;
   cursor: pointer;
+  transition: all ease 0.2s;
 }
-lx-music-list li.music-list-item[odd-even=odd] {
+lx-music-list li.music-list-item:nth-child(odd) {
   background-color: var(--themeLighterAlt);
 }
 lx-music-list li.music-list-item::before {
@@ -31,10 +31,10 @@ lx-music-list li.music-list-item::before {
 }
 lx-music-list li.music-list-item span {
   flex: 1 1 75px;
+  margin-right: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-right: 5px;
 }
 lx-music-list li.music-list-item span.music-list-item-songName {
   flex: 12 12 100px;

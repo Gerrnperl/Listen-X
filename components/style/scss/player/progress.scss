@@ -1,11 +1,11 @@
 lx-progress-ctrl {
 	display: flex;
-    flex-direction: row;
-    row-gap: 4px;
-    padding: 9px 9px 0;
-    user-select: none;
-    flex-wrap: wrap;
-    justify-content: space-between;
+	flex-direction: row;
+	flex-wrap: wrap;
+	row-gap: 4px;
+	justify-content: space-between;
+	padding: 9px 9px 0;
+	user-select: none;
 	.progress-text-wrapper {
 		display: flex;
 		flex-flow: row nowrap;
@@ -14,8 +14,8 @@ lx-progress-ctrl {
 		color: var(--black);
 	}
 	.progress-bar-wrapper {
-		width: 100%;
 		position: relative;
+		width: 100%;
 		cursor: pointer;
 		.progress-bar {
 			width: 100%;
@@ -44,13 +44,13 @@ lx-progress-ctrl {
 		#progress-slider {
 			position: absolute;
 			top: -2px;
+			z-index: 100;
 			width: 2px;
 			height: 8px;
 			background-color: var(--themePrimary);
 			border-radius: 1px;
 			transition: width ease 200ms, left 100ms linear;
 			transform: translateX(0);
-			z-index: 100;
 			&::after {
 				position: absolute;
 				top: -5px;
@@ -75,8 +75,6 @@ lx-progress-ctrl:hover #progress-slider {
 lx-progress-ctrl:active #progress-slider {
 	background-color: var(--themeDark);
 }
-
-
 lx-player[lyric-mode='true'] {
 	lx-progress-ctrl {
 		grid-area: lx-progress;
