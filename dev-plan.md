@@ -1,16 +1,17 @@
 Dev Plan
 ---
 - [ ] Side Panel
-- [ ] Search 
----
-- [ ] `Complete` Playing list
-- [ ] Play List
+  - [x] My Music
+  - [ ] Search
+  - [ ] Playlists
+  - [ ] Settings
+- [ ] Add interaction to lists
 - [ ] Translation of lyric
 ---
 - [x] Meta data
 - [x] Progress ctrl
 - [x] Play mode
-- [x] `Preliminary` Playing list
+- [x] Playing list
 - [x] Next & previous song
 - [x] Volume Controller
 - [x] Lyric

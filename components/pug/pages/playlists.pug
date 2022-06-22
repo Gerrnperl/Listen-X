@@ -6,9 +6,15 @@ template(id='template-playlists')
 		//- .nav-item user-playlists
 		.nav-item.add +
 	.page-contents
+		//- .page-content-header
+		//- 	span.content-header-item#content-header-item-provider 源
+		//- 	span.content-header-item#content-header-item-songName 音乐
+		//- 	span.content-header-item#content-header-item-albumName 专辑
+		//- 	span.content-header-item#content-header-item-artistList 作者
+		//- 	span.content-header-item#content-header-item-duration 时长
 		.page-content.playlist-favorite(visible)
 		//- .page-content .playlist-user
-		.page-content .action-add
+		.page-content.action-add
 	link(rel='stylesheet', href='components/style/css/pages/playlists.css')
 
 script(defer src='components/script/pages/playlists.js')

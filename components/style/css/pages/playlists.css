@@ -1,3 +1,34 @@
-
+.page-content {
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  transition: all ease 0.3s;
+  position: absolute;
+  width: 100%;
+}
+.page-content:nth-child(1) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(1)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content:nth-child(2) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(2)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content:nth-child(3) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(3)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content[visible=visible] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  display: block;
+}
 
 /*# sourceMappingURL=playlists.css.map */

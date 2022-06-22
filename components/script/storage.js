@@ -335,4 +335,27 @@ lx.storage = new (class LxStorage{
 		}
 	}
 
+	async getSpecificCachedMusicMetadata(ids){
+		try {
+			let results = [];
+
+			for (const id of ids){
+				results.push(await this.get('music', id));
+			}
+
+			if(results){
+				results.forEach(result => {
+					delete result.music;
+					delete result.blob;
+					delete result.albumCover;
+				});
+				return results;
+			}
+			throw new Error('Get cached music metadata failed');
+		}
+		catch (error){
+			throw new Error('Get cached music metadata failed');
+		}
+	}
+
 })();

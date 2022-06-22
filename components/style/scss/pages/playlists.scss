@@ -1,0 +1,27 @@
+.page-content {
+	display: block;
+	opacity: 0;
+	pointer-events: none;
+	transition: all ease 0.3s;
+	position: absolute;
+	width: 100%;
+
+	
+
+	@for $i from 1 through 3 {
+		&:nth-child(#{$i}) {
+			transform: translateX(-100%);
+		}
+		&:nth-child(#{$i})[visible=visible] ~ & {
+			transform: translateX(100%);
+		}
+	}
+	
+	&[visible=visible] {
+		opacity: 1;
+		transform: none;
+		pointer-events: auto;
+		display: block;
+	}
+	
+}
