@@ -2,9 +2,9 @@ template(id='template-my-music')
 	header.page-header
 		h1  我的音乐
 	nav
-		.nav-item(focus) 音乐
-		.nav-item 专辑
-		.nav-item 作者
+		.nav-item#nav-item-music(focus) 音乐
+		.nav-item#nav-item-album 专辑
+		.nav-item#nav-item-artist 作者
 	.page-contents
 		.page-content#page-content-songs(visible)
 			.page-content-header
@@ -14,9 +14,9 @@ template(id='template-my-music')
 				span.content-header-item#content-header-item-artistList 作者
 				span.content-header-item#content-header-item-duration 时长
 		.page-content#page-content-albums
-			.collection#albums-collection albums
+			.collection#albums-collection 
 		.page-content#page-content-artists
-			.collection#artists-collection artists
+			.collection#artists-collection
 
 	link(rel='stylesheet', href='components/style/css/pages/my-music.css')
 

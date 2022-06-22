@@ -144,22 +144,13 @@ let lx = new (class LX extends EventTarget{
 // }
 
 document.addEventListener('DOMContentLoaded', async()=>{
-	lx.storage.getAll('music', successEvent=>{
-		let results = successEvent.target.result;
-		let music = [];
+	let results = await lx.storage.getAllCachedMusicMetadata('music');
 
-		results.forEach(result=>{
-			delete result.music.blob;
-			music.push(result.music);
-		});
-		// // console.log(music);
-
-		lx.dispatchEvent(new CustomEvent('lx-loaded', {
-			'detail':{
-				playList: music, // await lx.getStoredPlayingList(),
-			},
-		}));
-	});
+	lx.dispatchEvent(new CustomEvent('lx-loaded', {
+		'detail':{
+			playList: results, // lx.getStoredPlayingList(),// music,
+		},
+	}));
 });
 
 lx.addEventListener('lx-meta-data-update', (event)=>{

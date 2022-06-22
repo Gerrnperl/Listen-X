@@ -46,20 +46,15 @@ customElements.define('lx-player', class extends HTMLElement{
 		});
 
 		lx.audioEle.addEventListener('ended', ()=>{
-			let music = lx.playingList.list[lx.playingList.playingIndex];
-			// // console.log(music);
+			// Free the memory of the playing music
 			URL.revokeObjectURL(lx.activeMusic.objURL);
-			delete lx.activeMusic;
-			URL.revokeObjectURL(music.objURL);
-			this.gotoNext();
-			lx.dispatchEvent(new CustomEvent('lx-music-ended'));
-		});
-
-		lx.addEventListener('lx-music-ended', ()=>{
-			// // console.log(musicWithBlob);
+			URL.revokeObjectURL(lx.activeMusic.albumCover);
 			delete lx.activeMusic.blob;
 			delete lx.activeMusic;
-			// // console.log(musicWithBlob);
+			delete lx.activeMusic;
+
+			this.gotoNext();
+			lx.dispatchEvent(new CustomEvent('lx-music-ended'));
 		});
 	}
 
@@ -69,39 +64,35 @@ customElements.define('lx-player', class extends HTMLElement{
 	 */
 	async loadMusic(music, play = true){
 		// Get blob from cache, if not, get from provider
-		lx.storage.get('music', `${music.provider}-${music.id}`, async successEvent=>{
-			let data = successEvent.target.result;
+		let data = await lx.storage.get('music', music.id);
 
-			if(data){
-				console.log(`get music ${music.provider}-${music.id}: ${music.songName} from cache`);
-				playMusic(data.music);
+		if(data){
+			lx.activeMusic = data.music;
+			lx.activeMusic.albumCover = URL.createObjectURL(data.albumCover);
+			playMusic(data.music);
+
+			lx.dispatchEvent(new CustomEvent('lx-music-loading'));
+		}
+		else{
+			if(!music.blob){
+				await this.getBlob(music);
+				// TODO: 增加缓存门槛
+				lx.storage.cacheMusic(music);
 			}
-			else{
-				if(!music.blob){
-					await this.getBlob(music);
-					// TODO: 增加缓存门槛
-					lx.storage.cacheMusic(music);
-				}
-				playMusic(music);
-			}
-		});
-		function playMusic(musicWithBlob){
-			if(!musicWithBlob.objURL){
-				musicWithBlob.objURL = URL.createObjectURL(musicWithBlob.blob);
-			}
-			// // console.log(musicWithBlob);
+			lx.activeMusic = music;
+			playMusic(music);
+			lx.dispatchEvent(new CustomEvent('lx-music-loading'));
+		}
+		async function playMusic(musicWithBlob){
+			lx.activeMusic = musicWithBlob;
+			musicWithBlob.objURL = URL.createObjectURL(musicWithBlob.blob);
 			lx.audioEle.src = musicWithBlob.objURL;
-			// lx.dispatchEvent(new CustomEvent('lx-music-ready', {
-			// 	'detail':{
-			// 		music: musicWithBlob,
-			// 	}}
-			// ));
 			lx.dispatchEvent(new CustomEvent('lx-music-ready'));
 			lx.dispatchEvent(new CustomEvent('lx-meta-data-update', {
 				'detail':{
 					songName: musicWithBlob.songName,
 					artistList: musicWithBlob.artistList,
-					coverURL: musicWithBlob.coverURL,
+					coverURL: musicWithBlob.albumCover,
 				}}
 			));
 
@@ -109,13 +100,6 @@ customElements.define('lx-player', class extends HTMLElement{
 				lx.player.playAudio();
 			}
 		}
-		// lx.dispatchEvent(new CustomEvent('lx-music-loading', {
-		// 	detail: {
-		// 		music: music,
-		// 	},
-		// }));
-		lx.activeMusic = music;
-		lx.dispatchEvent(new CustomEvent('lx-music-loading'));
 	}
 
 	async getBlob(music){

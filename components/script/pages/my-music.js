@@ -64,18 +64,21 @@ class MyMusic extends HTMLElement{
 		this.tags.push(this.querySelector('#page-content-artists'));
 	}
 
-	render(){
-		lx.storage.getAll('music', successEvent=>{
-			let musicArr = successEvent.target.result;
+	async render(){
+		let dataArr = (await lx.storage.getAllCachedMusicMetadata());
 
-			musicArr.forEach(data => {
-				delete data.music.blob;
-				this.usrSongs.push(data.music);
-			});
+		dataArr.forEach(data => {
+			// delete data.music.blob;
+			this.usrSongs.push(data);
+		});
 
-			this.renderMySongs();
+		document.querySelector('#nav-item-album').addEventListener('click', () => {
+			// To reduce memory usage of img
 			this.renderAlbums();
 		});
+		this.renderMySongs();
+		// await this.renderAlbums();
+		this.renderArtists();
 	}
 
 	renderMySongs(){
@@ -85,21 +88,35 @@ class MyMusic extends HTMLElement{
 		mySongsUI.appendChild(this.songsList);
 	}
 
-	renderAlbums(){
-		let albumsUI = document.querySelector('#page-content-albums');
-		let fragment = document.createDocumentFragment();
+	async renderAlbums(){
+		let albumsUI = document.querySelector('#albums-collection');
 
-		this.usrSongs.forEach(music => {
+		this.usrSongs.forEach(async music => {
 			let albumUI = document.createElement('div');
+			let url = URL.createObjectURL((await lx.storage.getCachedMusic(music.id)).albumCover);
 
 			albumUI.classList.add('album');
 			albumUI.innerHTML = `
-				<img src="${music.coverURL}" alt="album">
+				<img src="${url}" alt="album">
 				<div class="album-name">${music.albumName}</div>`;
-			fragment.appendChild(albumUI);
+			albumsUI.appendChild(albumUI);
+		});
+	}
+
+	renderArtists(){
+		let artistsUI = document.querySelector('#artists-collection');
+		let fragment = document.createDocumentFragment();
+
+		this.usrSongs.forEach(music => {
+			let artistUI = document.createElement('div');
+
+			artistUI.classList.add('artist');
+			artistUI.innerHTML = `
+				<div class="artist-name">${music.artistList.join(', ')}</div>`;
+			fragment.appendChild(artistUI);
 		});
 
-		albumsUI.appendChild(fragment);
+		artistsUI.appendChild(fragment);
 	}
 
 }

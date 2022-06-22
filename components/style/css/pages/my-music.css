@@ -91,4 +91,33 @@ li.music-list-item span.music-list-item-duration {
   display: block;
 }
 
+#albums-collection, #artists-collection {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+#albums-collection .artist, #albums-collection .album, #artists-collection .artist, #artists-collection .album {
+  width: 128px;
+  overflow: hidden;
+  margin: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+#albums-collection img, #artists-collection img {
+  width: 128px;
+  height: 128px;
+}
+#albums-collection .artist, #artists-collection .artist {
+  padding: 20px;
+  box-shadow: 0 1.6px 3.6px 0 rgba(0, 0, 0, 0.13), 0 0.3px 0.9px 0 rgba(0, 0, 0, 0.11);
+}
+#albums-collection .album-name, #albums-collection .artist-name, #artists-collection .album-name, #artists-collection .artist-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /*# sourceMappingURL=my-music.css.map */

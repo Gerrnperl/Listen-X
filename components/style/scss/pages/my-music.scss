@@ -95,5 +95,39 @@ li.music-list-item span.music-list-item-duration {
 }
 
 
+#albums-collection,#artists-collection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+
+	.artist, .album {
+		width: 128px;
+		overflow: hidden;
+		margin: 10px;
+		font-size: 14px;
+		line-height: 1.5;
+	}
+
+	img {
+		width: 128px;
+		height: 128px;
+	}
+	
+	.artist {
+		padding: 20px;
+		box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
+	}
+
+	.album-name, .artist-name {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+
+
 
 

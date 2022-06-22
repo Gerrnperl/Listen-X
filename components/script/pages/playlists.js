@@ -11,4 +11,10 @@ customElements.define('lx-playlists', class extends HTMLElement{
 		});
 	}
 
+	generatePlaylist(musics, name, cover){
+		let playlist = {
+			name: '',
+			musics: []
+		};
+	}
 });

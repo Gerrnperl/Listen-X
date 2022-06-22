@@ -74,9 +74,11 @@ customElements.define('lx-lyric', class extends HTMLElement{
 	}
 
 	async loadLyric(music){
-		let lyric = (await lx.providers[music.provider].getLyric(music)).lyric;
+		if(!music.lyric){
+			music.lyric = (await lx.providers[music.provider].getLyric(music)).lyric;
+		}
 
-		this.fmtLyric = this.formatLyric(lyric);
+		this.fmtLyric = this.formatLyric(music.lyric);
 		this.lyricIndex = 0;
 		lx.dispatchEvent(new CustomEvent('lx-lyric-loaded', {
 			detail: {

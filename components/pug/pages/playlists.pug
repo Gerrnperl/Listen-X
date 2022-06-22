@@ -1,14 +1,14 @@
 template(id='template-playlists')
-	style.
-		h1 {
-			text-align: center;
-			font-family: fabric;
-		}
-		h2 {
-			text-align: center;
-		}
-	h1 
-	h2 Playlists
+	header.page-header
+		h1  播放列表
+	nav
+		.nav-item.favorite(focus) 收藏
+		//- .nav-item user-playlists
+		.nav-item.add +
+	.page-contents
+		.page-content.playlist-favorite(visible)
+		//- .page-content .playlist-user
+		.page-content .action-add
 	link(rel='stylesheet', href='components/style/css/pages/playlists.css')
 
 script(defer src='components/script/pages/playlists.js')

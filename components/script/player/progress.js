@@ -31,7 +31,7 @@ customElements.define('lx-progress-ctrl', class extends HTMLElement{
 		lx.addEventListener('lx-music-ready', ()=>{
 			// // console.log(event.detail.music);
 			this.renderDurationText(lx.Utils.formatTime(lx.activeMusic.duration));
-			this.duration =lx.activeMusic.duration;
+			this.duration = lx.activeMusic.duration;
 		});
 		lx.addEventListener('lx-music-ended', ()=>{
 			this.updateProgressText('00:00');

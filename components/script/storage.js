@@ -15,6 +15,7 @@ lx.storage = new (class LxStorage{
 				{name: 'provider', keyPath: 'provider', options:{unique: false}},
 				{name: 'duration', keyPath: 'duration', options:{unique: false}},
 				{name: 'blob', keyPath: 'blob', options:{unique: false}},
+				{name: 'albumCover', keyPath: 'albumCover', options:{unique: false}},
 			],
 		},
 		{
@@ -131,73 +132,111 @@ lx.storage = new (class LxStorage{
 		return objectStore;
 	}
 
-	add(storeName, record, onsuccess = null, onerror = this.defaultOnerror){
-		let objectStore = this.getObjectStore(storeName, storeName);
+	add(storeName, record){
+		return new Promise((resolve, reject) => {
+			let objectStore = this.getObjectStore(storeName, storeName);
 
-		let request = objectStore.add(record);
+			let request = objectStore.add(record);
 
-		request.onsuccess = onsuccess;
-		request.onerror = onerror;
+			request.onsuccess = event=>{
+				resolve(event.target.result);
+			};
+			request.onerror = event=>{
+				reject(event);
+			};
+		});
 	}
 
-	delete(storeName, key, onsuccess, onerror = this.defaultOnerror){
-		let objectStore = this.getObjectStore(storeName, storeName);
+	delete(storeName, key){
+		return new Promise((resolve, reject) => {
+			let objectStore = this.getObjectStore(storeName, storeName);
 
-		let request = objectStore.delete(key);
+			let request = objectStore.delete(key);
 
-		request.onsuccess = onsuccess;
-		request.onerror = onerror;
+			request.onsuccess = event=>{
+				resolve(event.target.result);
+			};
+			request.onerror = event=>{
+				reject(event);
+			};
+		});
 	}
 
-	update(storeName, record, onsuccess, onerror = this.defaultOnerror){
-		let objectStore = this.getObjectStore(storeName, storeName);
+	update(storeName, record){
+		return new Promise((resolve, reject) => {
+			let objectStore = this.getObjectStore(storeName, storeName);
 
-		let request = objectStore.put(record);
+			let request = objectStore.put(record);
 
-		request.onsuccess = onsuccess;
-		request.onerror = onerror;
+			request.onsuccess = event=>{
+				resolve(event.target.result);
+			};
+			request.onerror = event=>{
+				reject(event);
+			};
+		});
 	}
 
-	get(storeName, key, onsuccess, onerror = this.defaultOnerror){
-		let objectStore = this.getObjectStore(storeName, storeName);
+	get(storeName, key){
+		return new Promise((resolve, reject) => {
+			let objectStore = this.getObjectStore(storeName, storeName);
 
-		let request = objectStore.get(key);
+			let request = objectStore.get(key);
 
-		request.onsuccess = onsuccess;
-		request.onerror = onerror;
+			request.onsuccess = event=>{
+				resolve(event.target.result);
+			};
+			request.onerror = event=>{
+				reject(event);
+			};
+		});
 	}
 
-	getAll(storeName, onsuccess, onerror = this.defaultOnerror){
-		let objectStore = this.getObjectStore(storeName, storeName);
+	getAll(storeName){
+		return new Promise((resolve, reject) => {
+			let objectStore = this.getObjectStore(storeName, storeName);
 
-		let request = objectStore.getAll();
+			let request = objectStore.getAll();
 
-		request.onsuccess = onsuccess;
-		request.onerror = onerror;
+			request.onsuccess = event=>{
+				resolve(event.target.result);
+			};
+			request.onerror = event=>{
+				reject(event);
+			};
+		});
 	}
 
-	getByField(storeName, fieldName, filedValue, onsuccess, onerror = this.defaultOnerror){
-		let objectStore = this.getObjectStore(storeName, storeName);
-		let index = objectStore.index(fieldName);
+	getByField(storeName, fieldName, filedValue){
+		return new Promise((resolve, reject) => {
+			let objectStore = this.getObjectStore(storeName, storeName);
+			let index = objectStore.index(fieldName);
 
-		let request = index.get(filedValue);
+			let request = index.get(filedValue);
 
-		request.onsuccess = onsuccess;
-		request.onerror = onerror;
+			request.onsuccess = event=>{
+				resolve(event.target.result);
+			};
+			request.onerror = event=>{
+				reject(event);
+			};
+		});
 	}
 
-	getAllByField(storeName, fieldName, filedValue, onsuccess, onerror = this.defaultOnerror){
-		let objectStore = this.getObjectStore(storeName, storeName);
-		let index = objectStore.index(fieldName);
+	getAllByField(storeName, fieldName, filedValue){
+		return new Promise((resolve, reject) => {
+			let objectStore = this.getObjectStore(storeName, storeName);
+			let index = objectStore.index(fieldName);
 
-		let request = index.getAll(IDBKeyRange.only(filedValue));
+			let request = index.getAll(IDBKeyRange.only(filedValue));
 
-		request.onsuccess = onsuccess;
-		request.onerror = onerror;
-	}
-
-	defaultOnerror(event){
-		console.error(event);
+			request.onsuccess = event=>{
+				resolve(event.target.result);
+			};
+			request.onerror = event=>{
+				reject(event);
+			};
+		});
 	}
 
 	async getSpaceUsage(){
@@ -243,7 +282,12 @@ lx.storage = new (class LxStorage{
 		}
 	}
 
-	cacheMusic(music){
+	async cacheMusic(music){
+		let response = await fetch(music.coverURL, {
+			method: 'GET',
+		});
+		let albumCover = await response.blob();
+
 		this.update('music', {
 			id			: `${music.provider}-${music.id}`,
 			music		: music,
@@ -253,7 +297,42 @@ lx.storage = new (class LxStorage{
 			provider	: music.provider,
 			duration	: music.duration,
 			blob		: music.blob,
+			albumCover  : albumCover,
 		});
+	}
+
+	async getCachedMusic(id){
+		try{
+			let result = await this.get('music', id);
+
+			if(result){
+				return result;
+			}
+
+			throw new Error('Music not found');
+		}
+		catch(error){
+			throw new Error('Music not found');
+		}
+	}
+
+	async getAllCachedMusicMetadata(){
+		try {
+			let results = await this.getAll('music');
+
+			if(results){
+				results.forEach(result => {
+					delete result.music;
+					delete result.blob;
+					delete result.albumCover;
+				});
+				return results;
+			}
+			throw new Error('Get cached music metadata failed');
+		}
+		catch (error){
+			throw new Error('Get cached music metadata failed');
+		}
 	}
 
 })();
