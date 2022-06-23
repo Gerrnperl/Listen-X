@@ -38,10 +38,26 @@ lx-music-list {
 			flex: 12 12 100px;
 		}
 	}
+
+	.music-cmd-button{
+		font-family: fabric;
+		border: none;
+		display: inline;
+		line-height: 1;
+		margin-left: 8px;
+		background: transparent;
+		color: var(--neutralDark);
+		opacity: 0;
+	}
+
+
 	li.music-list-item:hover {
 		color: var(--neutralPrimary);
 		background-color: var(--themeLighter);
 		&::before {
+			opacity: 1;
+		}
+		.music-cmd-button{
 			opacity: 1;
 		}
 	}

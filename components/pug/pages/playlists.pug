@@ -2,19 +2,23 @@ template(id='template-playlists')
 	header.page-header
 		h1  播放列表
 	nav
-		.nav-item.favorite(focus) 收藏
+		//- .nav-item.favorite(focus) 收藏
 		//- .nav-item user-playlists
 		.nav-item.add +
 	.page-contents
-		//- .page-content-header
-		//- 	span.content-header-item#content-header-item-provider 源
-		//- 	span.content-header-item#content-header-item-songName 音乐
-		//- 	span.content-header-item#content-header-item-albumName 专辑
-		//- 	span.content-header-item#content-header-item-artistList 作者
-		//- 	span.content-header-item#content-header-item-duration 时长
-		.page-content.playlist-favorite(visible)
+		.page-content-header
+			.playlist-cover
+				img#playlist-cover-img
+				button#playlist-cover-edit
+			.playlist-data
+				#playlist-name
+				.playlist-cmd-buttons
+					button#playlist-play-all 播放全部
+					button#playlist-rename 重命名
+					button#playlist-delete 删除
+		//- .page-content.playlist-favorite(visible)
 		//- .page-content .playlist-user
-		.page-content.action-add
+		//- .page-content.action-add
 	link(rel='stylesheet', href='components/style/css/pages/playlists.css')
 
 script(defer src='components/script/pages/playlists.js')

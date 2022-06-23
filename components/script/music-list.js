@@ -3,6 +3,7 @@ class MusicList extends HTMLElement{
 	/** @type {music[]} */
 	list = [];
 
+	/** @type {HTMLLIElement[]} */
 	listElement = [];
 
 	columns;
@@ -21,6 +22,8 @@ class MusicList extends HTMLElement{
 		});
 
 		this.appendChild(template);
+
+		this.addCmdButton('click', this.addToFavorites.bind(this), '\ueb51', '添加至收藏');
 	}
 
 	createListElement(music, index){
@@ -111,6 +114,25 @@ class MusicList extends HTMLElement{
 
 		this.replaceChildren(...this.listElement);
 		// this.appendChild(this.listElement);
+	}
+
+	addCmdButton(eventType, eventListener, icon, title){
+		this.listElement.forEach((li, index)=>{
+			let button = document.createElement('button');
+
+			button.className = 'music-cmd-button';
+			button.addEventListener(eventType, eventListener);
+			button.innerHTML = icon;
+			button.title = title;
+			button.setAttribute('index', index);
+			li.querySelector('.music-list-item-songName').appendChild(button);
+		});
+	}
+
+	addToFavorites(event){
+		let music = this.list[event.target.getAttribute('index')];
+
+		lx.playlists.playlists.__favorites__.add(music.id);
 	}
 
 }

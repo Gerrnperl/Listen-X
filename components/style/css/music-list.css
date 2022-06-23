@@ -39,11 +39,24 @@ lx-music-list li.music-list-item span {
 lx-music-list li.music-list-item span.music-list-item-songName {
   flex: 12 12 100px;
 }
+lx-music-list .music-cmd-button {
+  font-family: fabric;
+  border: none;
+  display: inline;
+  line-height: 1;
+  margin-left: 8px;
+  background: transparent;
+  color: var(--neutralDark);
+  opacity: 0;
+}
 lx-music-list li.music-list-item:hover {
   color: var(--neutralPrimary);
   background-color: var(--themeLighter);
 }
 lx-music-list li.music-list-item:hover::before {
+  opacity: 1;
+}
+lx-music-list li.music-list-item:hover .music-cmd-button {
   opacity: 1;
 }
 

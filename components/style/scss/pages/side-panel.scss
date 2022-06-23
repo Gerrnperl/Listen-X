@@ -82,6 +82,7 @@ lx-side-panel .spi-page {
 	pointer-events: none;
 	opacity: 0;
 	transform: translateY(20%);
+	z-index: -1000;
 
 	--focus-offset: 0;
 	--focus-width: 80px;

@@ -178,3 +178,25 @@ li.music-list-item[playing]::before {
 		content: '\e713';
 	}
 }
+
+
+lx-playlists .page-content-header{
+	button::before{
+		font-family: fabric;
+		font-size: 14px;
+		line-height: 20px;
+		margin-right: 5px;
+	}
+	button#playlist-cover-edit::before{
+		content: '\ef77';
+	}
+	button#playlist-play-all::before{
+		content: '\e768';
+	}
+	button#playlist-rename::before{
+		content: '\e8ac';
+	}
+	button#playlist-delete::before{
+		content: '\e74d';
+	}
+}

@@ -1,4 +1,4 @@
-.page-content-header {
+lx-my-music .page-content-header {
   z-index: 5;
   display: flex;
   flex-flow: row wrap;
@@ -11,14 +11,14 @@
   background-color: var(--white);
   border-bottom: 1px solid var(--themeLighter);
 }
-.page-content-header span {
+lx-my-music .page-content-header span {
   flex: 1 1 75px;
   margin-right: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.page-content-header::before {
+lx-my-music .page-content-header::before {
   flex: 0 0 30px;
   font-size: 8px;
   color: var(--neutralPrimaryAlt);

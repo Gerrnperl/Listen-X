@@ -127,4 +127,23 @@ li.music-list-item[playing]::before {
   content: "\e713";
 }
 
+lx-playlists .page-content-header button::before {
+  font-family: fabric;
+  font-size: 14px;
+  line-height: 20px;
+  margin-right: 5px;
+}
+lx-playlists .page-content-header button#playlist-cover-edit::before {
+  content: "\ef77";
+}
+lx-playlists .page-content-header button#playlist-play-all::before {
+  content: "\e768";
+}
+lx-playlists .page-content-header button#playlist-rename::before {
+  content: "\e8ac";
+}
+lx-playlists .page-content-header button#playlist-delete::before {
+  content: "\e74d";
+}
+
 /*# sourceMappingURL=icon.css.map */
