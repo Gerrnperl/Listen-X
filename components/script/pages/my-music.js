@@ -91,6 +91,10 @@ class MyMusic extends HTMLElement{
 	async renderAlbums(){
 		let albumsUI = document.querySelector('#albums-collection');
 
+		if(albumsUI.childElementCount !== 0){
+			return;
+		}
+
 		this.usrSongs.forEach(async music => {
 			let albumUI = document.createElement('div');
 			let url = URL.createObjectURL((await lx.storage.getCachedMusic(music.id)).albumCover);

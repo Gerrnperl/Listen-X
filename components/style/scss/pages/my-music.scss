@@ -74,7 +74,7 @@ li.music-list-item span.music-list-item-duration {
 	opacity: 0;
 	pointer-events: none;
 	transition: all ease 0.3s;
-	position: absolute;
+	position: fixed;
 	width: 100%;
 
 	
@@ -93,6 +93,7 @@ li.music-list-item span.music-list-item-duration {
 		transform: none;
 		pointer-events: auto;
 		display: block;
+		position: absolute;
 	}
 	
 }

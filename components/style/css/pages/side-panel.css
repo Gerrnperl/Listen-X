@@ -73,7 +73,7 @@ lx-side-panel .spi-page {
   top: 0;
   right: 0;
   width: calc(99vw - var(--side-panel-width-wide));
-  height: 100vh;
+  height: calc(100vh - var(--control-panel-height));
   color: #000000;
   pointer-events: none;
   opacity: 0;

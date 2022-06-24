@@ -189,6 +189,8 @@ lx-playlists .page-content-header{
 	}
 	button#playlist-cover-edit::before{
 		content: '\ef77';
+		background: #ffffff77;
+		padding: 2px;
 	}
 	button#playlist-play-all::before{
 		content: '\e768';

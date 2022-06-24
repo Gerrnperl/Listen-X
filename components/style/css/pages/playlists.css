@@ -10,14 +10,19 @@ lx-playlists .page-content-header button {
   margin-right: 25px;
   height: 20px;
 }
-lx-playlists .page-content-header button#playlist-cover-edit {
+lx-playlists .page-content-header .playlist-cover button#playlist-cover-edit {
   position: absolute;
   right: 0;
   margin: 2px;
   bottom: 3px;
+  opacity: 0;
+}
+lx-playlists .page-content-header .playlist-cover:hover button#playlist-cover-edit {
+  opacity: 1;
 }
 lx-playlists .playlist-cover {
   margin: auto 20px;
+  position: relative;
 }
 lx-playlists img#playlist-cover-img {
   width: 20vh;
@@ -27,7 +32,7 @@ lx-playlists img#playlist-cover-img {
 }
 lx-playlists .playlist-data {
   margin: auto 20px;
-  height: 20vh;
+  height: 18vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,33 +44,25 @@ lx-playlists div#playlist-name {
   line-height: 0.6;
 }
 
-.page-content {
-  display: block;
-  opacity: 0;
-  pointer-events: none;
-  transition: all ease 0.3s;
-  position: absolute;
-  width: 100%;
-}
-.page-content:nth-child(1) {
+lx-playlists .page-content:nth-child(1) {
   transform: translateX(-100%);
 }
-.page-content:nth-child(1)[visible=visible] ~ .page-content {
+lx-playlists .page-content:nth-child(1)[visible=visible] ~ lx-playlists .page-content {
   transform: translateX(100%);
 }
-.page-content:nth-child(2) {
+lx-playlists .page-content:nth-child(2) {
   transform: translateX(-100%);
 }
-.page-content:nth-child(2)[visible=visible] ~ .page-content {
+lx-playlists .page-content:nth-child(2)[visible=visible] ~ lx-playlists .page-content {
   transform: translateX(100%);
 }
-.page-content:nth-child(3) {
+lx-playlists .page-content:nth-child(3) {
   transform: translateX(-100%);
 }
-.page-content:nth-child(3)[visible=visible] ~ .page-content {
+lx-playlists .page-content:nth-child(3)[visible=visible] ~ lx-playlists .page-content {
   transform: translateX(100%);
 }
-.page-content[visible=visible] {
+lx-playlists .page-content[visible=visible] {
   opacity: 1;
   transform: none;
   pointer-events: auto;

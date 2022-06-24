@@ -57,7 +57,7 @@ customElements.define('lx-playlists', class extends HTMLElement{
 					this.navItems.push(navItem);
 					this.pageContents.push(playlistUI);
 
-					navItem.addEventListener('click', ()=>{
+					navItem.addEventListener('click', async()=>{
 						this.navItems.forEach(ele => {
 							ele.removeAttribute('focus');
 						});
@@ -70,19 +70,27 @@ customElements.define('lx-playlists', class extends HTMLElement{
 						lx.playlists.setAttribute('style',
 							`--focus-offset:${navItem.offsetLeft}px;--focus-width:${navItem.offsetWidth}px;`);
 
-						this.coverImgEle.setAttribute('src', playlist.cover);
-						this.nameEle.innerHTML = playlist.name === '__favorites__' ? '收藏' : playlist.name ;
+						this.coverImgEle.setAttribute('src', playlist.cover || await this.getFirstCover(playlist));
+						this.nameEle.innerHTML = playlist.name === '__favorites__' ? '收藏' : playlist.name;
 					});
 				});
 			});
 		});
 	}
 
+	async getFirstCover(playlist){
+		let id = playlist.list[0];
+
+		return URL.createObjectURL((await lx.storage.getCachedMusic(id)).albumCover);
+	}
+
 	async getAllPlaylists(){
 		let playlists = await lx.storage.getAll('playlists');
 
 		if(playlists.length === 0){
-			this.generatePlaylist([], '__favorites__');
+			let favoritePlaylist = this.generatePlaylist([], '__favorites__');
+
+			this.playlists.__favorites__ = favoritePlaylist;
 		}
 
 		// Add methods
@@ -132,8 +140,8 @@ customElements.define('lx-playlists', class extends HTMLElement{
 			cover: cover,
 		};
 
-		this.playlists.__favorites__ = playlist;
 		lx.storage.add('playlists', playlist);
+		return playlist;
 	}
 
 });

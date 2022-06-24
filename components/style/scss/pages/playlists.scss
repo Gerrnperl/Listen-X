@@ -12,17 +12,25 @@ lx-playlists{
 			height: 20px;
 		}
 
-		button#playlist-cover-edit {
-			position: absolute;
-			right: 0;
-			margin: 2px;
-			bottom: 3px;
+		.playlist-cover{
+			button#playlist-cover-edit {
+				position: absolute;
+				right: 0;
+				margin: 2px;
+				bottom: 3px;
+				opacity: 0;
+			}
+
+			&:hover button#playlist-cover-edit{
+				opacity: 1;
+			}
 		}
 
 	}
 	
 	.playlist-cover {
 		margin: auto 20px;
+		position: relative;
 	}
 	
 	img#playlist-cover-img {
@@ -34,7 +42,7 @@ lx-playlists{
 	
 	.playlist-data {
 		margin: auto 20px;
-		height: 20vh;
+		height: 18vh;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -48,13 +56,13 @@ lx-playlists{
 	}
 	
 }
-.page-content {
-	display: block;
-	opacity: 0;
-	pointer-events: none;
-	transition: all ease 0.3s;
-	position: absolute;
-	width: 100%;
+lx-playlists .page-content {
+	// display: block;
+	// opacity: 0;
+	// pointer-events: none;
+	// transition: all ease 0.3s;
+	// position: absolute;
+	// width: 100%;
 	
 	@for $i from 1 through 3 {
 		&:nth-child(#{$i}) {
