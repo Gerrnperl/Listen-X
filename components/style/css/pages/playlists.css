@@ -62,6 +62,48 @@ lx-playlists .page-content:nth-child(3) {
 lx-playlists .page-content:nth-child(3)[visible=visible] ~ lx-playlists .page-content {
   transform: translateX(100%);
 }
+lx-playlists .page-content:nth-child(4) {
+  transform: translateX(-100%);
+}
+lx-playlists .page-content:nth-child(4)[visible=visible] ~ lx-playlists .page-content {
+  transform: translateX(100%);
+}
+lx-playlists .page-content:nth-child(5) {
+  transform: translateX(-100%);
+}
+lx-playlists .page-content:nth-child(5)[visible=visible] ~ lx-playlists .page-content {
+  transform: translateX(100%);
+}
+lx-playlists .page-content:nth-child(6) {
+  transform: translateX(-100%);
+}
+lx-playlists .page-content:nth-child(6)[visible=visible] ~ lx-playlists .page-content {
+  transform: translateX(100%);
+}
+lx-playlists .page-content:nth-child(7) {
+  transform: translateX(-100%);
+}
+lx-playlists .page-content:nth-child(7)[visible=visible] ~ lx-playlists .page-content {
+  transform: translateX(100%);
+}
+lx-playlists .page-content:nth-child(8) {
+  transform: translateX(-100%);
+}
+lx-playlists .page-content:nth-child(8)[visible=visible] ~ lx-playlists .page-content {
+  transform: translateX(100%);
+}
+lx-playlists .page-content:nth-child(9) {
+  transform: translateX(-100%);
+}
+lx-playlists .page-content:nth-child(9)[visible=visible] ~ lx-playlists .page-content {
+  transform: translateX(100%);
+}
+lx-playlists .page-content:nth-child(10) {
+  transform: translateX(-100%);
+}
+lx-playlists .page-content:nth-child(10)[visible=visible] ~ lx-playlists .page-content {
+  transform: translateX(100%);
+}
 lx-playlists .page-content[visible=visible] {
   opacity: 1;
   transform: none;

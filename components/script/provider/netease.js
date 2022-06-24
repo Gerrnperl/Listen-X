@@ -200,10 +200,12 @@ class Netease{
 			songs: [],
 		};
 
-		result.songs.forEach(music => {
-			formattedResult.songs.push(this.#formatItem(music));
-		});
-		return formattedResult;
+		if(result.songCount > 0){
+			result.songs.forEach(music => {
+				formattedResult.songs.push(this.#formatItem(music));
+			});
+			return formattedResult;
+		}
 	}
 
 	/**

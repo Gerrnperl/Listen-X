@@ -1,14 +1,12 @@
 template(id='template-explore')
-	style.
-		h1 {
-			text-align: center;
-			font-family: fabric;
-		}
-		h2 {
-			text-align: center;
-		}
-	h1 
-	h2 Explore
+	header.page-header
+		h1  探索
+		form.search
+			input.searchText(placeholder="输入歌曲名")
+			button.searchTrigger
+	nav
+		// .nav-item.[provider] provider
+	.page-contents
 	link(rel='stylesheet', href='components/style/css/pages/explore.css')
 
 script(defer src='components/script/pages/explore.js')

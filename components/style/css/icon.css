@@ -148,4 +148,12 @@ lx-playlists .page-content-header button#playlist-delete::before {
   content: "\e74d";
 }
 
+lx-explore .searchTrigger::before {
+  font-family: fabric;
+  font-size: 14px;
+  line-height: 20px;
+  margin-right: 5px;
+  content: "\e721";
+}
+
 /*# sourceMappingURL=icon.css.map */

@@ -64,7 +64,7 @@ lx-playlists .page-content {
 	// position: absolute;
 	// width: 100%;
 	
-	@for $i from 1 through 3 {
+	@for $i from 1 through 10 {
 		&:nth-child(#{$i}) {
 			transform: translateX(-100%);
 		}

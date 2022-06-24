@@ -179,4 +179,13 @@ lx.Utils = class Utils{
 		return wrapper;
 	}
 
+	static debounce(func, cooldownTime = 100){
+		let timeout;
+
+		return function(){
+			clearTimeout(timeout);
+			timeout = setTimeout(() => func.apply(this, arguments), cooldownTime);
+		};
+	}
+
 };
