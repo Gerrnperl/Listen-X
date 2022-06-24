@@ -11,5 +11,13 @@
     "stylelint": "stylelint \"./components/**/*.scss\" --fix"
   },
   "author": "Gerrnperl Lunn",
-  "license": "GPL-3.0-or-later"
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "grunt": "^1.5.3",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-pug": "^3.0.0",
+    "grunt-contrib-sass": "^2.0.0",
+    "grunt-contrib-uglify": "^5.2.2",
+    "grunt-crx": "^2.0.0"
+  }
 }
