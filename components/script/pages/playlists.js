@@ -112,7 +112,9 @@ customElements.define('lx-playlists', class extends HTMLElement{
 
 				let musicData = await lx.storage.getSpecificCachedMusicMetadata(this.list);
 				let musicList = new MusicList(musicData,
-					['provider', 'songName', 'albumName', 'artistList', 'duration']);
+					['provider', 'songName', 'albumName', 'artistList', 'duration'],
+					// eslint-disable-next-line no-undefined
+					playlist.name === '__favorites__'?['play', 'addToPlayingList', 'remove'] : undefined);
 
 				pageContent.appendChild(musicList);
 				lx.playlists.pageContentsUI.appendChild(pageContent);

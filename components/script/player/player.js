@@ -80,6 +80,7 @@ customElements.define('lx-player', class extends HTMLElement{
 				lx.storage.cacheMusic(music);
 			}
 			lx.activeMusic = music;
+			lx.activeMusic.albumCover = music.coverURL;
 			playMusic(music);
 			lx.dispatchEvent(new CustomEvent('lx-music-loading'));
 		}

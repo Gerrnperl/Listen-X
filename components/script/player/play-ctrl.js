@@ -89,7 +89,23 @@ customElements.define('lx-play-ctrl', class extends HTMLElement{
 	}
 
 	renderPlayingList(){
-		this.playingListUI = new MusicList(lx.playingList.list);
+		this.playingListUI = new MusicList(
+			lx.playingList.list,
+			// eslint-disable-next-line no-undefined
+			undefined,
+			[
+				'addToFavorites',
+				{
+					icon: '\ue74d',
+					title: '从列表移除',
+					eventListener: event => {
+						let music = this.playingListUI.list[event.target.getAttribute('index')];
+
+						// this.playingListUI.remove(music);
+						lx.playingList.remove(music);
+					},
+				},
+			]);
 		this.playingListPanel.appendChild(this.playingListUI);
 		this.playingListUI.listElement.forEach((ele, index)=>{
 			ele.addEventListener('click', (()=>{
@@ -179,11 +195,19 @@ customElements.define('lx-play-ctrl', class extends HTMLElement{
 			},
 			add(song){
 				this.list.push(song);
+				this.playingIndex = this.list.length - 1;
+				lx.playCtrl.playingListUI.add(song);
+			},
+			addAndPlay(song){
+				this.add(song);
+				lx.playCtrl.switchPlayingMusic(this.playedStack.at(-1), this.playingIndex);
+				this.playedStack.push(this.playingIndex);
 			},
 			remove(song){
 				let index = this.list.indexOf(song);
 
 				this.list.splice(index, 1);
+				lx.playCtrl.playingListUI.remove(song);
 			},
 			move(from, to){
 				if(typeof from !== 'number'){

@@ -8,7 +8,50 @@ class MusicList extends HTMLElement{
 
 	columns;
 
-	constructor(musics, columns = ['songName', 'artistList', 'duration']){
+	cmdList = {
+		play: {
+			icon: '\ue768',
+			title: '播放',
+			eventListener: event => {
+				let music = this.list[event.target.getAttribute('index')];
+
+				lx.playingList.addAndPlay(music);
+				lx.player.loadMusic(music);
+			},
+		},
+		addToPlayingList: {
+			icon: '\ue710',
+			title: '添加至播放列表',
+			eventListener: event => {
+				let music = this.list[event.target.getAttribute('index')];
+				// todo:
+			},
+		},
+		addToFavorites: {
+			icon: '\ueb51',
+			title: '添加至收藏',
+			eventListener: event => {
+				let music = this.list[event.target.getAttribute('index')];
+
+				lx.playlists.playlists.__favorites__.add(music.id);
+			},
+		},
+		remove: {
+			icon: '\ue74d',
+			title: '从列表移除',
+			eventListener: event => {
+				let music = this.list[event.target.getAttribute('index')];
+
+				this.remove(music);
+			},
+		},
+	};
+
+	constructor(
+		musics,
+		columns = ['songName', 'artistList', 'duration'],
+		cmd = ['play', 'addToPlayingList', 'addToFavorites', 'remove']
+	){
 		super();
 		this.columns = columns;
 		let template = document.createDocumentFragment();
@@ -23,7 +66,18 @@ class MusicList extends HTMLElement{
 
 		this.appendChild(template);
 
-		this.addCmdButton('click', this.addToFavorites.bind(this), '\ueb51', '添加至收藏');
+		this.cmd = cmd;
+
+		cmd.forEach(cmdName=>{
+			if(typeof cmdName === 'string'){
+				let cmdItem = this.cmdList[cmdName];
+
+				this.addCmdToAll('click', cmdItem.eventListener.bind(this), cmdItem.icon, cmdItem.title);
+			}
+			else{
+				this.addCmdToAll('click', cmdName.eventListener.bind(this), cmdName.icon, cmdName.title);
+			}
+		});
 	}
 
 	createListElement(music, index){
@@ -61,9 +115,20 @@ class MusicList extends HTMLElement{
 		this.list.push(music);
 		this.listElement.push(li);
 		this.appendChild(li);
+
+		this.cmd.forEach(cmdName => {
+			if(typeof cmdName === 'string'){
+				let cmdItem = this.cmdList[cmdName];
+
+				this.addCmdButton(li, this.list.length - 1, 'click', cmdItem.eventListener.bind(this), cmdItem.icon, cmdItem.title);
+			}
+			else{
+				this.addCmdButton(li, this.list.length - 1, 'click', cmdName.eventListener.bind(this), cmdName.icon, cmdName.title);
+			}
+		});
 	}
 
-	delete(music){
+	remove(music){
 		let index = this.list.indexOf(music);
 
 		if(index === -1){
@@ -116,24 +181,25 @@ class MusicList extends HTMLElement{
 		// this.appendChild(this.listElement);
 	}
 
-	addCmdButton(eventType, eventListener, icon, title){
-		this.listElement.forEach((li, index)=>{
-			let button = document.createElement('button');
 
-			button.className = 'music-cmd-button';
-			button.addEventListener(eventType, eventListener);
-			button.innerHTML = icon;
-			button.title = title;
-			button.setAttribute('index', index);
-			li.querySelector('.music-list-item-songName').appendChild(button);
+	addCmdToAll(eventType, eventListener, icon, title){
+		this.listElement.forEach((li, index)=>{
+			this.addCmdButton(li, index, eventType, eventListener, icon, title);
 		});
 	}
 
-	addToFavorites(event){
-		let music = this.list[event.target.getAttribute('index')];
+	addCmdButton(li, index, eventType, eventListener, icon, title){
+		let button = document.createElement('button');
 
-		lx.playlists.playlists.__favorites__.add(music.id);
+		button.className = 'music-cmd-button';
+		button.addEventListener(eventType, eventListener);
+		button.innerHTML = icon;
+		button.title = title;
+		button.setAttribute('index', index);
+		li.querySelector('.music-list-item-songName').appendChild(button);
 	}
+
+
 
 }
 
