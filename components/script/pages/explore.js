@@ -15,16 +15,22 @@ customElements.define('lx-explore', class extends HTMLElement{
 			event.stopPropagation();
 		});
 
-		this.initProviders();
-		this.switchPageContent();
+		
 
 		this.querySelector('button.searchTrigger').addEventListener('click', event=>{
 			event.preventDefault();
+			this.initProviders();
+			this.switchPageContent();
 			this.search();
+			this.navItems[0].click();
 		});
 	}
 
 	initProviders(){
+		this.querySelector('nav').innerHTML = '';
+		this.querySelector('.page-contents').innerHTML = '';
+		this.navItems = [];
+		this.pageContents = [];
 		for (const name in lx.providers){
 			if (Object.hasOwnProperty.call(lx.providers, name)){
 				const provider = lx.providers[name];
@@ -75,7 +81,13 @@ customElements.define('lx-explore', class extends HTMLElement{
 			let pageContent = this.pageContents[index];
 
 			navItem.addEventListener('click', async() =>{
-				delete pageContent.musicList;
+				keywords = lx.explore.querySelector('input.searchText').value;
+				if(pageContent.musicList){
+					pageContent.musicList.listElement = [];
+					pageContent.musicList.list = [];
+					pageContent.musicList = null;
+					delete pageContent.musicList;
+				}
 				pageContent.innerHTML = '';
 				let result = await lx.providers[providerName].search({
 					keywords: keywords,
@@ -85,9 +97,11 @@ customElements.define('lx-explore', class extends HTMLElement{
 				});
 
 				this.renderSearchResult(pageContent, result);
+				result = [];
 			});
 
 			lx.explore.addEventListener('scroll', lx.Utils.debounce(async()=>{
+				keywords = lx.explore.querySelector('input.searchText').value;
 				if(lx.explore.scrollTop + lx.explore.offsetHeight - lx.explore.scrollHeight > -1){
 					offset += limit;
 					let result = await lx.providers[providerName].search({
@@ -101,7 +115,6 @@ customElements.define('lx-explore', class extends HTMLElement{
 				}
 			}), 4000);
 		});
-		this.navItems[0].click();
 	}
 
 	renderSearchResult(pageContent, result){
@@ -113,26 +126,26 @@ customElements.define('lx-explore', class extends HTMLElement{
 		if(pageContent.musicList){
 			result.songs.forEach(music=>{
 				pageContent.musicList.add(music);
+				pageContent.musicList.listElement.at(-1).addEventListener('click', async()=>{
+					await lx.providers[music.provider].getDetails(music);
+					lx.playingList.addAndPlay(music);
+					lx.player.loadMusic(music);
+				});
 			});
 		}
 		else{
 			pageContent.musicList = new MusicList(result.songs, ['songName', 'artistList', 'albumName', 'duration']);
 			pageContent.appendChild(pageContent.musicList);
+			pageContent.musicList.listElement.forEach(musicItem => {
+				musicItem.addEventListener('click', async()=>{
+					let music = musicItem.music;
+
+					await lx.providers[music.provider].getDetails(music);
+					lx.playingList.addAndPlay(music);
+					lx.player.loadMusic(music);
+				});
+			});
 		}
-		// result.songs.forEach(musicSummary => {
-		// 	let li = document.createElement('li');
-
-		// 	li.className = 'music-list-item';
-		// 	li.music = musicSummary;
-
-		// 	li.innerHTML = `
-		// 		<span class="music-list-item-songName">${musicSummary.songName}</span>
-		// 		<span class="music-list-item-artistList">${musicSummary.artistList.join(', ')}</span>
-		// 		<span class="music-list-item-albumName">${musicSummary.albumName}</span>
-		// 		<span class="music-list-item-duration">${lx.Utils.formatTime(musicSummary.duration).split('.')[0]}</span>
-		// 	`;
-		// 	pageContent.appendChild(li);
-		// });
 	}
 
 
