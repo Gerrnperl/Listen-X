@@ -201,7 +201,7 @@ class QQ{
 		};
 		let target = 'https://szc.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg';
 		console.log(await lx.Utils.fetchWithForm(target, data, 'GET'));
-		let encodedLyric = (await (await lx.Utils.fetchWithForm(target, data, 'GET')).text()).lyric;
+		let encodedLyric = (await lx.Utils.fetchWithForm(target, data, 'GET')).lyric;
 		let lyric = lx.Utils.arrayBufferToStr(lx.Utils.base64ToArrayBuffer(encodedLyric));
 
 		return Object.assign(music, {
