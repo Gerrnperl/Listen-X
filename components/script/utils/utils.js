@@ -27,11 +27,21 @@ lx.Utils = class Utils{
 		let body = new URLSearchParams(Object.entries(form)).toString();
 
 		try {
-			let response = await fetch(url, {
-				method,
-				headers,
-				body,
-			});
+			let response;
+
+			if (method === 'GET'){
+				response = await fetch(`${url}?${body}`, {
+					method,
+					headers,
+				});
+			}
+			else {
+				response = await fetch(url, {
+					method,
+					headers,
+					body,
+				});
+			}
 			let content = await response.text();
 
 			try {
@@ -109,6 +119,40 @@ lx.Utils = class Utils{
 			binary += String.fromCharCode(bytes[i]);
 		}
 		return window.btoa(binary);
+	}
+
+	// https://stackoverflow.com/questions/17191945/conversion-between-utf-8-arraybuffer-and-string
+	static arrayBufferToStr(buffer){
+		let bytes = new Uint8Array(buffer);
+		let out, i, len, c;
+		let char2, char3;
+
+		out = '';
+		len = bytes.length;
+		i = 0;
+		while (i < len){
+			c = bytes[i++];
+			switch (c >> 4){
+			case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+				// 0xxxxxxx
+				out += String.fromCharCode(c);
+				break;
+			case 12: case 13:
+				// 110x xxxx   10xx xxxx
+				char2 = bytes[i++];
+				out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
+				break;
+			case 14:
+				// 1110 xxxx  10xx xxxx  10xx xxxx
+				char2 = bytes[i++];
+				char3 = bytes[i++];
+				out += String.fromCharCode(((c & 0x0F) << 12)
+						| ((char2 & 0x3F) << 6)
+						| ((char3 & 0x3F) << 0));
+				break;
+			}
+		}
+		return out;
 	}
 
 	static getRandomInt(from, to){
