@@ -143,16 +143,45 @@ let lx = new (class LX extends EventTarget{
 
 // }
 
-document.addEventListener('DOMContentLoaded', async()=>{
+document.addEventListener('DOMContentLoaded', async() => {
 	let results = await lx.storage.getAllCachedMusicMetadata('music');
 
 	lx.dispatchEvent(new CustomEvent('lx-loaded', {
-		'detail':{
+		'detail': {
 			playList: results, // lx.getStoredPlayingList(),// music,
 		},
 	}));
 });
 
-lx.addEventListener('lx-meta-data-update', (event)=>{
+lx.addEventListener('lx-meta-data-update', (event) => {
 	document.querySelector('#player-background').style.backgroundImage = `url(${event.detail.coverURL})`;
+});
+
+
+// Some requests of y.qq.com set anti-leech link 
+// The following bypasses anti-leech by modifying the referer
+// todo: 重构
+let urls = ['https://szc.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg'];
+
+urls.forEach((domain, index) => {
+	let id = index + 1;
+
+	chrome.declarativeNetRequest.updateDynamicRules(
+		{
+			addRules: [{
+				'id': id,
+				'priority': 1,
+				'action': {
+					'type': 'modifyHeaders',
+					'requestHeaders': [{'header': 'referer', 'operation': 'set', 'value': domain}],
+				},
+				'condition': {
+					'urlFilter': domain,
+					'domains': [chrome.runtime.getURL('').split('/')[2]],
+					'resourceTypes': ["xmlhttprequest"],
+				},
+			}],
+			removeRuleIds: [id],
+		},
+	);
 });

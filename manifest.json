@@ -15,7 +15,9 @@
 		"default_title": "Listen X"
 	},
 	"permissions":[
-		"unlimitedStorage"
+		"unlimitedStorage",
+		"declarativeNetRequest",
+		"declarativeNetRequestFeedback"
 	],
 	"host_permissions": [
 		"<all_urls>"
