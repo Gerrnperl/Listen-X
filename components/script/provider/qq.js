@@ -46,7 +46,7 @@ class QQ{
 	static #formatItem(item){
 		let name = item.songname;
 		let id = item.songmid;
-		let coverImage = item.albummid; // it's not a url todo: 在getDetails时获取url
+		let coverURL = item.coverURL;
 		let albumName = item.albumname;
 		let duration = item.interval;
 		let artists = [];
@@ -61,7 +61,7 @@ class QQ{
 		return {
 			id,
 			songName: name,
-			coverURL: `${coverImage}?param=140y140`,
+			coverURL: coverURL,
 			albumName,
 			artistList: artists,
 			albumArtistList: albumArtists,
@@ -129,6 +129,10 @@ class QQ{
 
 		if(result.curnum > 0){
 			result.list.forEach(music => {
+				let size = '150x150';
+				let album = `https://y.gtimg.cn/music/photo_new/T002R${size}M000${music.albummid}.jpg`;
+
+				music.coverURL = album;
 				formattedResult.songs.push(this.#formatItem(music));
 			});
 			return formattedResult;
@@ -167,6 +171,9 @@ class QQ{
 		};
 		let target = 'https://u.y.qq.com/cgi-bin/musicu.fcg';
 		let responseData  = (await lx.Utils.fetchWithForm(target, {format: 'json', data: JSON.stringify(data)}, 'GET')).req_0.data;
+
+		
+
 		// console.log(responseData);
 		return Object.assign(music, {
 			// bitRate: responseData.br || NaN,
@@ -200,7 +207,6 @@ class QQ{
 			songmid: music.id,
 		};
 		let target = 'https://szc.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg';
-		console.log(await lx.Utils.fetchWithForm(target, data, 'GET'));
 		let encodedLyric = (await lx.Utils.fetchWithForm(target, data, 'GET')).lyric;
 		let lyric = lx.Utils.arrayBufferToStr(lx.Utils.base64ToArrayBuffer(encodedLyric));
 
@@ -208,7 +214,6 @@ class QQ{
 			lyric: lyric,
 		});
 	}
-
 }
 
 lx.registerProvider(QQ, 'qq', 'qq');
