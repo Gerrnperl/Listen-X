@@ -5,9 +5,10 @@ head
 	link(rel="stylesheet", href="components/style/css/icon.css")
 	title Listen X
 	link(rel="stylesheet", href="components/style/css/music-list.css")
+	link(rel="stylesheet", href="components/style/css/popup.css")
 body
-	script(src='components/script/test.js')
 	script(src='components/script/main.js')
+	script(src='components/script/test.js')
 	script(src='components/script/utils/utils.js')
 	script(src='components/script/utils/crypto-js.js')
 	script(src='components/script/storage.js')
@@ -17,6 +18,8 @@ body
 	lx-side-panel(open='true')
 	lx-player(lyric-mode='false')
 	div.background#player-background
+	div#popup-container
 	script(src='components/script/provider/netease.js')
 	script(src='components/script/provider/qq.js') 
+	script(src="components/script/popup.js") 
 	

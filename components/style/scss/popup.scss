@@ -1,0 +1,48 @@
+#popup-container {
+	display: flex;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	flex-flow: column nowrap;
+	align-items: center;
+	padding-top: 10vh;
+	pointer-events: none;
+	z-index: 1000;
+
+	.toast {
+		/* min-width: 40vw; */
+		/* height: 2rem; */
+		line-height: 2rem;
+		/* text-align: center; */
+		font-size: 1rem;
+		background-color: #97979761;
+		padding: 0 3rem;
+		backdrop-filter: blur(5px);
+		margin: 5px;
+		max-width: 60vw;
+		pointer-events: all;
+		user-select: text;
+		box-shadow: 0 6.4px 14.4px 0 rgb(0 0 0 / 13%), 0 1.2px 3.6px 0 rgb(0 0 0 / 11%);
+		opacity: 0;
+		transition: all ease 0.3s;
+	}
+	
+	.toast.info {
+		background-color: #03a9f477;
+	}
+	
+	.toast.warning {
+		background-color: #ffeb3b77;
+	}
+	
+	.toast.error {
+		background-color: #f4433677;
+	}
+
+	.toast.success {
+		background-color: #3ad24077;
+	}
+}
+
