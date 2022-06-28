@@ -50,10 +50,14 @@ class MusicList extends HTMLElement{
 	constructor(
 		musics,
 		columns = ['songName', 'artistList', 'duration'],
-		cmd = ['play', 'addToPlayingList', 'addToFavorites', 'remove']
+		cmd = ['play', 'addToPlayingList', 'addToFavorites', 'remove'],
+		header
 	){
 		super();
 		this.columns = columns;
+		if(header){
+			this.createHeader(header.name, header.coverURL);
+		}
 		let template = document.createDocumentFragment();
 
 		musics.forEach((music, index)=>{
@@ -78,6 +82,35 @@ class MusicList extends HTMLElement{
 				this.addCmdToAll('click', cmdName.eventListener.bind(this), cmdName.icon, cmdName.title);
 			}
 		});
+	}
+
+	createHeader(name, coverURL){
+		let header = document.createElement('div');
+
+		header.classList.add('music-list-header');
+		header.innerHTML = `
+		<div class='playlist-cover'>
+			<img id='playlist-cover-img' src='${coverURL}'/>
+			<button id='playlist-cover-edit'></button>
+		</div>
+		<div class='playlist-data'>
+			<div id='playlist-name'>${name}</div>
+			<div class='playlist-cmd-buttons'>
+				<button id='playlist-play-all'>播放全部</button>
+				<button id='playlist-rename'>重命名</button>
+				<button id='playlist-delete'>删除</button>
+			</div>
+		</div>
+		`;
+
+		this.coverImgEle = header.querySelector('#playlist-cover-img');
+		this.coverEditEle = header.querySelector('#playlist-cover-edit');
+		this.nameEle = header.querySelector('#playlist-name');
+		this.playAllEle = header.querySelector('#playlist-play-all');
+		this.renameEle = header.querySelector('#playlist-rename');
+		this.deleteEle = header.querySelector('#playlist-delete');
+
+		this.appendChild(header);
 	}
 
 	createListElement(music, index){

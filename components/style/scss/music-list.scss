@@ -61,4 +61,62 @@ lx-music-list {
 			opacity: 1;
 		}
 	}
+
+	.music-list-header {
+		height: 25vh;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+
+		button {
+			background: transparent;
+			border: none;
+			margin-right: 25px;
+			height: 20px;
+		}
+
+		.playlist-cover{
+			button#playlist-cover-edit {
+				position: absolute;
+				right: 0;
+				margin: 2px;
+				bottom: 3px;
+				opacity: 0;
+			}
+
+			&:hover button#playlist-cover-edit{
+				opacity: 1;
+			}
+		}
+
+		.playlist-cover {
+			margin: auto 20px;
+			position: relative;
+		}
+		
+		img#playlist-cover-img {
+			width: 20vh;
+			height: 20vh;
+			background-color: var(--themeLighter);
+			/* margin: auto; */
+		}
+		
+		.playlist-data {
+			margin: auto 20px;
+			height: 18vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: flex-start;
+		}
+		
+		div#playlist-name {
+			font-size: 1.5rem;
+			/* font-weight: 400; */
+			line-height: 0.6;
+		}
+
+	}
+	
+	
 }

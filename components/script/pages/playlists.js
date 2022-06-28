@@ -23,18 +23,10 @@ customElements.define('lx-playlists', class extends HTMLElement{
 		lx.playlists = this;
 		this.appendChild(document.querySelector('#template-playlists').content);
 		this.pageContentsUI = this.querySelector('.page-contents');
-		this.coverImgEle = this.querySelector('#playlist-cover-img');
-		this.coverEditEle = this.querySelector('#playlist-cover-edit');
-		this.nameEle = this.querySelector('#playlist-name');
-		this.playAllEle = this.querySelector('#playlist-play-all');
-		this.renameEle = this.querySelector('#playlist-rename');
-		this.deleteEle = this.querySelector('#playlist-delete');
 
 		this.addEventListener('mouseover', event=>{
 			event.stopPropagation();
 		});
-
-
 
 		// Render user playlist and add Event listeners
 		this.getAllPlaylists().then(playlists=>{
@@ -69,9 +61,6 @@ customElements.define('lx-playlists', class extends HTMLElement{
 
 						lx.playlists.setAttribute('style',
 							`--focus-offset:${navItem.offsetLeft}px;--focus-width:${navItem.offsetWidth}px;`);
-
-						this.coverImgEle.setAttribute('src', playlist.cover || await this.getFirstCover(playlist));
-						this.nameEle.innerHTML = playlist.name === '__favorites__' ? '收藏' : playlist.name;
 					});
 				});
 			});
@@ -111,15 +100,25 @@ customElements.define('lx-playlists', class extends HTMLElement{
 				pageContent.classList.add('page-content');
 
 				let musicData = await lx.storage.getSpecificCachedMusicMetadata(this.list);
-				let musicList = new MusicList(musicData,
+				let musicList = new MusicList(
+					musicData,
 					['provider', 'songName', 'albumName', 'artistList', 'duration'],
 					// eslint-disable-next-line no-undefined
-					playlist.name === '__favorites__'?['play', 'addToPlayingList', 'remove'] : undefined);
+					playlist.name === '__favorites__' ? ['play', 'addToPlayingList', 'remove'] : undefined,
+					{
+						name:playlist.name === '__favorites__' ? '收藏' : playlist.name,
+						coverURL:playlist.cover || await lx.playlists.getFirstCover(playlist),
+					}
+				);
 
 				pageContent.appendChild(musicList);
-				lx.playlists.pageContentsUI.appendChild(pageContent);
+
 				if(this.name === '__favorites__'){
+					lx.playlists.pageContentsUI.insertBefore(pageContent, lx.playlists.pageContentsUI.firstChild);
 					pageContent.setAttribute('visible', 'visible');
+				}
+				else{
+					lx.playlists.pageContentsUI.appendChild(pageContent);
 				}
 				return pageContent;
 			};

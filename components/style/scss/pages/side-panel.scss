@@ -90,7 +90,7 @@ lx-side-panel .spi-page {
 		padding-left: 0.6rem;
 		h1 {
 			font-family: sans-serif, ui-sans-serif, system-ui;
-			font-size: 1.5rem;
+			font-size: 1.3rem;
 			font-weight: 100;
 			line-height: 2em;
 			text-align: left;
@@ -113,7 +113,7 @@ lx-side-panel .spi-page {
 			justify-content: center;
 			min-width: 5rem;
 			height: 2rem;
-			font-size: 1.2rem;
+			font-size: 1.1rem;
 			color: var(--neutralDark);
 			&[focus] {
 				color: var(--themePrimary);
@@ -144,4 +144,22 @@ lx-side-panel li.side-panel-item[focus] .spi-page {
 	opacity: 1;
 	transition: all ease 0.3s;
 	transform: none;
+}
+
+.page-content{
+	@for $i from 1 through 10 {
+		&:nth-child(#{$i}) {
+			transform: translateX(-100%);
+		}
+		&:nth-child(#{$i})[visible=visible] ~ & {
+			transform: translateX(100%);
+		}
+	}
+	
+	&[visible=visible] {
+		opacity: 1;
+		transform: none;
+		pointer-events: auto;
+		display: block;
+	}
 }

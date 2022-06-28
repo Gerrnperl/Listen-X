@@ -59,5 +59,50 @@ lx-music-list li.music-list-item:hover::before {
 lx-music-list li.music-list-item:hover .music-cmd-button {
   opacity: 1;
 }
+lx-music-list .music-list-header {
+  height: 25vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+lx-music-list .music-list-header button {
+  background: transparent;
+  border: none;
+  margin-right: 25px;
+  height: 20px;
+}
+lx-music-list .music-list-header .playlist-cover button#playlist-cover-edit {
+  position: absolute;
+  right: 0;
+  margin: 2px;
+  bottom: 3px;
+  opacity: 0;
+}
+lx-music-list .music-list-header .playlist-cover:hover button#playlist-cover-edit {
+  opacity: 1;
+}
+lx-music-list .music-list-header .playlist-cover {
+  margin: auto 20px;
+  position: relative;
+}
+lx-music-list .music-list-header img#playlist-cover-img {
+  width: 20vh;
+  height: 20vh;
+  background-color: var(--themeLighter);
+  /* margin: auto; */
+}
+lx-music-list .music-list-header .playlist-data {
+  margin: auto 20px;
+  height: 18vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+lx-music-list .music-list-header div#playlist-name {
+  font-size: 1.5rem;
+  /* font-weight: 400; */
+  line-height: 0.6;
+}
 
 /*# sourceMappingURL=music-list.css.map */

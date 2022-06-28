@@ -14,8 +14,7 @@ customElements.define('lx-explore', class extends HTMLElement{
 		this.addEventListener('mouseover', event=>{
 			event.stopPropagation();
 		});
-
-		
+		this.initProviders();
 
 		this.querySelector('button.searchTrigger').addEventListener('click', event=>{
 			event.preventDefault();

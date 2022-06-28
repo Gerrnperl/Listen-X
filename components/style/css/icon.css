@@ -127,24 +127,24 @@ li.music-list-item[playing]::before {
   content: "\e713";
 }
 
-lx-playlists .page-content-header button::before {
+.music-list-header button::before {
   font-family: fabric;
   font-size: 14px;
   line-height: 20px;
   margin-right: 5px;
 }
-lx-playlists .page-content-header button#playlist-cover-edit::before {
+.music-list-header button#playlist-cover-edit::before {
   content: "\ef77";
   background: rgba(255, 255, 255, 0.4666666667);
   padding: 2px;
 }
-lx-playlists .page-content-header button#playlist-play-all::before {
+.music-list-header button#playlist-play-all::before {
   content: "\e768";
 }
-lx-playlists .page-content-header button#playlist-rename::before {
+.music-list-header button#playlist-rename::before {
   content: "\e8ac";
 }
-lx-playlists .page-content-header button#playlist-delete::before {
+.music-list-header button#playlist-delete::before {
   content: "\e74d";
 }
 

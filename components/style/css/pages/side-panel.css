@@ -87,7 +87,7 @@ lx-side-panel .spi-page header.page-header {
 }
 lx-side-panel .spi-page header.page-header h1 {
   font-family: sans-serif, ui-sans-serif, system-ui;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 100;
   line-height: 2em;
   text-align: left;
@@ -108,7 +108,7 @@ lx-side-panel .spi-page nav .nav-item {
   justify-content: center;
   min-width: 5rem;
   height: 2rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--neutralDark);
 }
 lx-side-panel .spi-page nav .nav-item[focus] {
@@ -139,6 +139,73 @@ lx-side-panel li.side-panel-item[focus] .spi-page {
   opacity: 1;
   transition: all ease 0.3s;
   transform: none;
+}
+
+.page-content:nth-child(1) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(1)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content:nth-child(2) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(2)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content:nth-child(3) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(3)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content:nth-child(4) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(4)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content:nth-child(5) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(5)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content:nth-child(6) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(6)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content:nth-child(7) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(7)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content:nth-child(8) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(8)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content:nth-child(9) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(9)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content:nth-child(10) {
+  transform: translateX(-100%);
+}
+.page-content:nth-child(10)[visible=visible] ~ .page-content {
+  transform: translateX(100%);
+}
+.page-content[visible=visible] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  display: block;
 }
 
 /*# sourceMappingURL=side-panel.css.map */
