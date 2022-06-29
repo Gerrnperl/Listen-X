@@ -49,8 +49,8 @@
 	.popup.dialog {
 		z-index: 999;
 		pointer-events: all;
-		max-width: 60vw;
-		min-width: 30rem;
+		max-width: 45rem;
+		min-width: 25rem;
 		min-height: 20vh;
 		background-color: var(--white);
 		border-top: 3px solid var(--themePrimary);
@@ -95,11 +95,63 @@
 		button.dialog-button.button-confirm {
 			color: var(--white);
 			background-color: var(--themePrimary);
+			&:hover{
+				background-color: var(--themeDarkAlt);
+			}
+			&:active{
+				background-color: var(--themeDark);
+			}
 		}
 		
 		button.dialog-button.button-cancel {
 			border: 1px solid var(--neutralPrimaryAlt);
-			background: transparent;
+			background-color: var(--neutralLighterAlt);
+			&:hover{
+				background-color: var(--neutralLighter);
+			}
+			&:active{
+				background-color: var(--neutralLight);
+			}
+		}
+	}
+
+	.popup.dialog.form{
+		.dialog-content {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: row;
+			justify-content: flex-start;
+		}
+		
+		.form-item {
+			display: flex;
+			flex-direction: column;
+			flex-wrap: nowrap;
+			align-content: flex-start;
+			margin: 8px;
+			box-sizing: border-box;
+			width: 45%;
+		}
+		
+		.form-item label {
+			padding: 5px 0px;
+			font-size: 0.9rem;
+		}
+		
+		.form-item input[type="text"] {
+			height: 2rem;
+			box-sizing: border-box;
+			border: 1px solid var(--neutralPrimary);
+			/* margin-right: 10px; */
+			outline: transparent;
+			padding: 5px;
+			/* width: 90%; */
+			line-height: 1.5rem;
+			font-size: 1rem;
+		}
+		
+		.form-item input[type="text"]:focus {
+			border: 1px solid var(--themePrimary);
 		}
 	}
 	

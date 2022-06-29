@@ -46,19 +46,22 @@ async function getTESTStoredPlaylist(){
 }
 
 
-lx.addEventListener('lx-loaded', async ()=>{
-	new Popup('info', 'TEST: It\'s a test');
-	setTimeout(()=>{
-		new Popup('warning', 'TEST: It\'s a test');
-		new Popup('confirm', 'TEST: It\'s a test', 'TEST').result.then(result=>{
-			console.log(result);
-		});
-		setTimeout(()=>{
-			new Popup('info', 'TEST: Asperiores enim vel repellat earum.');
-			setTimeout(()=>{
-				new Popup('info', 'TEST: Voluptas hic sunt tempore odio in et inventore. Amet quia aliquid rerum praesentium voluptatem expedita illo sequi vero. Voluptas officiis ab at a vel consequuntur saepe maxime. Voluptas perferendis libero velit quo aliquid maiores.');
-			}, 3000);
-		}, 1500);
-	}, 1500);
-	new Popup('error', 'TEST: Ipsum quo sed tempore voluptates praesentium. Provident non officia. Nihil et qui saepe nisi ut. Et beatae nihil. Quis expedita in. Quibusdam numquam quia quia iste eius.');
-})
+// lx.addEventListener('lx-loaded', async ()=>{
+// 	new Popup('info', 'TEST: It\'s a test');
+// 	setTimeout(()=>{
+// 		new Popup('warning', 'TEST: It\'s a test');
+// 		new Popup('confirm', 'TEST: It\'s a test', 'TEST').result.then(result=>{
+// 			console.log(result);
+// 			new Popup('form', {name: {label: 'Name', type: 'text'}, sex: {label: 'Sex', type: 'text'}}, 'TEST').result.then(result1=>{
+// 				console.log(result1);
+// 			});
+// 		});
+// 		setTimeout(()=>{
+// 			new Popup('info', 'TEST: Asperiores enim vel repellat earum.');
+// 			setTimeout(()=>{
+// 				new Popup('info', 'TEST: Voluptas hic sunt tempore odio in et inventore. Amet quia aliquid rerum praesentium voluptatem expedita illo sequi vero. Voluptas officiis ab at a vel consequuntur saepe maxime. Voluptas perferendis libero velit quo aliquid maiores.');
+// 			}, 3000);
+// 		}, 1500);
+// 	}, 1500);
+// 	new Popup('error', 'TEST: Ipsum quo sed tempore voluptates praesentium. Provident non officia. Nihil et qui saepe nisi ut. Et beatae nihil. Quis expedita in. Quibusdam numquam quia quia iste eius.');
+// });

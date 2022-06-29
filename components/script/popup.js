@@ -22,7 +22,7 @@ class Popup{
 				this.createDialog(title, type, content).then(result => {
 					resolve(result);
 				});
-			})
+			});
 			document.querySelector('#popup-container').appendChild(this.element);
 			break;
 		}
@@ -61,23 +61,48 @@ class Popup{
 	 */
 	createDialog(title, type, content){
 		this.element.className = `popup dialog ${type}`;
-		let dialogContent;
+		let dialogContent = document.createElement('div');
+
+		dialogContent.className = 'dialog-content';
+		let result;
 
 		if(typeof content === 'string'){
-			dialogContent = content;
+			dialogContent.innerHTML = content;
 		}
 		else {
+			result = {};
+			for (const name in content){
+				if (Object.hasOwnProperty.call(content, name)){
+					const item = content[name];
+					let label = document.createElement('label');
+
+					label.innerHTML = `${item.label}`;
+					let input = document.createElement('input');
+
+					input.setAttribute('type', item.type || text);
+					input.addEventListener('change', ()=>{
+						result[name] = input.value;
+					});
+					let container = document.createElement('div');
+
+					container.className = 'form-item';
+					container.appendChild(label);
+					container.appendChild(input);
+					dialogContent.appendChild(container);
+				}
+			}
 			// dialogContent
 		}
 
 		this.element.innerHTML = `
 			<div class='dialog-title'>${title}</div>
-			<div class='dialog-content'>${dialogContent}</div>
 			<div class='dialog-buttons'>	
 				<button class='dialog-button button-confirm'>确定</button>
 				<button class='dialog-button button-cancel'>取消</button>
 			</div>
 		`;
+
+		this.element.insertBefore(dialogContent, this.element.querySelector('.dialog-buttons'));
 		return new Promise((resolve, reject) => {
 			if(type === 'confirm'){
 				this.element.querySelector('.dialog-button.button-confirm').addEventListener('click', ()=>{
@@ -85,7 +110,17 @@ class Popup{
 					this.close();
 				});
 				this.element.querySelector('.dialog-button.button-cancel').addEventListener('click', ()=>{
-					resolve(false);
+					reject(false);
+					this.close();
+				});
+			}
+			else{
+				this.element.querySelector('.dialog-button.button-confirm').addEventListener('click', ()=>{
+					resolve(result);
+					this.close();
+				});
+				this.element.querySelector('.dialog-button.button-cancel').addEventListener('click', ()=>{
+					reject(false);
 					this.close();
 				});
 			}
