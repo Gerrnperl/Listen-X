@@ -40,5 +40,55 @@
 #popup-container .toast.success {
   background-color: rgba(58, 210, 64, 0.4666666667);
 }
+#popup-container .popup.dialog {
+  z-index: 999;
+  pointer-events: all;
+  max-width: 60vw;
+  min-width: 30rem;
+  min-height: 20vh;
+  background-color: var(--white);
+  border-top: 3px solid var(--themePrimary);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 1.2px 14.4px 0 rgba(0, 0, 0, 0.13), 0 6.4px 3.6px 0 rgba(0, 0, 0, 0.11), 0px 0px 1px 100vw rgba(27, 27, 27, 0.4666666667);
+  display: flex;
+  flex-direction: column;
+  transition: all ease 0.3s;
+}
+#popup-container .popup.dialog .dialog-title {
+  font-size: 1.2rem;
+  padding: 16px 46px 20px 24px;
+  color: var(--themePrimary);
+  flex: 0 0;
+  font-weight: 600;
+}
+#popup-container .popup.dialog .dialog-content {
+  padding: 0px 24px 16px 24px;
+  font-size: 1rem;
+  flex: 1 1;
+}
+#popup-container .popup.dialog .dialog-buttons {
+  flex: 0 0;
+  padding: 0 24px 24px 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+#popup-container .popup.dialog button.dialog-button {
+  height: 2rem;
+  min-width: 5rem;
+  margin-left: 4px;
+  border: 1px solid transparent;
+}
+#popup-container .popup.dialog button.dialog-button.button-confirm {
+  color: var(--white);
+  background-color: var(--themePrimary);
+}
+#popup-container .popup.dialog button.dialog-button.button-cancel {
+  border: 1px solid var(--neutralPrimaryAlt);
+  background: transparent;
+}
 
 /*# sourceMappingURL=popup.css.map */

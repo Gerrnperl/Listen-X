@@ -46,10 +46,13 @@ async function getTESTStoredPlaylist(){
 }
 
 
-lx.addEventListener('lx-loaded', ()=>{
+lx.addEventListener('lx-loaded', async ()=>{
 	new Popup('info', 'TEST: It\'s a test');
 	setTimeout(()=>{
 		new Popup('warning', 'TEST: It\'s a test');
+		new Popup('confirm', 'TEST: It\'s a test', 'TEST').result.then(result=>{
+			console.log(result);
+		});
 		setTimeout(()=>{
 			new Popup('info', 'TEST: Asperiores enim vel repellat earum.');
 			setTimeout(()=>{
