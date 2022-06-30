@@ -89,6 +89,9 @@ customElements.define('lx-play-ctrl', class extends HTMLElement{
 	}
 
 	renderPlayingList(){
+		if(this.playingListUI){
+			this.playingListPanel.removeChild(this.playingListUI);
+		}
 		this.playingListUI = new MusicList(
 			lx.playingList.list,
 			// eslint-disable-next-line no-undefined

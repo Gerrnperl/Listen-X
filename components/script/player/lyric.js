@@ -101,6 +101,7 @@ customElements.define('lx-lyric', class extends HTMLElement{
 
 		if(oldIndex !== this.lyricIndex){
 			if(this.lyricIndex >= this.fmtLyric.length){
+				new Popup('error', 'Err: Lyric index out of range');
 				throw new Error('Lyric index out of range');
 			}
 			lx.dispatchEvent(new CustomEvent('lx-lyric-update', {

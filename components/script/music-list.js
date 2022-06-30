@@ -56,6 +56,7 @@ class MusicList extends HTMLElement{
 		super();
 		this.columns = columns;
 		if(header){
+			this.header = header;
 			this.createHeader(header.name, header.coverURL);
 		}
 		let template = document.createDocumentFragment();
@@ -110,6 +111,10 @@ class MusicList extends HTMLElement{
 		this.renameEle = header.querySelector('#playlist-rename');
 		this.deleteEle = header.querySelector('#playlist-delete');
 
+		this.playAllEle.addEventListener('click', this.playAll.bind(this));
+		this.renameEle.addEventListener('click', this.rename.bind(this));
+		this.deleteEle.addEventListener('click', this.deletePlaylist.bind(this));
+		
 		this.appendChild(header);
 	}
 
@@ -212,6 +217,33 @@ class MusicList extends HTMLElement{
 
 		this.replaceChildren(...this.listElement);
 		// this.appendChild(this.listElement);
+	}
+
+	playAll(){
+		lx.playCtrl.generatePlayingList(this.list);
+		let next = lx.playingList.next();
+
+		lx.player.loadMusic(next);
+	}
+
+	rename(){
+		new Popup('form', {name: {label: '新的名字', type: 'text'}}, '重命名').result.then(async result => {
+			let record = await lx.storage.get('playlists', this.header.name);
+
+			await lx.storage.delete('playlists', record.name);
+			record.name = result.name;
+			console.log(record);
+			lx.storage.add('playlists', record);
+			this.nameEle.innerHTML = result.name;
+		});
+	}
+
+	deletePlaylist(){
+		new Popup('confirm', '确认删除？', '确认').result.then(async result => {
+			if(result){
+				lx.storage.delete('playlists', this.header.name);
+			}
+		});
 	}
 
 

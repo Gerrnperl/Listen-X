@@ -52,6 +52,7 @@ lx.Utils = class Utils{
 			}
 		}
 		catch (error){
+			new Popup('error', `Err: Failed to fetch ${url}`);
 			console.error('Failed to fetch data', {
 				fetching: url,
 				payload: body,

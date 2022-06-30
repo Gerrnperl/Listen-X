@@ -61,6 +61,7 @@ lx.storage = new (class LxStorage{
 			},
 			error => {
 				console.error(error);
+				new Popup('error', 'Err: Failed to create database');
 			}
 		);
 	}
@@ -114,6 +115,7 @@ lx.storage = new (class LxStorage{
 	){
 		if(!this.db){
 			console.error(`Get objectStore "${storeNames}" failed, database does not exist`);
+			new Popup('error', 'Err: Failed to access database.');
 			return;
 		}
 		let transaction = this.db.transaction(storeNames, mode);
@@ -312,6 +314,7 @@ lx.storage = new (class LxStorage{
 			throw new Error('Music not found');
 		}
 		catch(error){
+			new Popup('error', 'Err: Failed to get cached music');
 			throw new Error('Music not found');
 		}
 	}
@@ -328,6 +331,7 @@ lx.storage = new (class LxStorage{
 				});
 				return results;
 			}
+			new Popup('error', 'Err: Failed to get metadata of cached music');
 			throw new Error('Get cached music metadata failed');
 		}
 		catch (error){
@@ -354,6 +358,7 @@ lx.storage = new (class LxStorage{
 			throw new Error('Get cached music metadata failed');
 		}
 		catch (error){
+			new Popup('error', 'Err: Failed to get metadata of cached music');
 			throw new Error('Get cached music metadata failed');
 		}
 	}
