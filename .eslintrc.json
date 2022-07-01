@@ -6,7 +6,10 @@
     "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaVersion": "latest",
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
     },
     "globals": {
         "CryptoJS": "writable",
@@ -141,6 +144,7 @@
         }],
         "switch-colon-spacing": "warn",
 
-        "no-var": "error"
+        "no-var": "error",
+        "no-unused-vars": "off"
     }
 }

@@ -1,0 +1,26 @@
+{
+	"manifest_version": 3,
+	"name": "Listen X",
+	"version": "0.1.0",
+	"description": "To be a better music player",
+	"default_locale": "zh",
+	"icons": {
+		"48": "icons/listen-x48.png",
+		"96": "icons/listen-x96.png",
+		"192": "icons/listen-x192.png"
+	},
+	"background": {
+		"service_worker": "background.js"
+	},
+	"action": {
+		"default_title": "Listen X"
+	},
+	"permissions":[
+		"unlimitedStorage",
+		"declarativeNetRequest",
+		"declarativeNetRequestFeedback"
+	],
+	"host_permissions": [
+		"<all_urls>"
+	]
+}
