@@ -1,23 +1,11 @@
-/* eslint-disable no-unused-vars */
-/*
- * @Author      : Gerrnperl
- * @Date        : 2022-02-15 15: 19: 39
- * @LastEditTime: 2022-06-10 08:42:29
- * @LastEditors: Gerrnperl
- * @Description : 
- * ═══════════😅═══════════
- */
-
-lx.Utils = class Utils{
+export default class Helper{
 
 	/**
-	 * 以表单数据发送获取数据
-	 * 如果响应主体是合法 JSON 则返回 JSON 对象
-	 * 否则返回文本
+	 * 
 	 * @param {string} url
 	 * @param {object} form
-	 * @param {string} method
-	 * @param {object} headers
+	 * @param {'GET'|'POST'} method
+	 * @param {HeaderInit} headers
 	 * @returns {object|string}
 	 */
 	static async fetchWithForm(url, form, method = 'POST', headers = {
@@ -52,7 +40,6 @@ lx.Utils = class Utils{
 			}
 		}
 		catch (error){
-			new Popup('error', `Err: Failed to fetch ${url}`);
 			console.error('Failed to fetch data', {
 				fetching: url,
 				payload: body,
@@ -62,7 +49,6 @@ lx.Utils = class Utils{
 	}
 
 	/**
-	 * 字符串转16进制
 	 * @param {string} str 
 	 * @returns {string}
 	 */
@@ -76,7 +62,6 @@ lx.Utils = class Utils{
 	}
 
 	/**
-	 * 16进制转字符串
 	 * @param {string} hex 
 	 * @returns {string}
 	 */
@@ -92,7 +77,7 @@ lx.Utils = class Utils{
 	/**
 	 * 
 	 * @param {string} base64 
-	 * @returns {ArrayBufferLike}
+	 * @returns {ArrayBuffer}
 	 */
 	static base64ToArrayBuffer(base64){
 		let binary_string = window.atob(base64);
@@ -105,12 +90,22 @@ lx.Utils = class Utils{
 		return bytes.buffer;
 	}
 
+	/**
+	 * 
+	 * @param {ArrayBuffer} buffer 
+	 * @returns {string}
+	 */
 	static arrayBufferToHex(buffer){
 		return [...new Uint8Array(buffer)]
 			.map(x => x.toString(16).padStart(2, '0'))
 			.join('');
 	}
 
+	/**
+	 * 
+	 * @param {ArrayBuffer} buffer 
+	 * @returns {string}
+	 */
 	static arrayBufferToBase64(buffer){
 		let binary = '';
 		let bytes = new Uint8Array(buffer);
@@ -122,6 +117,11 @@ lx.Utils = class Utils{
 		return window.btoa(binary);
 	}
 
+	/**
+	 * 
+	 * @param {ArrayBuffer} buffer 
+	 * @returns {string}
+	 */
 	// https://stackoverflow.com/questions/17191945/conversion-between-utf-8-arraybuffer-and-string
 	static arrayBufferToStr(buffer){
 		let bytes = new Uint8Array(buffer);
@@ -156,6 +156,12 @@ lx.Utils = class Utils{
 		return out;
 	}
 
+	/**
+	 * 
+	 * @param {number} from 
+	 * @param {number} to 
+	 * @returns {number}
+	 */
 	static getRandomInt(from, to){
 		return ~~(Math.random() * (to - from + 1)) + from;
 	}
@@ -181,13 +187,18 @@ lx.Utils = class Utils{
 		let result = '';
 
 		for (let i = 0; len > i; i += 1){
-			let index = Math.floor(Math.random() * s.len);
+			let index = Math.floor(Math.random() * s.length);
 
 			result += s.charAt(index);
 		}
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param {number} s the count of second
+	 * @returns {string} 'mm:ss.ms'
+	 */
 	static formatTime(s){
 		let minute = (~~(s.toFixed(3) / 60)).toString().padStart(2, '0');
 		let second = (~~(s % 60)).toString().padStart(2, '0');
@@ -196,7 +207,13 @@ lx.Utils = class Utils{
 		return `${minute}:${second}.${millisecond}`;
 	}
 
-	static throttle(func, cooldownTime = 100){
+	/**
+	 * 
+	 * @param {Function} func 
+	 * @param {number} coolDown 
+	 * @returns {Function}
+	 */
+	static throttle(func, coolDown = 100){
 		let isThrottled = false;
 		let args = null;
 		let self = null;
@@ -218,19 +235,25 @@ lx.Utils = class Utils{
 					args = null;
 					self = null;
 				}
-			}, cooldownTime);
+			}, coolDown);
 		}
 
 		return wrapper;
 	}
 
-	static debounce(func, cooldownTime = 100){
+	/**
+	 * 
+	 * @param {Function} func 
+	 * @param {number} coolDown 
+	 * @returns {Function}
+	 */
+	static debounce(func, coolDown = 100){
 		let timeout;
 
 		return function(){
 			clearTimeout(timeout);
-			timeout = setTimeout(() => func.apply(this, arguments), cooldownTime);
+			timeout = setTimeout(() => func.apply(this, arguments), coolDown);
 		};
 	}
 
-};
+}

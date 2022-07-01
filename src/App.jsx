@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import Player from './player/player';
 // function App(){
 // 	return (
 // 		<div className="App">
@@ -23,12 +23,14 @@ import './App.css';
 // 	);
 // }
 
-class App extends React.Component {
-	render() {
+class App extends React.Component{
+
+	render(){
 		return (
-			
-		)
+			<Player />
+		);
 	}
+
 }
 
 export default App;
