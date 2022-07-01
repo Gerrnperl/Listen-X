@@ -1,0 +1,30 @@
+.Player{
+	position: absolute;
+  bottom: 0;
+  width: 100%;
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+.Metadata {
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+.LxImage {
+	margin-right: 5px;
+}
+
+.LxImage.Album-Missing {
+	font-size: xx-large;
+	text-align: center;
+	user-select: none;
+}
+
+.TextData {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: flex-start;
+	align-content: flex-start;
+}

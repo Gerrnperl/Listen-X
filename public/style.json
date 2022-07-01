@@ -1,4 +1,8 @@
 {
+	"player": {
+		"panel-height": "80px",
+		"panel-background": ""
+	},
 	"box": {
 		"border-radius": "2px"
 	},
@@ -11,7 +15,20 @@
 		"medium": "1rem",
 		"small": "0.75rem"
 	},
-	"color": {
-		"common": "red"
+	"theme": {
+		"effects":{
+
+		},
+		"fonts":{
+
+		},
+		"palette":{
+		},
+		"semanticColors":{
+
+		},
+		"spacing":{
+			
+		}
 	}
 }

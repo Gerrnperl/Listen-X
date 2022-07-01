@@ -1,33 +1,30 @@
 import React from 'react';
+import {ThemeProvider, PartialTheme} from '@fluentui/react';
+import {getTheme} from '@fluentui/react';
 
 import './App.css';
 import Player from './player/player';
-// function App(){
-// 	return (
-// 		<div className="App">
-// 			<header className="App-header">
-// 				<img src={logo} className="App-logo" alt="logo" />
-// 				<p>
-// 					Edit <code>src/App.js</code> and save to reload.
-// 				</p>
-// 				<a
-// 					className="App-link"
-// 					href="https://reactjs.org"
-// 					target="_blank"
-// 					rel="noopener noreferrer"
-// 				>
-// 					Learn React
-// 				</a>
-// 			</header>
-// 		</div>
-// 	);
+import Utils from './utils/utils';
+
+
+// const theme = getTheme();
+// const userTheme = Utils.style.theme;
+
+// for (const key in theme){
+// 	if (Object.hasOwnProperty.call(theme, key) && Object.hasOwnProperty.call(userTheme, key)){
+// 		Object.assign(theme[key], userTheme[key]);
+// 	}
 // }
+
+// const ThemeContext = React.createContext(theme);
 
 class App extends React.Component{
 
 	render(){
 		return (
-			<Player />
+			<ThemeProvider theme={Utils.appTheme}>
+				<Player/>
+			</ThemeProvider>
 		);
 	}
 
