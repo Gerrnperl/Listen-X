@@ -6,11 +6,6 @@ class Metadata extends React.Component{
 
 	constructor(props){
 		super(props);
-		this.state = {
-			imageSrc: '', // 'https://cn.bing.com/th?id=OHR.CoteSauvage_ZH-CN9967984163_1920x1080.jpg&rf=LaDigue_1920x1080.jpg',
-			musicName: 'Hello World',
-			singerName: 'Bernhard',
-		};
 	}
 
 	// componentDidMount(){
@@ -18,18 +13,18 @@ class Metadata extends React.Component{
 
 	render(){
 		const musicNameStyle = {
-			'fontSize': Utils.style.fontSize.large,
+			'fontSize': Utils.style.fontSize.medium,
 		};
 		const singerNameStyle = {
-			'fontSize': Utils.style.fontSize.medium,
+			'fontSize': Utils.style.fontSize.small,
 		};
 
 		return (
 			<div className='Metadata'>
-				<AlbumCover imageSrc={this.state.imageSrc}/>
+				<AlbumCover imageSrc={this.props.imageSrc}/>
 				<div className='TextData'>
-					<Text className="MusicName" style={musicNameStyle} block nowrap>{this.state.musicName}</Text>
-					<Text className='SingerName' style={singerNameStyle} block nowrap>{this.state.singerName}</Text>
+					<Text className="MusicName" style={musicNameStyle} block nowrap>{this.props.musicName}</Text>
+					<Text className='SingerName' style={singerNameStyle} block nowrap>{this.props.singerName}</Text>
 				</div>
 			</div>
 		);

@@ -33,11 +33,13 @@
  * 	url    : string,
  * }}music
  */
+import Helper from '../utils/helper';
 
 export default class Netease{
 
 	static name = 'netease';
 	static displayName = '网易';
+
 	/************************
 	 * 🄱🄴🄶🄸🄽 Netease api encryption functions
 	 * Refer to https: //github.com/Binaryify/NeteaseCloudMusicApi/blob/master/util/crypto.js
@@ -64,14 +66,14 @@ export default class Netease{
 		text = text.split('').reverse().join('');
 		let n = BigInt('0x' + modulus);
 		let e = BigInt('0x' + pubKey);
-		let b = BigInt('0x' + lx.Utils.str2hex(text));
+		let b = BigInt('0x' + Helper.str2hex(text));
 
 		return (b ** e % n).toString(16).padStart(256, '0');
 	}
 
 	static async #weapi(object){
 		let text = JSON.stringify(object);
-		let secretKey = lx.Utils.getRandomString(16);
+		let secretKey = Helper.getRandomString(16);
 
 		return {
 			params: CryptoJS.enc.Base64.stringify(
@@ -144,8 +146,8 @@ export default class Netease{
 		});
 		return {
 			id,
-			songName: name,
-			coverURL: `${coverImage}?param=140y140`,
+			musicName: name,
+			albumCover: `${coverImage}?param=140y140`,
 			albumName,
 			artistList: artists,
 			albumArtistList: albumArtists,
@@ -188,7 +190,7 @@ export default class Netease{
 		 * }[]
 		 * }}
 		*/
-		let result = (await lx.Utils.fetchWithForm('https://music.163.com/api/search/pc', data)).result;
+		let result = (await Helper.fetchWithForm('https://music.163.com/api/search/pc', data)).result;
 		let formattedResult = {
 			songCount: result.songCount,
 			songs: [],
@@ -213,7 +215,7 @@ export default class Netease{
 			br : 999000,
 		};
 		let encryptedData = this.#eapi('/api/song/enhance/player/url', data);
-		let responseData  = (await lx.Utils.fetchWithForm('https://interface3.music.163.com/eapi/song/enhance/player/url', encryptedData, 'POST')).data[0];
+		let responseData  = (await Helper.fetchWithForm('https://interface3.music.163.com/eapi/song/enhance/player/url', encryptedData, 'POST')).data[0];
 
 		return Object.assign(music, {
 			bitRate: responseData.br || NaN,
@@ -237,7 +239,7 @@ export default class Netease{
 			tv: -1,
 		};
 		let encryptedData = await this.#weapi(data);
-		let responseData = (await lx.Utils.fetchWithForm('https://music.163.com/weapi/song/lyric?csrf_token=', encryptedData, 'POST'));
+		let responseData = (await Helper.fetchWithForm('https://music.163.com/weapi/song/lyric?csrf_token=', encryptedData, 'POST'));
 
 		return Object.assign(music, {
 			lyric: responseData.lrc.lyric,

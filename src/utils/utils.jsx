@@ -15,8 +15,6 @@ for (const key in userTheme){
 	}
 }
 
-console.log(appTheme);
-
 class LxImage extends React.Component{
 
 	constructor(props){

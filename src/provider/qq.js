@@ -24,8 +24,12 @@
  * }}music
  */
 
-class QQ{
+import Helper from '../utils/helper';
 
+export default class QQ{
+
+	static name = 'qq';
+	static displayName = 'QQ';
 
 	/**
 	 * 处理单个歌曲元素
@@ -46,7 +50,7 @@ class QQ{
 	static #formatItem(item){
 		let name = item.songname;
 		let id = item.songmid;
-		let coverURL = item.coverURL;
+		let albumCover = item.albumCover;
 		let albumName = item.albumname;
 		let duration = item.interval;
 		let artists = [];
@@ -60,8 +64,8 @@ class QQ{
 		// });
 		return {
 			id,
-			songName: name,
-			coverURL: coverURL,
+			musicName: name,
+			albumCover: albumCover,
 			albumName,
 			artistList: artists,
 			albumArtistList: albumArtists,
@@ -121,7 +125,7 @@ class QQ{
 		 * }[]
 		 * }}
 		*/
-		let result = (await lx.Utils.fetchWithForm('https://c.y.qq.com/soso/fcgi-bin/client_search_cp', data, 'GET')).data.song;
+		let result = (await Helper.fetchWithForm('https://c.y.qq.com/soso/fcgi-bin/client_search_cp', data, 'GET')).data.song;
 		let formattedResult = {
 			songCount: result.curnum,
 			songs: [],
@@ -132,7 +136,7 @@ class QQ{
 				let size = '150x150';
 				let album = `https://y.gtimg.cn/music/photo_new/T002R${size}M000${music.albummid}.jpg`;
 
-				music.coverURL = album;
+				music.albumCover = album;
 				formattedResult.songs.push(this.#formatItem(music));
 			});
 			return formattedResult;
@@ -170,7 +174,7 @@ class QQ{
 			},
 		};
 		let target = 'https://u.y.qq.com/cgi-bin/musicu.fcg';
-		let responseData  = (await lx.Utils.fetchWithForm(target, {format: 'json', data: JSON.stringify(data)}, 'GET')).req_0.data;
+		let responseData  = (await Helper.fetchWithForm(target, {format: 'json', data: JSON.stringify(data)}, 'GET')).req_0.data;
 
 		
 
@@ -207,13 +211,12 @@ class QQ{
 			songmid: music.id,
 		};
 		let target = 'https://szc.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg';
-		let encodedLyric = (await lx.Utils.fetchWithForm(target, data, 'GET')).lyric;
-		let lyric = lx.Utils.arrayBufferToStr(lx.Utils.base64ToArrayBuffer(encodedLyric));
+		let encodedLyric = (await Helper.fetchWithForm(target, data, 'GET')).lyric;
+		let lyric = Helper.arrayBufferToStr(Helper.base64ToArrayBuffer(encodedLyric));
 
 		return Object.assign(music, {
 			lyric: lyric,
 		});
 	}
-}
 
-lx.registerProvider(QQ, 'qq', 'qq');
+}

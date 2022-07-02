@@ -1,6 +1,6 @@
 {
 	"player": {
-		"panel-height": "80px",
+		"panel-height": "70px",
 		"panel-background": ""
 	},
 	"box": {
@@ -25,7 +25,8 @@
 		"palette":{
 		},
 		"semanticColors":{
-
+			"LxProgressBarBackground": "--themeLighter",
+			"LxProgressBarColor": "--themePrimary"
 		},
 		"spacing":{
 			
