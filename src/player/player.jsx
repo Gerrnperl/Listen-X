@@ -120,7 +120,7 @@ class Player extends React.Component{
 					onTimeUpdate={event => {
 						this.setState({current: event.target.currentTime});
 					}}
-					// controls // todo: remove `controls`
+					controls // todo: remove `controls`
 				/>
 				<Metadata
 					imageSrc={this.state.activeMusic?.albumCover}

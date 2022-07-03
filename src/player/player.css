@@ -50,11 +50,18 @@
 } */
 .progress{
 	width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  padding: 0 1rem;
 }
 .ProgressBar {
   position: relative;
   width: 100%;
   cursor: pointer;
+  margin: auto 10px;
 }
 .currentTimeBar, .durationBar {
   width: 100%;
@@ -77,27 +84,34 @@
   position: absolute;
   width: 0%;
   background-color: var(--themePrimary);
-  transition: width 100ms linear;
+  transition: width ease 0.1s;
 }
 .progressSlider {
   position: absolute;
-  top: -2px;
   z-index: 100;
-  width: 2px;
-  height: 8px;
-  background-color: var(--themePrimary);
-  border-radius: 1px;
-  transition: width ease 200ms, left 100ms linear;
+  transition: left 100ms ease;
   transform: translateX(0);
+
+  width: 14px;
+  height: 14px;
+  border: 3px solid;
+  border-radius: 50px;
+  outline: 2px solid white;
+  transform: translate(-50%, calc(-50% - 1px));
+  cursor: pointer;
 }
 .progressSlider::after {
   position: absolute;
   top: -5px;
   left: -8px;
-  width: 16px;
+  width: 20px;
   height: 20px;
   content: "";
   background-color: rgba(244, 67, 54, 0);
+}
+
+.progressText {
+  min-width: 2rem;
 }
 
 /* lx-progress-ctrl:hover #progress-slider {

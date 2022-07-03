@@ -200,6 +200,9 @@ export default class Helper{
 	 * @returns {string} 'mm:ss.ms'
 	 */
 	static formatTime(s){
+		if(!s){
+			return '--:--';
+		}
 		let minute = (~~(s.toFixed(3) / 60)).toString().padStart(2, '0');
 		let second = (~~(s % 60)).toString().padStart(2, '0');
 		let millisecond = ((s % 1).toFixed(3) * 1000).toString().padStart(3, '0');

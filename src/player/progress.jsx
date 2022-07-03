@@ -19,7 +19,7 @@ class ProgressController extends React.Component{
 
 	componentDidMount(){
 		// TODO: remove this
-		setTimeout(() =>{
+		setTimeout(() => {
 			this.props.handlePlay();
 		}, 2000);
 	}
@@ -37,12 +37,12 @@ class ProgressController extends React.Component{
 				<ProgressBar
 					current={
 						this.isMovingSlider
-							? this.state.current
+							? this.state.current * 2
 							: this.props.current
 					}
 					duration={this.props.duration}
-					updateProgressBar={this.updateProgressBar}
-					jumpTo={(second)=>{
+					updateProgressBar={this.updateProgressBar.bind(this)}
+					jumpTo={(second) => {
 						this.props.handleProgress(second);
 						this.isMovingSlider = false;
 					}}
@@ -63,6 +63,10 @@ class ProgressBar extends React.Component{
 
 		/** @type {React.RefObject<HTMLDivElement>} */
 		this.ProgressBarElement = React.createRef();
+	}
+
+	componentDidMount(){
+		this.ProgressBarElement.current?.addEventListener('click', this.flashSlider.bind(this));
 	}
 
 	/**
@@ -97,10 +101,10 @@ class ProgressBar extends React.Component{
 		let bgColorRef = Utils.appTheme.semanticColors.LxProgressBarBackground;
 		let bgColor = bgColorRef;
 
-		if(colorRef.startsWith('--')){
+		if (colorRef.startsWith('--')){
 			color = Utils.appTheme.palette[colorRef.slice(2)];
 		}
-		if(bgColorRef.startsWith('--')){
+		if (bgColorRef.startsWith('--')){
 			bgColor = Utils.appTheme.palette[bgColorRef.slice(2)];
 		}
 		const currentTimeBarStyle = {
@@ -109,29 +113,34 @@ class ProgressBar extends React.Component{
 		};
 		const durationBarStyle = {
 			backgroundColor: `${bgColor}`,
-		}
+		};
 
 		const [leftMax, rightMax, range] = this.getBarRect();
 
 		return (
-			<div className='ProgressBar' ref={this.ProgressBarElement}>
-				<div
-					className='currentTimeBar'
-					style={currentTimeBarStyle}
-				></div>
-				<div
-					className='durationBar'
-					style={durationBarStyle}
-				></div>
-				<ProgressSlider
-					duration={this.props.duration}
-					leftMax={leftMax}
-					rightMax={rightMax}
-					range={range}
-					updateProgressBar={this.props.updateProgressBar}
-					jumpTo={this.props.jumpTo}
-				/>
-			</div>
+			<>
+				<div className='progressText currentTimeText'>{Helper.formatTime(this.props.current).split('.')[0]}</div>
+				<div className='ProgressBar' ref={this.ProgressBarElement}>
+					<div
+						className='currentTimeBar'
+						style={currentTimeBarStyle}
+					></div>
+					<div
+						className='durationBar'
+						style={durationBarStyle}
+					></div>
+					<ProgressSlider
+						color={color}
+						current={this.props.current}
+						duration={this.props.duration}
+						leftMax={leftMax}
+						rightMax={rightMax}
+						range={range}
+						updateProgressBar={this.props.updateProgressBar}
+						jumpTo={this.props.jumpTo} />
+				</div>
+				<div className='progressText durationText'>{Helper.formatTime(this.props.duration).split('.')[0]}</div>
+			</>
 		);
 	}
 
@@ -193,6 +202,11 @@ class ProgressSlider extends React.Component{
 	render(){
 		return (
 			<div
+				style={{
+					left: `${(this.isMovingSlider ? this.sliderGoingTo : this.props.current) / this.props.duration * 100}%`,
+					backgroundColor: Utils.appTheme.palette.white,
+					borderColor: this.props.color,
+				}}
 				className='progressSlider'
 				onMouseDown={this.activeSlider.bind(this)}
 			></div>
