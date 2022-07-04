@@ -26,7 +26,9 @@
 		},
 		"semanticColors":{
 			"LxProgressBarBackground": "--themeLighter",
-			"LxProgressBarColor": "--themePrimary"
+			"LxProgressBarColor": "--themePrimary",
+			"LxProgressBarHoverColor": "--themeDarkAlt",
+			"LxProgressBarActiveColor": "--themeDark"
 		},
 		"spacing":{
 			

@@ -40,6 +40,10 @@
   padding: 9px 9px 0;
   user-select: none;
   flex: 1 1 250px;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: space-evenly;
 }
 /* lx-progress-ctrl .progress-text-wrapper {
   display: flex;
@@ -114,20 +118,11 @@
   min-width: 2rem;
 }
 
-/* lx-progress-ctrl:hover #progress-slider {
-  width: 8px;
-  height: 8px;
-  background-color: var(--themeLight);
-  border: 2px solid var(--themePrimary);
+
+.PlayTrigger {
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  /* border: 1px solid var(--themeLighter); */
   border-radius: 50px;
-  outline: 1px solid var(--neutralLighterAlt);
-  transform: translate(-4px, -2px);
 }
-
-lx-progress-ctrl:active #progress-slider {
-  background-color: var(--themeDark);
-}
-
-lx-player[lyric-mode=true] lx-progress-ctrl {
-  grid-area: lx-progress;
-} */

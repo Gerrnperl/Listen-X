@@ -96,19 +96,12 @@ class ProgressBar extends React.Component{
 	}
 
 	render(){
-		let colorRef = Utils.appTheme.semanticColors.LxProgressBarColor;
-		let color = colorRef;
-		let bgColorRef = Utils.appTheme.semanticColors.LxProgressBarBackground;
-		let bgColor = bgColorRef;
+		let color = Utils.appTheme.semanticColors.LxProgressBarColor;
+		let hoverColor = Utils.appTheme.semanticColors.LxProgressBarHoverColor;
+		let activeColor = Utils.appTheme.semanticColors.LxProgressBarActiveColor;
+		let bgColor = Utils.appTheme.semanticColors.LxProgressBarBackground;
 
-		if (colorRef.startsWith('--')){
-			color = Utils.appTheme.palette[colorRef.slice(2)];
-		}
-		if (bgColorRef.startsWith('--')){
-			bgColor = Utils.appTheme.palette[bgColorRef.slice(2)];
-		}
 		const currentTimeBarStyle = {
-			backgroundColor: `${color}`,
 			width: `${this.props.current / this.props.duration * 100}%`,
 		};
 		const durationBarStyle = {
@@ -140,6 +133,21 @@ class ProgressBar extends React.Component{
 						jumpTo={this.props.jumpTo} />
 				</div>
 				<div className='progressText durationText'>{Helper.formatTime(this.props.duration).split('.')[0]}</div>
+				<style>{`
+					.currentTimeBar {
+						background-color: ${color};
+					}
+					.progressSlider {
+						border-color: ${color};
+					}
+					.progressSlider:hover {
+						border-color: ${hoverColor};
+					}
+					.progressSlider:active {
+						border-color: ${activeColor};
+					}
+					.
+				`}</style>
 			</>
 		);
 	}
@@ -186,8 +194,6 @@ class ProgressSlider extends React.Component{
 				this.sliderGoingTo = percentage * this.props.duration;
 			}
 			this.props.updateProgressBar((~~(this.sliderGoingTo / this.props.duration * 1000)) / 10);
-			// this.updateProgressBar((~~(this.sliderGoingTo / this.props.duration * 1000)) / 10);
-			// this.updateProgressText(lx.Utils.formatTime(this.sliderGoingTo));
 		}
 	}
 
@@ -205,7 +211,6 @@ class ProgressSlider extends React.Component{
 				style={{
 					left: `${(this.isMovingSlider ? this.sliderGoingTo : this.props.current) / this.props.duration * 100}%`,
 					backgroundColor: Utils.appTheme.palette.white,
-					borderColor: this.props.color,
 				}}
 				className='progressSlider'
 				onMouseDown={this.activeSlider.bind(this)}
@@ -217,7 +222,58 @@ class ProgressSlider extends React.Component{
 
 class PlayController extends React.Component{
 
+	constructor(props){
+		super(props);
+	}
+
+	render(){
+		return (
+			<div className='playController'>
+				<PlayTrigger
+					playing={this.props.playing}
+					handlePlay={this.props.handlePlay}
+				/>
+			</div>
+		);
+	}
+
 }
 
-export {ProgressController};
+class PlayTrigger extends React.Component{
+
+	constructor(props){
+		super(props);
+	}
+
+	render(){
+		let style = {
+			fontSize: Utils.style.fontSize.xLarge,
+			lineHeight: Utils.style.fontSize.xLarge,
+		};
+
+		if(this.props.playing){
+			return (
+				<div
+					className='PlayTrigger'
+					onClick={this.props.handlePlay}
+					style={style}
+				>
+					<Utils.Icons.Pause />
+				</div>
+			);
+		}
+		return (
+			<div
+				className='PlayTrigger'
+				onClick={this.props.handlePlay}
+				style={style}
+			>
+				<Utils.Icons.Play />
+			</div>
+		);
+	}
+
+}
+
+export {ProgressController, PlayController};
 

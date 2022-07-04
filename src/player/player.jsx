@@ -6,7 +6,7 @@ import {getTheme} from '@fluentui/react';
 import './player.css';
 import Metadata from './metadata';
 import Utils from '../utils/utils';
-import {ProgressController} from './progress';
+import {ProgressController, PlayController} from './control';
 
 
 class Player extends React.Component{
@@ -103,7 +103,9 @@ class Player extends React.Component{
 	 * @this Player
 	 */
 	handleProgress(second){
-		this.audioElement.current.currentTime = second;
+		if(isFinite(second) && !isNaN(second) && second > 0 && second < this.state.activeMusic.duration){
+			this.audioElement.current.currentTime = second;
+		}
 	}
 
 
@@ -120,7 +122,7 @@ class Player extends React.Component{
 					onTimeUpdate={event => {
 						this.setState({current: event.target.currentTime});
 					}}
-					controls // todo: remove `controls`
+					// controls // todo: remove `controls`
 				/>
 				<Metadata
 					imageSrc={this.state.activeMusic?.albumCover}
@@ -133,6 +135,10 @@ class Player extends React.Component{
 						handleProgress={this.handleProgress.bind(this)}
 						duration={this.state.activeMusic?.duration}
 						current={this.state.current}
+					/>
+					<PlayController
+						playing={this.state.playing}
+						handlePlay={this.handlePlay.bind(this)}
 					/>
 				</div>
 			</div>
