@@ -6,7 +6,7 @@ import {getTheme} from '@fluentui/react';
 import './player.css';
 import Metadata from './metadata';
 import Utils from '../utils/utils';
-import {ProgressController, PlayController} from './control';
+import {ProgressController, PlayController, VolumeRegulator} from './control';
 
 
 class Player extends React.Component{
@@ -140,6 +140,9 @@ class Player extends React.Component{
 						playing={this.state.playing}
 						handlePlay={this.handlePlay.bind(this)}
 					/>
+				</div>
+				<div className="right-area">
+					<VolumeRegulator />
 				</div>
 			</div>
 		);

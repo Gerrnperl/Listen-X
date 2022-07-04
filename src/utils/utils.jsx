@@ -1,8 +1,12 @@
 import React from 'react';
 import {Icon} from '@fluentui/react/lib/Icon';
-import {initializeIcons} from '@fluentui/font-icons-mdl2';
+import {initializeIcons, initializeCusIcons} from '../fabric-icons.ts';
 import {getTheme} from '@fluentui/react';
+
 initializeIcons('../fonts/');
+initializeCusIcons('../fonts/');
+
+
 
 let style = await (await fetch('./style.json')).json();
 
@@ -54,6 +58,17 @@ let Icons = {
 	AlbumIcon: ()=><Icon iconName="Album" />,
 	Play: ()=><Icon iconName="Play" />,
 	Pause: ()=><Icon iconName="Pause" />,
+	Next: ()=><Icon iconName="Next" />,
+	Prev: ()=><Icon iconName="Previous" />,
+	PlaylistMusic: ()=><Icon iconName="PlaylistMusic" />,
+	RepeatOne: ()=><Icon iconName="RepeatOne" />,
+	RepeatAll: ()=><Icon iconName="RepeatAll" />,
+	Shuffle: ()=><Icon iconName="Shuffle" />,
+	VolumeDisabled: ()=><Icon iconName="VolumeDisabled" />,
+	Volume0: ()=><Icon iconName="Volume0" />,
+	Volume1: ()=><Icon iconName="Volume1" />,
+	Volume2: ()=><Icon iconName="Volume2" />,
+	Volume3: ()=><Icon iconName="Volume3" />,
 };
 
 export default {

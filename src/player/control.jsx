@@ -2,6 +2,7 @@ import React from 'react';
 import {Slider, IStackTokens, Stack, IStackStyles} from '@fluentui/react';
 import Utils from '../utils/utils';
 import Helper from '../utils/helper';
+import MusicList from '../music-list';
 
 class ProgressController extends React.Component{
 
@@ -185,7 +186,7 @@ class ProgressSlider extends React.Component{
 			if (event.clientX <= this.props.leftMax){
 				this.sliderGoingTo = 0;
 			}
-			else if (event.clientX >= this.rightMax){
+			else if (event.clientX >= this.props.rightMax){
 				this.sliderGoingTo = this.props.duration;
 			}
 			else {
@@ -229,10 +230,14 @@ class PlayController extends React.Component{
 	render(){
 		return (
 			<div className='playController'>
+				<PlayMode />
+				<PlaySwitcher direction='-1'/>
 				<PlayTrigger
 					playing={this.props.playing}
 					handlePlay={this.props.handlePlay}
 				/>
+				<PlaySwitcher direction='1'/>
+				<PlayingList />
 			</div>
 		);
 	}
@@ -251,23 +256,100 @@ class PlayTrigger extends React.Component{
 			lineHeight: Utils.style.fontSize.xLarge,
 		};
 
-		if(this.props.playing){
-			return (
-				<div
-					className='PlayTrigger'
-					onClick={this.props.handlePlay}
-					style={style}
-				>
-					<Utils.Icons.Pause />
-				</div>
-			);
-		}
 		return (
 			<div
 				className='PlayTrigger'
 				onClick={this.props.handlePlay}
 				style={style}
 			>
+				{this.props.playing ? <Utils.Icons.Pause/> : <Utils.Icons.Play />}
+			</div>
+		);
+	}
+
+}
+
+class PlaySwitcher extends React.Component{
+
+	constructor(props){
+		super(props);
+	}
+
+	render(){
+		let forward = this.props.direction === '1';
+		let style = {
+			fontSize: Utils.style.fontSize.large,
+		};
+
+		return (
+			<div
+				className={`PlaySwitcher ${forward ? 'next' : 'prev'}`}
+				style={style}
+			>
+				{forward ? <Utils.Icons.Next /> : <Utils.Icons.Prev />}
+			</div>
+		);
+	}
+
+}
+
+class PlayMode extends React.Component{
+
+	constructor(props){
+		super(props);
+	}
+
+	render(){
+		let currentMode;
+
+		switch(this.props.playMode){
+		case 'RepeatAll':
+			currentMode = <Utils.Icons.RepeatAll />;
+			break;
+		case 'RepeatOne':
+			currentMode = <Utils.Icons.RepeatOne />;
+			break;
+		case 'Shuffle':
+			currentMode = <Utils.Icons.Shuffle />;
+			break;
+		default:
+			currentMode = <Utils.Icons.RepeatAll />;
+		}
+		return (
+			<div
+				className='PlayModeSwitcher'
+				onClick={this.props.switchPlayMode}
+			>
+				{currentMode}
+			</div>
+		);
+	}
+
+}
+
+
+class PlayingList extends React.Component{
+
+	constructor(props){
+		super(props);
+	}
+
+	render(){
+		return (
+			<div
+				className='PlayingListTrigger'
+			>
+				<Utils.Icons.PlaylistMusic />
+			</div>
+			// <div className='PlayingListPanel'>
+			// 	<MusicList
+			// 		list={this.props.playingList}
+			// 	/>
+			// </div>
+		);
+	}
+
+}
 				<Utils.Icons.Play />
 			</div>
 		);
