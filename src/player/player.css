@@ -4,15 +4,13 @@
   width: 100%;
 	display: flex;
 	flex-flow: row nowrap;
+  justify-content: space-between;
 }
 
 .Metadata {
 	display: flex;
 	flex-flow: row nowrap;
-}
-
-.LxImage {
-	margin-right: 5px;
+  width: max-content;
 }
 
 .LxImage.Album-Missing {
@@ -23,33 +21,26 @@
 
 .TextData {
 	display: flex;
+  margin-left: 5px;
 	flex-flow: column nowrap;
 	justify-content: center;
 	align-items: flex-start;
 	align-content: flex-start;
 }
 
-
-
 .center-area {
   display: flex;
   flex-wrap: nowrap;
   row-gap: 4px;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 1rem 5px 1rem;
   user-select: none;
   flex: 1 1 250px;
   flex-direction: column;
   align-content: center;
   align-items: center;
   justify-content: space-evenly;
+  max-width: 768px;
 }
-/* lx-progress-ctrl .progress-text-wrapper {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  font-family: sans-serif;
-  color: var(--black);
-} */
 .progress{
 	width: 100%;
   display: flex;
@@ -57,7 +48,6 @@
   flex-direction: row;
   align-content: center;
   align-items: center;
-  padding: 0 1rem;
 }
 .ProgressBar {
   position: relative;

@@ -25,10 +25,12 @@
 		"palette":{
 		},
 		"semanticColors":{
-			"LxProgressBarBackground": "--themeLighter",
-			"LxProgressBarColor": "--themePrimary",
-			"LxProgressBarHoverColor": "--themeDarkAlt",
-			"LxProgressBarActiveColor": "--themeDark"
+			"LxSliderBackground": "--themeLighter",
+			"LxSliderColor": "--themePrimary",
+			"LxSliderHoverColor": "--themeDarkAlt",
+			"LxSliderActiveColor": "--themeDark",
+			"LxSliderThumbBackground": "--white",
+			"LxSliderThumbColor": "--themePrimary"
 		},
 		"spacing":{
 			

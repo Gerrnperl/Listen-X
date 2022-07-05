@@ -14,17 +14,19 @@ class Metadata extends React.Component{
 	render(){
 		const musicNameStyle = {
 			'fontSize': Utils.style.fontSize.medium,
+			'maxWidth': (160 - Utils.style.player['panel-height'].split('px')[0]) + 'px',
 		};
 		const singerNameStyle = {
 			'fontSize': Utils.style.fontSize.small,
+			'maxWidth': (160 - Utils.style.player['panel-height'].split('px')[0]) + 'px',
 		};
 
 		return (
 			<div className='Metadata'>
 				<AlbumCover imageSrc={this.props.imageSrc}/>
 				<div className='TextData'>
-					<Text className="MusicName" style={musicNameStyle} block nowrap>{this.props.musicName}</Text>
-					<Text className='SingerName' style={singerNameStyle} block nowrap>{this.props.singerName}</Text>
+					<Text className="MusicName" title={this.props.musicName} style={musicNameStyle} block nowrap>{this.props.musicName}</Text>
+					<Text className='SingerName' title={this.props.singerName} style={singerNameStyle} block nowrap>{this.props.singerName}</Text>
 				</div>
 			</div>
 		);
