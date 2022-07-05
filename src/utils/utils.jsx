@@ -64,7 +64,7 @@ let Icons = {
 	RepeatOne: ()=><Icon iconName="RepeatOne" />,
 	RepeatAll: ()=><Icon iconName="RepeatAll" />,
 	Shuffle: ()=><Icon iconName="Shuffle" />,
-	VolumeDisabled: ()=><Icon iconName="VolumeDisabled" />,
+	VolumeDisabled: ()=><Icon iconName="VolumeDisabled" style={{position: 'relative',	left: '-4px'}}/>,
 	Volume0: ()=><Icon iconName="Volume0" />,
 	Volume1: ()=><Icon iconName="Volume1" />,
 	Volume2: ()=><Icon iconName="Volume2" />,

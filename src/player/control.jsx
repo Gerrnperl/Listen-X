@@ -1,5 +1,5 @@
 import React from 'react';
-import {Slider, IStackTokens, Stack, IStackStyles} from '@fluentui/react';
+import {Callout, DirectionalHint} from '@fluentui/react';
 import Utils from '../utils/utils';
 import Helper from '../utils/helper';
 import MusicList from '../music-list';
@@ -97,10 +97,10 @@ class ProgressBar extends React.Component{
 	}
 
 	render(){
-		let color = Utils.appTheme.semanticColors.LxProgressBarColor;
-		let hoverColor = Utils.appTheme.semanticColors.LxProgressBarHoverColor;
-		let activeColor = Utils.appTheme.semanticColors.LxProgressBarActiveColor;
-		let bgColor = Utils.appTheme.semanticColors.LxProgressBarBackground;
+		let color = Utils.appTheme.semanticColors.LxSliderColor;
+		let hoverColor = Utils.appTheme.semanticColors.LxSliderHoverColor;
+		let activeColor = Utils.appTheme.semanticColors.LxSliderActiveColor;
+		let bgColor = Utils.appTheme.semanticColors.LxSliderBackground;
 
 		const currentTimeBarStyle = {
 			width: `${this.props.current / this.props.duration * 100}%`,
@@ -211,7 +211,7 @@ class ProgressSlider extends React.Component{
 			<div
 				style={{
 					left: `${(this.isMovingSlider ? this.sliderGoingTo : this.props.current) / this.props.duration * 100}%`,
-					backgroundColor: Utils.appTheme.palette.white,
+					backgroundColor: Utils.appTheme.semanticColors.inputBackground,
 				}}
 				className='progressSlider'
 				onMouseDown={this.activeSlider.bind(this)}
@@ -230,7 +230,7 @@ class PlayController extends React.Component{
 	render(){
 		return (
 			<div className='playController'>
-				<PlayMode />
+				<PlayMode switchPlayMode={this.props.switchPlayMode}/>
 				<PlaySwitcher direction='-1'/>
 				<PlayTrigger
 					playing={this.props.playing}
@@ -295,14 +295,27 @@ class PlaySwitcher extends React.Component{
 
 class PlayMode extends React.Component{
 
+	modes = ['RepeatAll', 'RepeatOne', 'Shuffle'];
+	state = {
+		modeIndex: 0,
+	};
+
 	constructor(props){
 		super(props);
+	}
+
+	switchPlayMode(){
+		this.setState(prevState=>({
+			modeIndex: (prevState.modeIndex + 1) % 3,
+		}), ()=>{
+			this.props.switchPlayMode(this.modes[this.state.modeIndex]);
+		});
 	}
 
 	render(){
 		let currentMode;
 
-		switch(this.props.playMode){
+		switch(this.modes[this.state.modeIndex]){
 		case 'RepeatAll':
 			currentMode = <Utils.Icons.RepeatAll />;
 			break;
@@ -318,7 +331,7 @@ class PlayMode extends React.Component{
 		return (
 			<div
 				className='PlayModeSwitcher'
-				onClick={this.props.switchPlayMode}
+				onClick={this.switchPlayMode.bind(this)}
 			>
 				{currentMode}
 			</div>
@@ -350,12 +363,163 @@ class PlayingList extends React.Component{
 	}
 
 }
-				<Utils.Icons.Play />
+
+class VolumeRegulator extends React.Component{
+
+	constructor(props){
+		super(props);
+		this.state = {
+			muted: false,
+			volume: this.props.volume || 50,
+			volumeCalloutAvailable: false,
+			volumeCalloutVisible: false,
+		};
+	}
+
+	componentDidMount(){
+		window.addEventListener('resize', (event) => {
+			try{
+				if(event.target.innerWidth < 600){
+					this.setState({
+						volumeCalloutAvailable: true,
+					});
+				}
+				else{
+					this.setState({
+						volumeCalloutAvailable: false,
+					});
+				}
+			}
+			catch{
+				// pass
+			}
+		});
+		window.addEventListener('click', ()=>{
+			this.setState({
+				volumeCalloutVisible: false,
+			});
+		});
+	}
+
+	getVolumeLabel(){
+		let volume = this.state.volume;
+
+		if(this.state.muted){
+			return (
+				<Utils.Icons.VolumeDisabled />);
+		}
+
+		if(volume === 0){
+			return <Utils.Icons.Volume0 />;
+		}
+		if(volume < 25){
+			return <Utils.Icons.Volume1 />;
+		}
+		if(volume < 75){
+			return <Utils.Icons.Volume2 />;
+		}
+		if(volume <= 100){
+			return <Utils.Icons.Volume3 />;
+		}
+
+		return <Utils.Icons.VolumeDisabled />;
+	}
+
+	changeVolume(event){
+		this.setState({
+			volume: +event.target.value,
+		});
+		this.props.changeVolume(+event.target.value / 100);
+		this.changeMuteState(false);
+	}
+
+	/**
+	 * 
+	 * @param {boolean} muteState 
+	 */
+	changeMuteState(muteState = void (0)){
+		this.setState(prevState=>({
+			muted: muteState ?? !prevState.muted,
+		}), ()=>{
+			this.props.changeMuteState(this.state.muted);
+		});
+	}
+
+	/**
+	 * 
+	 * @param {Event} event 
+	 */
+	handleTriggerClick(event){
+		event.stopPropagation();
+		if(this.state.volumeCalloutAvailable){
+			this.setState(prevState=>({
+				volumeCalloutVisible: !prevState.volumeCalloutVisible,
+			}));
+			return;
+		}
+		this.changeMuteState();
+	}
+
+	render(){
+		let semanticColors = Utils.appTheme.semanticColors;
+		let style = {
+			'--color': semanticColors.LxSliderColor,
+			'--hoverColor': semanticColors.LxSliderHoverColor,
+			'--activeColor': semanticColors.LxSliderActiveColor,
+			'--backgroundColor': semanticColors.LxSliderBackground,
+			'--thumbBackground': semanticColors.LxSliderThumbBackground,
+			'--thumbColor': semanticColors.LxSliderThumbColor,
+			'--present': this.state.volume + '%',
+		};
+
+		let VolumeInput
+			= <input
+				name="volumeSlider"
+				className="volumeSlider"
+				type="range"
+				min="0"
+				max="100"
+				step="1"
+				value={this.state.volume || 0}
+				onChange={this.changeVolume.bind(this)}
+				style={style}
+			/>;
+
+		let VolumeSlider;
+
+		if(!this.state.volumeCalloutAvailable){
+			VolumeSlider = VolumeInput;
+		}
+
+		if(this.state.volumeCalloutAvailable && this.state.volumeCalloutVisible){
+			style.margin = '14px 0 10px 5px';
+			VolumeSlider
+			= <Callout
+					className="volumeCallout visible"
+					role="alert"
+					gapSpace={10}
+					target={'#volumeTrigger'}
+					directionalHint={DirectionalHint.leftBottomEdge}
+				>
+					{VolumeInput}
+				</Callout>;
+		}
+
+		return (
+			<div className='VolumeRegulator'>
+				<label
+					htmlFor=""
+					id="volumeTrigger"
+					onClick={this.handleTriggerClick.bind(this)}
+				>
+					{this.getVolumeLabel()}
+				</label>
+				{VolumeSlider}
 			</div>
 		);
 	}
 
 }
 
-export {ProgressController, PlayController};
+export {ProgressController, PlayController, VolumeRegulator};
 

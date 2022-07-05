@@ -17,6 +17,7 @@ class Player extends React.Component{
 		playingList: null,
 		activeMusic: null,
 		current: 0,
+		playMode: 'RepeatAll',
 	};
 
 	constructor(props){
@@ -108,6 +109,29 @@ class Player extends React.Component{
 		}
 	}
 
+	/**
+	 * @param {number} volume 
+	 * @this Player
+	 */
+	changeVolume(volume){
+		this.audioElement.current.volume = volume;
+	}
+
+	/**
+	 * @param {boolean} muted 
+	 * @this Player
+	 */
+	changeMuteState(muted){
+		this.audioElement.current.muted = muted;
+	}
+
+	/**
+	 * 
+	 * @param {'RepeatAll'|'RepeatOne'|'Shuffle'} mode 
+	 */
+	switchPlayMode(mode){
+		this.setState({playMode: mode});
+	}
 
 	render(){
 		return (
@@ -139,10 +163,14 @@ class Player extends React.Component{
 					<PlayController
 						playing={this.state.playing}
 						handlePlay={this.handlePlay.bind(this)}
+						switchPlayMode={this.switchPlayMode.bind(this)}
 					/>
 				</div>
 				<div className="right-area">
-					<VolumeRegulator />
+					<VolumeRegulator
+						changeVolume={this.changeVolume.bind(this)}
+						changeMuteState={this.changeMuteState.bind(this)}
+					/>
 				</div>
 			</div>
 		);

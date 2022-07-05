@@ -126,6 +126,24 @@
   margin: auto 1rem;
 }
 
+.right-area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.VolumeRegulator {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.VolumeRegulator label {
+  font-size: 1rem;
+}
+
 .volumeSlider {
   position: relative;
   top: -2px;
@@ -154,32 +172,41 @@
   background: linear-gradient(90deg, var(--color) var(--present), var(--present), var(--backgroundColor) 100%);
 }
 .volumeSlider::-webkit-slider-thumb {
-  width: 5px;
-  height: 14px;
-  margin-top: -5px;
-  cursor: pointer;
-  background: var(--color);
-  border: 1px solid var(--white);
-  border-radius: 0;
   appearance: none;
+  margin-top: -5px;
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--thumbColor);
+  border-radius: 50px;
+  outline: 2px solid white;
+  background-color: var(--thumbBackground);
+  cursor: pointer;
 }
 .volumeSlider::-moz-range-thumb {
-  width: 5px;
-  height: 14px;
-  margin-top: -5px;
-  cursor: pointer;
-  background: var(--color);
-  border: 1px solid var(--white);
-  border-radius: 0;
   appearance: none;
+  margin-top: -5px;
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--thumbColor);
+  border-radius: 50px;
+  outline: 2px solid white;
+  background-color: var(--thumbBackground);
+  cursor: pointer;
 }
 .volumeSlider::-ms-thumb {
-  width: 5px;
-  height: 14px;
-  margin-top: -5px;
-  cursor: pointer;
-  background: var(--color);
-  border: 1px solid var(--white);
-  border-radius: 0;
   appearance: none;
+  margin-top: -5px;
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--thumbColor);
+  border-radius: 50px;
+  outline: 2px solid white;
+  background-color: var(--thumbBackground);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .LxImage{
+    display: none;
+  }
 }
