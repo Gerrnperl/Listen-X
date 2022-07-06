@@ -81,6 +81,25 @@ class Player extends React.Component{
 				'url': 'http://m701.music.126.net/20220701163058/c8227c0f13e35334c37237d2edeff5b1/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/14096482726/be1f/9c3c/7cba/29ca72fe7379e2096af6f5107af3136c.mp3',
 				'size': 3769199,
 			},
+			// todo: remove it
+			{
+				'id': 1111111,
+				'musicName': 'aaaaaa',
+				'albumCover': 'https://p2.music.126.net/fkqFqMaEt0CzxYS-0NpCog==/18587244069235039.jpg?param=140y140',
+				'albumName': 'aaaaaa',
+				'artistList': [
+					'bbbbbb',
+				],
+				'albumArtistList': [
+					'bbbbbb',
+				],
+				'duration': 235.505,
+				'provider': 'netease',
+				'bitRate': 128000,
+				'type': 'mp3',
+				'url': 'http://localhost:8080/e7062445-447a-462e-a15c-4941395980ab.mp3',
+				'size': 3769199,
+			},
 		];
 
 		return PlayingList;
@@ -164,6 +183,7 @@ class Player extends React.Component{
 						playing={this.state.playing}
 						handlePlay={this.handlePlay.bind(this)}
 						switchPlayMode={this.switchPlayMode.bind(this)}
+						playingList={this.state.playingList}
 					/>
 				</div>
 				<div className="right-area">

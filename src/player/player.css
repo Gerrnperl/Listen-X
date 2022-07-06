@@ -205,6 +205,15 @@
   cursor: pointer;
 }
 
+.playingListPanelHeader {
+  height: 20px;
+  padding: 10px;
+}
+
+.playingListPanelHeader .headerSummary {
+  font-size: 14px;
+}
+
 @media screen and (max-width: 768px) {
   .LxImage{
     display: none;

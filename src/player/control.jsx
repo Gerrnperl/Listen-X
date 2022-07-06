@@ -2,7 +2,8 @@ import React from 'react';
 import {Callout, DirectionalHint} from '@fluentui/react';
 import Utils from '../utils/utils';
 import Helper from '../utils/helper';
-import MusicList from '../music-list';
+import {MusicList} from '../music-list';
+
 
 class ProgressController extends React.Component{
 
@@ -237,7 +238,7 @@ class PlayController extends React.Component{
 					handlePlay={this.props.handlePlay}
 				/>
 				<PlaySwitcher direction='1'/>
-				<PlayingList />
+				<PlayingList playingList={this.props.playingList}/>
 			</div>
 		);
 	}
@@ -345,20 +346,79 @@ class PlayingList extends React.Component{
 
 	constructor(props){
 		super(props);
+		this.state = {
+			listVisible: false,
+		};
+	}
+
+	componentDidMount(){
+		window.addEventListener('click', ()=>{
+			this.setState({
+				listVisible: false,
+			});
+		});
+	}
+
+	handleTriggerClick(event){
+		event.stopPropagation();
+		this.setState(prevState=>({
+			listVisible: !prevState.listVisible,
+		}));
 	}
 
 	render(){
 		return (
 			<div
-				className='PlayingListTrigger'
+				className='PlayingList'
 			>
-				<Utils.Icons.PlaylistMusic />
+				<div
+					className='PlayingListTrigger'
+					onClick={this.handleTriggerClick.bind(this)}
+				>
+					<Utils.Icons.PlaylistMusic />
+				</div>
+				{this.state.listVisible && (
+					<Callout
+						role="dialog"
+						gapSpace={15}
+						target={'.Player'}
+						isBeakVisible={false}
+						// beakWidth={beakWidth}
+						// onDismiss={toggleIsCalloutVisible}
+						directionalHint={DirectionalHint.topCenter}
+					>
+						<div
+							className='playingListPanel'
+							style={{
+								minHeight: '250px',
+							}}
+						>
+							<div
+								className='playingListPanelHeader'
+								style={{
+									height: '2.25rem',
+									borderBottom: `1px solid ${Utils.appTheme.palette.themeTertiary}`,
+								}}
+							>
+								<span
+									className='headerSummary'
+									style={{
+										fontSize: Utils.style.fontSize.medium,
+									}}
+								>
+									{`正在播放 [${this.props.playingList.length}]`}
+								</span>
+							</div>
+							<MusicList
+								list={this.props.playingList}
+								compact={true}
+								columns={['provider', 'musicName', 'artistList', 'duration']}
+							/>
+						</div>
+					</Callout>
+				)}
 			</div>
-			// <div className='PlayingListPanel'>
-			// 	<MusicList
-			// 		list={this.props.playingList}
-			// 	/>
-			// </div>
+
 		);
 	}
 

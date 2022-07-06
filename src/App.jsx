@@ -4,6 +4,8 @@ import './App.css';
 import Player from './player/player';
 import Utils from './utils/utils';
 
+let ProviderContext = React.createContext([]);
+
 class App extends React.Component{
 
 	/** @type {AppState} */
@@ -44,11 +46,14 @@ class App extends React.Component{
 	render(){
 		return (
 			<ThemeProvider theme={Utils.appTheme}>
-				<Player/>
+				<ProviderContext.Provider value={this.state.providers}>
+					<Player/>
+				</ProviderContext.Provider>
 			</ThemeProvider>
 		);
 	}
 
 }
-
+console.log(ProviderContext);
 export default App;
+export {App, ProviderContext};
